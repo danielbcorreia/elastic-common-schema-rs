@@ -1,0 +1,49 @@
+#![allow(unused)]
+
+{% macro render_field(field) -%}
+    {%- for line in field.description.split('\n') %}
+    /// {{line}}
+    {%- endfor %}
+    {%- if field.example is defined %}
+    ///
+    /// # Examples
+    ///
+    /// - `{{field.example }}`
+    {%- endif %}
+    {%- if opentelemetry is defined %}
+    pub const {{ field.flat_name | replace(".", "_") | replace("@", "") | upper }}: Key = Key::from_static_str("{{field.flat_name}}");
+    {%- else %}
+    pub const {{ field.flat_name | replace(".", "_") | replace("@", "") | upper }}: &str = "{{field.flat_name}}";
+    {%- endif %}
+{%- endmacro %}
+
+{% macro render_fieldset(fieldset) -%}
+    {%+ for key, field in fieldset.items() %}
+        {{ render_field(field) }}
+    {%+ endfor %}
+{%- endmacro %}
+
+{% include 'header.rs' %}
+
+{# render top level properties (ecs) differently to avoid clippy warnings on duplicated module names #}
+{{ render_fieldset(root.ecs.fields) }}
+
+{%+ for categoryName, category in root.items() %}
+{%- if categoryName == "ecs" %}
+    {%- continue %}
+{%- endif %}
+{%- for line in category.description.split('\n') %}
+
+/// {{line}}
+{%- endfor %}
+{%- if categoryName == "as" %}
+    {%- set categoryName="as_" %}
+{%- endif %}
+pub mod {{ categoryName | replace(".", "_") }} {
+    {%- if opentelemetry is defined %}
+    use opentelemetry::Key;
+    {%- endif %}
+
+    {{ render_fieldset(category.fields) }}
+}
+{%+ endfor %}

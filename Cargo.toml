@@ -1,0 +1,10 @@
+[package]
+name = "elastic-common-schema"
+version = "1.10.0"
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/danielbcorreia/elastic-common-schema-rs"
+description = "Elastic Common Schema (ECS) for Rust"
+readme = "README.md"
+documentation = "https://docs.rs/elastic-common-schema"
+keywords = ["ecs", "elastic", "observability"]
