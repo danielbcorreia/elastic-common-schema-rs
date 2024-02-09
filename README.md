@@ -10,7 +10,7 @@ Add this crate to your `Cargo.toml`. Note that the version is indexed to the ECS
 
 ```toml
 [dependencies]
-elastic-common-schema = "1.10.0"
+elastic-common-schema = "8.11.0"
 ```
 
 Then use the constants as you wish:

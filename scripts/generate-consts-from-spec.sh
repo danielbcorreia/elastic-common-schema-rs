@@ -5,8 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CRATE_DIR="${SCRIPT_DIR}/../"
 
 # freeze the spec version and generator version to make generation reproducible
-#SPEC_VERSION=8.11.0
-SPEC_VERSION=1.10.0
+SPEC_VERSION=8.11.0
 
 cd "$CRATE_DIR"
 

@@ -43,7 +43,6 @@ pub mod agent {
 
     /// Custom name of the agent.
     /// This is a name that can be given to an agent. This can be helpful if for example two Filebeat instances are running on the same host but a human readable separation is needed on which Filebeat instance data is coming from.
-    /// If no name is given, the name is often left empty.
     ///
     /// # Examples
     ///
@@ -155,7 +154,12 @@ pub mod client {
     /// - `184`
     pub const CLIENT_BYTES: &str = "client.bytes";
 
-    /// Client domain.
+    /// The domain name of the client system.
+    /// This value may be a host name, a fully qualified domain name, or another host naming format. The value may derive from the original event or be added from enrichment.
+    ///
+    /// # Examples
+    ///
+    /// - `foo.example.com`
     pub const CLIENT_DOMAIN: &str = "client.domain";
 
     /// City name.
@@ -321,13 +325,17 @@ pub mod client {
     pub const CLIENT_USER_HASH: &str = "client.user.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const CLIENT_USER_ID: &str = "client.user.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const CLIENT_USER_NAME: &str = "client.user.name";
 
     /// Array of user roles at the time of the event.
@@ -357,7 +365,7 @@ pub mod cloud {
     /// - `elastic-dev`
     pub const CLOUD_ACCOUNT_NAME: &str = "cloud.account.name";
 
-    /// Availability zone in which this host is running.
+    /// Availability zone in which this host, resource, or service is located.
     ///
     /// # Examples
     ///
@@ -380,6 +388,84 @@ pub mod cloud {
     ///
     /// - `t2.medium`
     pub const CLOUD_MACHINE_TYPE: &str = "cloud.machine.type";
+
+    /// The cloud account or organization id used to identify different entities in a multi-tenant environment.
+    /// Examples: AWS account id, Google Cloud ORG Id, or other unique identifier.
+    ///
+    /// # Examples
+    ///
+    /// - `666777888999`
+    pub const CLOUD_ORIGIN_ACCOUNT_ID: &str = "cloud.origin.account.id";
+
+    /// The cloud account name or alias used to identify different entities in a multi-tenant environment.
+    /// Examples: AWS account name, Google Cloud ORG display name.
+    ///
+    /// # Examples
+    ///
+    /// - `elastic-dev`
+    pub const CLOUD_ORIGIN_ACCOUNT_NAME: &str = "cloud.origin.account.name";
+
+    /// Availability zone in which this host, resource, or service is located.
+    ///
+    /// # Examples
+    ///
+    /// - `us-east-1c`
+    pub const CLOUD_ORIGIN_AVAILABILITY_ZONE: &str = "cloud.origin.availability_zone";
+
+    /// Instance ID of the host machine.
+    ///
+    /// # Examples
+    ///
+    /// - `i-1234567890abcdef0`
+    pub const CLOUD_ORIGIN_INSTANCE_ID: &str = "cloud.origin.instance.id";
+
+    /// Instance name of the host machine.
+    pub const CLOUD_ORIGIN_INSTANCE_NAME: &str = "cloud.origin.instance.name";
+
+    /// Machine type of the host machine.
+    ///
+    /// # Examples
+    ///
+    /// - `t2.medium`
+    pub const CLOUD_ORIGIN_MACHINE_TYPE: &str = "cloud.origin.machine.type";
+
+    /// The cloud project identifier.
+    /// Examples: Google Cloud Project id, Azure Project id.
+    ///
+    /// # Examples
+    ///
+    /// - `my-project`
+    pub const CLOUD_ORIGIN_PROJECT_ID: &str = "cloud.origin.project.id";
+
+    /// The cloud project name.
+    /// Examples: Google Cloud Project name, Azure Project name.
+    ///
+    /// # Examples
+    ///
+    /// - `my project`
+    pub const CLOUD_ORIGIN_PROJECT_NAME: &str = "cloud.origin.project.name";
+
+    /// Name of the cloud provider. Example values are aws, azure, gcp, or digitalocean.
+    ///
+    /// # Examples
+    ///
+    /// - `aws`
+    pub const CLOUD_ORIGIN_PROVIDER: &str = "cloud.origin.provider";
+
+    /// Region in which this host, resource, or service is located.
+    ///
+    /// # Examples
+    ///
+    /// - `us-east-1`
+    pub const CLOUD_ORIGIN_REGION: &str = "cloud.origin.region";
+
+    /// The cloud service name is intended to distinguish services running on different platforms within a provider, eg AWS EC2 vs Lambda, GCP GCE vs App Engine, Azure VM vs App Server.
+    /// Examples: app engine, app service, cloud run, fargate, lambda.
+    ///
+    /// # Examples
+    ///
+    /// - `lambda`
+    pub const CLOUD_ORIGIN_SERVICE_NAME: &str = "cloud.origin.service.name";
 
     /// The cloud project identifier.
     /// Examples: Google Cloud Project id, Azure Project id.
@@ -404,7 +490,7 @@ pub mod cloud {
     /// - `aws`
     pub const CLOUD_PROVIDER: &str = "cloud.provider";
 
-    /// Region in which this host is running.
+    /// Region in which this host, resource, or service is located.
     ///
     /// # Examples
     ///
@@ -418,10 +504,96 @@ pub mod cloud {
     ///
     /// - `lambda`
     pub const CLOUD_SERVICE_NAME: &str = "cloud.service.name";
+
+    /// The cloud account or organization id used to identify different entities in a multi-tenant environment.
+    /// Examples: AWS account id, Google Cloud ORG Id, or other unique identifier.
+    ///
+    /// # Examples
+    ///
+    /// - `666777888999`
+    pub const CLOUD_TARGET_ACCOUNT_ID: &str = "cloud.target.account.id";
+
+    /// The cloud account name or alias used to identify different entities in a multi-tenant environment.
+    /// Examples: AWS account name, Google Cloud ORG display name.
+    ///
+    /// # Examples
+    ///
+    /// - `elastic-dev`
+    pub const CLOUD_TARGET_ACCOUNT_NAME: &str = "cloud.target.account.name";
+
+    /// Availability zone in which this host, resource, or service is located.
+    ///
+    /// # Examples
+    ///
+    /// - `us-east-1c`
+    pub const CLOUD_TARGET_AVAILABILITY_ZONE: &str = "cloud.target.availability_zone";
+
+    /// Instance ID of the host machine.
+    ///
+    /// # Examples
+    ///
+    /// - `i-1234567890abcdef0`
+    pub const CLOUD_TARGET_INSTANCE_ID: &str = "cloud.target.instance.id";
+
+    /// Instance name of the host machine.
+    pub const CLOUD_TARGET_INSTANCE_NAME: &str = "cloud.target.instance.name";
+
+    /// Machine type of the host machine.
+    ///
+    /// # Examples
+    ///
+    /// - `t2.medium`
+    pub const CLOUD_TARGET_MACHINE_TYPE: &str = "cloud.target.machine.type";
+
+    /// The cloud project identifier.
+    /// Examples: Google Cloud Project id, Azure Project id.
+    ///
+    /// # Examples
+    ///
+    /// - `my-project`
+    pub const CLOUD_TARGET_PROJECT_ID: &str = "cloud.target.project.id";
+
+    /// The cloud project name.
+    /// Examples: Google Cloud Project name, Azure Project name.
+    ///
+    /// # Examples
+    ///
+    /// - `my project`
+    pub const CLOUD_TARGET_PROJECT_NAME: &str = "cloud.target.project.name";
+
+    /// Name of the cloud provider. Example values are aws, azure, gcp, or digitalocean.
+    ///
+    /// # Examples
+    ///
+    /// - `aws`
+    pub const CLOUD_TARGET_PROVIDER: &str = "cloud.target.provider";
+
+    /// Region in which this host, resource, or service is located.
+    ///
+    /// # Examples
+    ///
+    /// - `us-east-1`
+    pub const CLOUD_TARGET_REGION: &str = "cloud.target.region";
+
+    /// The cloud service name is intended to distinguish services running on different platforms within a provider, eg AWS EC2 vs Lambda, GCP GCE vs App Engine, Azure VM vs App Server.
+    /// Examples: app engine, app service, cloud run, fargate, lambda.
+    ///
+    /// # Examples
+    ///
+    /// - `lambda`
+    pub const CLOUD_TARGET_SERVICE_NAME: &str = "cloud.target.service.name";
 }
 
 /// These fields contain information about binary code signatures.
 pub mod code_signature {
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const CODE_SIGNATURE_DIGEST_ALGORITHM: &str = "code_signature.digest_algorithm";
 
     /// Boolean to capture if a signature is present.
     ///
@@ -461,6 +633,13 @@ pub mod code_signature {
     /// - `EQHXZ8M8AV`
     pub const CODE_SIGNATURE_TEAM_ID: &str = "code_signature.team_id";
 
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const CODE_SIGNATURE_TIMESTAMP: &str = "code_signature.timestamp";
+
     /// Stores the trust status of the certificate chain.
     /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
     ///
@@ -483,8 +662,24 @@ pub mod code_signature {
 /// These fields help correlate data based containers from any runtime.
 pub mod container {
 
+    /// Percent CPU used which is normalized by the number of CPU cores and it ranges from 0 to 1. Scaling factor: 1000.
+    pub const CONTAINER_CPU_USAGE: &str = "container.cpu.usage";
+
+    /// The total number of bytes (gauge) read successfully (aggregated from all disks) since the last metric collection.
+    pub const CONTAINER_DISK_READ_BYTES: &str = "container.disk.read.bytes";
+
+    /// The total number of bytes (gauge) written successfully (aggregated from all disks) since the last metric collection.
+    pub const CONTAINER_DISK_WRITE_BYTES: &str = "container.disk.write.bytes";
+
     /// Unique container id.
     pub const CONTAINER_ID: &str = "container.id";
+
+    /// An array of digests of the image the container was built on. Each digest consists of the hash algorithm and value in this format: `algorithm:value`. Algorithm names should align with the field names in the ECS hash field set.
+    ///
+    /// # Examples
+    ///
+    /// - `[sha256:f8fefc80e3273dc756f288a63945820d6476ad64883892c771b5e2ece6bf1b26]`
+    pub const CONTAINER_IMAGE_HASH_ALL: &str = "container.image.hash.all";
 
     /// Name of the image the container was built on.
     pub const CONTAINER_IMAGE_NAME: &str = "container.image.name";
@@ -495,8 +690,17 @@ pub mod container {
     /// Image labels.
     pub const CONTAINER_LABELS: &str = "container.labels";
 
+    /// Memory usage percentage and it ranges from 0 to 1. Scaling factor: 1000.
+    pub const CONTAINER_MEMORY_USAGE: &str = "container.memory.usage";
+
     /// Container name.
     pub const CONTAINER_NAME: &str = "container.name";
+
+    /// The number of bytes (gauge) sent out on all network interfaces by the container since the last metric collection.
+    pub const CONTAINER_NETWORK_EGRESS_BYTES: &str = "container.network.egress.bytes";
+
+    /// The number of bytes received (gauge) on all network interfaces by the container since the last metric collection.
+    pub const CONTAINER_NETWORK_INGRESS_BYTES: &str = "container.network.ingress.bytes";
 
     /// Runtime managing this container.
     ///
@@ -504,6 +708,9 @@ pub mod container {
     ///
     /// - `docker`
     pub const CONTAINER_RUNTIME: &str = "container.runtime";
+
+    /// Indicates whether the container is running in privileged mode.
+    pub const CONTAINER_SECURITY_CONTEXT_PRIVILEGED: &str = "container.security_context.privileged";
 }
 
 /// The data_stream fields take part in defining the new data stream naming scheme.
@@ -574,7 +781,12 @@ pub mod destination {
     /// - `184`
     pub const DESTINATION_BYTES: &str = "destination.bytes";
 
-    /// Destination domain.
+    /// The domain name of the destination system.
+    /// This value may be a host name, a fully qualified domain name, or another host naming format. The value may derive from the original event or be added from enrichment.
+    ///
+    /// # Examples
+    ///
+    /// - `foo.example.com`
     pub const DESTINATION_DOMAIN: &str = "destination.domain";
 
     /// City name.
@@ -740,13 +952,17 @@ pub mod destination {
     pub const DESTINATION_USER_HASH: &str = "destination.user.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const DESTINATION_USER_ID: &str = "destination.user.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const DESTINATION_USER_NAME: &str = "destination.user.name";
 
     /// Array of user roles at the time of the event.
@@ -755,6 +971,42 @@ pub mod destination {
     ///
     /// - `["kibana_admin", "reporting_user"]`
     pub const DESTINATION_USER_ROLES: &str = "destination.user.roles";
+}
+
+/// Fields that describe a device instance and its characteristics.  Data collected for applications and processes running on a (mobile) device can be enriched with these fields to describe the identity, type and other characteristics of the device.
+
+/// This field group definition is based on the Device namespace of the OpenTelemetry Semantic Conventions (https://opentelemetry.io/docs/reference/specification/resource/semantic_conventions/device/).
+pub mod device {
+
+    /// The unique identifier of a device. The identifier must not change across application sessions but stay fixed for an instance of a (mobile) device.
+    /// On iOS, this value must be equal to the vendor identifier (https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor). On Android, this value must be equal to the Firebase Installation ID or a globally unique UUID which is persisted across sessions in your application.
+    /// For GDPR and data protection law reasons this identifier should not carry information that would allow to identify a user.
+    ///
+    /// # Examples
+    ///
+    /// - `00000000-54b3-e7c7-0000-000046bffd97`
+    pub const DEVICE_ID: &str = "device.id";
+
+    /// The vendor name of the device manufacturer.
+    ///
+    /// # Examples
+    ///
+    /// - `Samsung`
+    pub const DEVICE_MANUFACTURER: &str = "device.manufacturer";
+
+    /// The machine readable identifier of the device model.
+    ///
+    /// # Examples
+    ///
+    /// - `SM-G920F`
+    pub const DEVICE_MODEL_IDENTIFIER: &str = "device.model.identifier";
+
+    /// The human readable marketing name of the device model.
+    ///
+    /// # Examples
+    ///
+    /// - `Samsung Galaxy S6`
+    pub const DEVICE_MODEL_NAME: &str = "device.model.name";
 }
 
 /// These fields contain information about code libraries dynamically loaded into processes.
@@ -769,6 +1021,14 @@ pub mod destination {
 
 /// * Dynamic library (`.dylib`) commonly used on macOS
 pub mod dll {
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const DLL_CODE_SIGNATURE_DIGEST_ALGORITHM: &str = "dll.code_signature.digest_algorithm";
 
     /// Boolean to capture if a signature is present.
     ///
@@ -808,6 +1068,13 @@ pub mod dll {
     /// - `EQHXZ8M8AV`
     pub const DLL_CODE_SIGNATURE_TEAM_ID: &str = "dll.code_signature.team_id";
 
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const DLL_CODE_SIGNATURE_TIMESTAMP: &str = "dll.code_signature.timestamp";
+
     /// Stores the trust status of the certificate chain.
     /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
     ///
@@ -833,11 +1100,17 @@ pub mod dll {
     /// SHA256 hash.
     pub const DLL_HASH_SHA256: &str = "dll.hash.sha256";
 
+    /// SHA384 hash.
+    pub const DLL_HASH_SHA384: &str = "dll.hash.sha384";
+
     /// SHA512 hash.
     pub const DLL_HASH_SHA512: &str = "dll.hash.sha512";
 
     /// SSDEEP hash.
     pub const DLL_HASH_SSDEEP: &str = "dll.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const DLL_HASH_TLSH: &str = "dll.hash.tlsh";
 
     /// Name of the library.
     /// This generally maps to the name of the file on disk.
@@ -882,6 +1155,26 @@ pub mod dll {
     /// - `6.3.9600.17415`
     pub const DLL_PE_FILE_VERSION: &str = "dll.pe.file_version";
 
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const DLL_PE_GO_IMPORT_HASH: &str = "dll.pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const DLL_PE_GO_IMPORTS: &str = "dll.pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const DLL_PE_GO_IMPORTS_NAMES_ENTROPY: &str = "dll.pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const DLL_PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str = "dll.pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const DLL_PE_GO_STRIPPED: &str = "dll.pe.go_stripped";
+
     /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
     /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
     ///
@@ -890,6 +1183,23 @@ pub mod dll {
     /// - `0c6803c4e922103c4dca5963aad36ddf`
     pub const DLL_PE_IMPHASH: &str = "dll.pe.imphash";
 
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const DLL_PE_IMPORT_HASH: &str = "dll.pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const DLL_PE_IMPORTS: &str = "dll.pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const DLL_PE_IMPORTS_NAMES_ENTROPY: &str = "dll.pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const DLL_PE_IMPORTS_NAMES_VAR_ENTROPY: &str = "dll.pe.imports_names_var_entropy";
+
     /// Internal name of the file, provided at compile-time.
     ///
     /// # Examples
@@ -897,12 +1207,39 @@ pub mod dll {
     /// - `MSPAINT.EXE`
     pub const DLL_PE_ORIGINAL_FILE_NAME: &str = "dll.pe.original_file_name";
 
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const DLL_PE_PEHASH: &str = "dll.pe.pehash";
+
     /// Internal product name of the file, provided at compile-time.
     ///
     /// # Examples
     ///
     /// - `Microsoft® Windows® Operating System`
     pub const DLL_PE_PRODUCT: &str = "dll.pe.product";
+
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const DLL_PE_SECTIONS: &str = "dll.pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const DLL_PE_SECTIONS_ENTROPY: &str = "dll.pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const DLL_PE_SECTIONS_NAME: &str = "dll.pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const DLL_PE_SECTIONS_PHYSICAL_SIZE: &str = "dll.pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const DLL_PE_SECTIONS_VAR_ENTROPY: &str = "dll.pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const DLL_PE_SECTIONS_VIRTUAL_SIZE: &str = "dll.pe.sections.virtual_size";
 }
 
 /// Fields describing DNS queries and answers.
@@ -953,7 +1290,6 @@ pub mod dns {
     pub const DNS_ANSWERS_TYPE: &str = "dns.answers.type";
 
     /// Array of 2 letter DNS header flags.
-    /// Expected values are: AA, TC, RD, RA, AD, CD, DO.
     ///
     /// # Examples
     ///
@@ -1046,6 +1382,303 @@ pub mod dns {
     pub const DNS_TYPE: &str = "dns.type";
 }
 
+/// These fields contain Linux Executable Linkable Format (ELF) metadata.
+pub mod elf {
+
+    /// Machine architecture of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `x86-64`
+    pub const ELF_ARCHITECTURE: &str = "elf.architecture";
+
+    /// Byte sequence of ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Little Endian`
+    pub const ELF_BYTE_ORDER: &str = "elf.byte_order";
+
+    /// CPU type of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Intel`
+    pub const ELF_CPU_TYPE: &str = "elf.cpu_type";
+
+    /// Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+    pub const ELF_CREATION_DATE: &str = "elf.creation_date";
+
+    /// List of exported element names and types.
+    pub const ELF_EXPORTS: &str = "elf.exports";
+
+    /// A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const ELF_GO_IMPORT_HASH: &str = "elf.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const ELF_GO_IMPORTS: &str = "elf.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const ELF_GO_IMPORTS_NAMES_ENTROPY: &str = "elf.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const ELF_GO_IMPORTS_NAMES_VAR_ENTROPY: &str = "elf.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const ELF_GO_STRIPPED: &str = "elf.go_stripped";
+
+    /// Version of the ELF Application Binary Interface (ABI).
+    pub const ELF_HEADER_ABI_VERSION: &str = "elf.header.abi_version";
+
+    /// Header class of the ELF file.
+    pub const ELF_HEADER_CLASS: &str = "elf.header.class";
+
+    /// Data table of the ELF header.
+    pub const ELF_HEADER_DATA: &str = "elf.header.data";
+
+    /// Header entrypoint of the ELF file.
+    pub const ELF_HEADER_ENTRYPOINT: &str = "elf.header.entrypoint";
+
+    /// "0x1" for original ELF files.
+    pub const ELF_HEADER_OBJECT_VERSION: &str = "elf.header.object_version";
+
+    /// Application Binary Interface (ABI) of the Linux OS.
+    pub const ELF_HEADER_OS_ABI: &str = "elf.header.os_abi";
+
+    /// Header type of the ELF file.
+    pub const ELF_HEADER_TYPE: &str = "elf.header.type";
+
+    /// Version of the ELF header.
+    pub const ELF_HEADER_VERSION: &str = "elf.header.version";
+
+    /// A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is an ELF implementation of the Windows PE imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const ELF_IMPORT_HASH: &str = "elf.import_hash";
+
+    /// List of imported element names and types.
+    pub const ELF_IMPORTS: &str = "elf.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const ELF_IMPORTS_NAMES_ENTROPY: &str = "elf.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const ELF_IMPORTS_NAMES_VAR_ENTROPY: &str = "elf.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.
+    pub const ELF_SECTIONS: &str = "elf.sections";
+
+    /// Chi-square probability distribution of the section.
+    pub const ELF_SECTIONS_CHI2: &str = "elf.sections.chi2";
+
+    /// Shannon entropy calculation from the section.
+    pub const ELF_SECTIONS_ENTROPY: &str = "elf.sections.entropy";
+
+    /// ELF Section List flags.
+    pub const ELF_SECTIONS_FLAGS: &str = "elf.sections.flags";
+
+    /// ELF Section List name.
+    pub const ELF_SECTIONS_NAME: &str = "elf.sections.name";
+
+    /// ELF Section List offset.
+    pub const ELF_SECTIONS_PHYSICAL_OFFSET: &str = "elf.sections.physical_offset";
+
+    /// ELF Section List physical size.
+    pub const ELF_SECTIONS_PHYSICAL_SIZE: &str = "elf.sections.physical_size";
+
+    /// ELF Section List type.
+    pub const ELF_SECTIONS_TYPE: &str = "elf.sections.type";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const ELF_SECTIONS_VAR_ENTROPY: &str = "elf.sections.var_entropy";
+
+    /// ELF Section List virtual address.
+    pub const ELF_SECTIONS_VIRTUAL_ADDRESS: &str = "elf.sections.virtual_address";
+
+    /// ELF Section List virtual size.
+    pub const ELF_SECTIONS_VIRTUAL_SIZE: &str = "elf.sections.virtual_size";
+
+    /// An array containing an object for each segment of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.
+    pub const ELF_SEGMENTS: &str = "elf.segments";
+
+    /// ELF object segment sections.
+    pub const ELF_SEGMENTS_SECTIONS: &str = "elf.segments.sections";
+
+    /// ELF object segment type.
+    pub const ELF_SEGMENTS_TYPE: &str = "elf.segments.type";
+
+    /// List of shared libraries used by this ELF object.
+    pub const ELF_SHARED_LIBRARIES: &str = "elf.shared_libraries";
+
+    /// telfhash symbol hash for ELF file.
+    pub const ELF_TELFHASH: &str = "elf.telfhash";
+}
+
+/// Event details relating to an email transaction.
+
+/// This field set focuses on the email message header, body, and attachments. Network protocols that send and receive email messages such as SMTP are outside the scope of the `email.*` fields.
+pub mod email {
+
+    /// A list of objects describing the attachment files sent along with an email message.
+    pub const EMAIL_ATTACHMENTS: &str = "email.attachments";
+
+    /// Attachment file extension, excluding the leading dot.
+    ///
+    /// # Examples
+    ///
+    /// - `txt`
+    pub const EMAIL_ATTACHMENTS_FILE_EXTENSION: &str = "email.attachments.file.extension";
+
+    /// MD5 hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_MD5: &str = "email.attachments.file.hash.md5";
+
+    /// SHA1 hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_SHA1: &str = "email.attachments.file.hash.sha1";
+
+    /// SHA256 hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_SHA256: &str = "email.attachments.file.hash.sha256";
+
+    /// SHA384 hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_SHA384: &str = "email.attachments.file.hash.sha384";
+
+    /// SHA512 hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_SHA512: &str = "email.attachments.file.hash.sha512";
+
+    /// SSDEEP hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_SSDEEP: &str = "email.attachments.file.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const EMAIL_ATTACHMENTS_FILE_HASH_TLSH: &str = "email.attachments.file.hash.tlsh";
+
+    /// The MIME media type of the attachment.
+    /// This value will typically be extracted from the `Content-Type` MIME header field.
+    ///
+    /// # Examples
+    ///
+    /// - `text/plain`
+    pub const EMAIL_ATTACHMENTS_FILE_MIME_TYPE: &str = "email.attachments.file.mime_type";
+
+    /// Name of the attachment file including the file extension.
+    ///
+    /// # Examples
+    ///
+    /// - `attachment.txt`
+    pub const EMAIL_ATTACHMENTS_FILE_NAME: &str = "email.attachments.file.name";
+
+    /// Attachment file size in bytes.
+    ///
+    /// # Examples
+    ///
+    /// - `64329`
+    pub const EMAIL_ATTACHMENTS_FILE_SIZE: &str = "email.attachments.file.size";
+
+    /// The email address of BCC recipient
+    ///
+    /// # Examples
+    ///
+    /// - `bcc.user1@example.com`
+    pub const EMAIL_BCC_ADDRESS: &str = "email.bcc.address";
+
+    /// The email address of CC recipient
+    ///
+    /// # Examples
+    ///
+    /// - `cc.user1@example.com`
+    pub const EMAIL_CC_ADDRESS: &str = "email.cc.address";
+
+    /// Information about how the message is to be displayed.
+    /// Typically a MIME type.
+    ///
+    /// # Examples
+    ///
+    /// - `text/plain`
+    pub const EMAIL_CONTENT_TYPE: &str = "email.content_type";
+
+    /// The date and time when the email message was received by the service or client.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-10T22:12:34.8196921Z`
+    pub const EMAIL_DELIVERY_TIMESTAMP: &str = "email.delivery_timestamp";
+
+    /// The direction of the message based on the sending and receiving domains.
+    ///
+    /// # Examples
+    ///
+    /// - `inbound`
+    pub const EMAIL_DIRECTION: &str = "email.direction";
+
+    /// The email address of the sender, typically from the RFC 5322 `From:` header field.
+    ///
+    /// # Examples
+    ///
+    /// - `sender@example.com`
+    pub const EMAIL_FROM_ADDRESS: &str = "email.from.address";
+
+    /// Unique identifier given to the email by the source that created the event.
+    /// Identifier is not persistent across hops.
+    ///
+    /// # Examples
+    ///
+    /// - `c26dbea0-80d5-463b-b93c-4e8b708219ce`
+    pub const EMAIL_LOCAL_ID: &str = "email.local_id";
+
+    /// Identifier from the RFC 5322 `Message-ID:` email header that refers to a particular email message.
+    ///
+    /// # Examples
+    ///
+    /// - `81ce15$8r2j59@mail01.example.com`
+    pub const EMAIL_MESSAGE_ID: &str = "email.message_id";
+
+    /// The date and time the email message was composed. Many email clients will fill in this value automatically when the message is sent by a user.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-10T22:12:34.8196921Z`
+    pub const EMAIL_ORIGINATION_TIMESTAMP: &str = "email.origination_timestamp";
+
+    /// The address that replies should be delivered to based on the value in the RFC 5322 `Reply-To:` header.
+    ///
+    /// # Examples
+    ///
+    /// - `reply.here@example.com`
+    pub const EMAIL_REPLY_TO_ADDRESS: &str = "email.reply_to.address";
+
+    /// Per RFC 5322, specifies the address responsible for the actual transmission of the message.
+    pub const EMAIL_SENDER_ADDRESS: &str = "email.sender.address";
+
+    /// A brief summary of the topic of the message.
+    ///
+    /// # Examples
+    ///
+    /// - `Please see this important message.`
+    pub const EMAIL_SUBJECT: &str = "email.subject";
+
+    /// The email address of recipient
+    ///
+    /// # Examples
+    ///
+    /// - `user1@example.com`
+    pub const EMAIL_TO_ADDRESS: &str = "email.to.address";
+
+    /// The name of the application that was used to draft and send the original email message.
+    ///
+    /// # Examples
+    ///
+    /// - `Spambot v2.5`
+    pub const EMAIL_X_MAILER: &str = "email.x_mailer";
+}
+
 /// These fields can represent errors of any kind.
 
 /// Use them for errors that happen while fetching events or in cases where the event itself contains an error.
@@ -1084,6 +1717,20 @@ pub mod event {
     /// - `user-password-change`
     pub const EVENT_ACTION: &str = "event.action";
 
+    /// Agents are normally responsible for populating the `agent.id` field value. If the system receiving events is capable of validating the value based on authentication information for the client then this field can be used to reflect the outcome of that validation.
+    /// For example if the agent's connection is authenticated with mTLS and the client cert contains the ID of the agent to which the cert was issued then the `agent.id` value in events can be checked against the certificate. If the values match then `event.agent_id_status: verified` is added to the event, otherwise one of the other allowed values should be used.
+    /// If no validation is performed then the field should be omitted.
+    /// The allowed values are:
+    /// `verified` - The `agent.id` field value matches expected value obtained from auth metadata.
+    /// `mismatch` - The `agent.id` field value does not match the expected value obtained from auth metadata.
+    /// `missing` - There was no `agent.id` field in the event to validate.
+    /// `auth_metadata_missing` - There was no auth metadata or it was missing information about the agent ID.
+    ///
+    /// # Examples
+    ///
+    /// - `verified`
+    pub const EVENT_AGENT_ID_STATUS: &str = "event.agent_id_status";
+
     /// This is one of four ECS Categorization Fields, and indicates the second level in the ECS category hierarchy.
     /// `event.category` represents the "big buckets" of ECS categories. For example, filtering on `event.category:process` yields all events relating to process activity. This field is closely related to `event.type`, which is used as a subcategory.
     /// This field is an array. This will allow proper categorization of some events that fall in multiple categories.
@@ -1101,10 +1748,10 @@ pub mod event {
     /// - `4648`
     pub const EVENT_CODE: &str = "event.code";
 
-    /// event.created contains the date/time when the event was first read by an agent, or by your pipeline.
-    /// This field is distinct from @timestamp in that @timestamp typically contain the time extracted from the original event.
+    /// `event.created` contains the date/time when the event was first read by an agent, or by your pipeline.
+    /// This field is distinct from `@timestamp` in that `@timestamp` typically contain the time extracted from the original event.
     /// In most situations, these two timestamps will be slightly different. The difference can be used to calculate the delay between your source generating an event, and the time when your agent first processed it. This can be used to monitor your agent's or pipeline's ability to keep up with your event source.
-    /// In case the two timestamps are identical, @timestamp should be used.
+    /// In case the two timestamps are identical, `@timestamp` should be used.
     ///
     /// # Examples
     ///
@@ -1121,10 +1768,10 @@ pub mod event {
     pub const EVENT_DATASET: &str = "event.dataset";
 
     /// Duration of the event in nanoseconds.
-    /// If event.start and event.end are known this value should be the difference between the end and start time.
+    /// If `event.start` and `event.end` are known this value should be the difference between the end and start time.
     pub const EVENT_DURATION: &str = "event.duration";
 
-    /// event.end contains the date when the event ended or when the activity was last observed.
+    /// `event.end` contains the date when the event ended or when the activity was last observed.
     pub const EVENT_END: &str = "event.end";
 
     /// Hash (perhaps logstash fingerprint) of raw field to be able to demonstrate log integrity.
@@ -1152,7 +1799,7 @@ pub mod event {
 
     /// This is one of four ECS Categorization Fields, and indicates the highest level in the ECS category hierarchy.
     /// `event.kind` gives high-level information about what type of information the event contains, without being specific to the contents of the event. For example, values of this field distinguish alert events from metric events.
-    /// The value of this field can be used to inform how these kinds of events should be handled. They may warrant different retention, different access control, it may also help understand whether the data coming in at a regular interval or not.
+    /// The value of this field can be used to inform how these kinds of events should be handled. They may warrant different retention, different access control, it may also help understand whether the data is coming in at a regular interval or not.
     ///
     /// # Examples
     ///
@@ -1167,8 +1814,8 @@ pub mod event {
     /// - `apache`
     pub const EVENT_MODULE: &str = "event.module";
 
-    /// Raw text message of entire event. Used to demonstrate log integrity.
-    /// This field is not indexed and doc_values are disabled. It cannot be searched, but it can be retrieved from `_source`. If users wish to override this and index this field, consider using the wildcard data type.
+    /// Raw text message of entire event. Used to demonstrate log integrity or where the full log message (before splitting it up in multiple parts) may be required, e.g. for reindex.
+    /// This field is not indexed and doc_values are disabled. It cannot be searched, but it can be retrieved from `_source`. If users wish to override this and index this field, please see `Field data types` in the `Elasticsearch Reference`.
     ///
     /// # Examples
     ///
@@ -1230,7 +1877,7 @@ pub mod event {
     /// - `7`
     pub const EVENT_SEVERITY: &str = "event.severity";
 
-    /// event.start contains the date when the event started or when the activity was first observed.
+    /// `event.start` contains the date when the event started or when the activity was first observed.
     pub const EVENT_START: &str = "event.start";
 
     /// This field should be populated when the event's timestamp does not include timezone information already (e.g. default Syslog timestamps). It's optional otherwise.
@@ -1251,6 +1898,56 @@ pub mod event {
     pub const EVENT_URL: &str = "event.url";
 }
 
+/// The user fields describe information about the function as a service (FaaS) that is relevant to the event.
+pub mod faas {
+
+    /// Boolean value indicating a cold start of a function.
+    pub const FAAS_COLDSTART: &str = "faas.coldstart";
+
+    /// The execution ID of the current function execution.
+    ///
+    /// # Examples
+    ///
+    /// - `af9d5aa4-a685-4c5f-a22b-444f80b3cc28`
+    pub const FAAS_EXECUTION: &str = "faas.execution";
+
+    /// The unique identifier of a serverless function.
+    /// For AWS Lambda it's the function ARN (Amazon Resource Name) without a version or alias suffix.
+    ///
+    /// # Examples
+    ///
+    /// - `arn:aws:lambda:us-west-2:123456789012:function:my-function`
+    pub const FAAS_ID: &str = "faas.id";
+
+    /// The name of a serverless function.
+    ///
+    /// # Examples
+    ///
+    /// - `my-function`
+    pub const FAAS_NAME: &str = "faas.name";
+
+    /// The ID of the trigger request , message, event, etc.
+    ///
+    /// # Examples
+    ///
+    /// - `123456789`
+    pub const FAAS_TRIGGER_REQUEST_ID: &str = "faas.trigger.request_id";
+
+    /// The trigger for the function execution.
+    ///
+    /// # Examples
+    ///
+    /// - `http`
+    pub const FAAS_TRIGGER_TYPE: &str = "faas.trigger.type";
+
+    /// The version of a serverless function.
+    ///
+    /// # Examples
+    ///
+    /// - `123`
+    pub const FAAS_VERSION: &str = "faas.version";
+}
+
 /// A file is defined as a set of information that has been created on, or has existed on a filesystem.
 
 /// File objects can be associated with host events, network events, and/or file events (e.g., those produced by File Integrity Monitoring [FIM] products or services). File fields provide details about the affected file associated with the event or metric.
@@ -1267,6 +1964,14 @@ pub mod file {
     ///
     /// - `["readonly", "system"]`
     pub const FILE_ATTRIBUTES: &str = "file.attributes";
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const FILE_CODE_SIGNATURE_DIGEST_ALGORITHM: &str = "file.code_signature.digest_algorithm";
 
     /// Boolean to capture if a signature is present.
     ///
@@ -1305,6 +2010,13 @@ pub mod file {
     ///
     /// - `EQHXZ8M8AV`
     pub const FILE_CODE_SIGNATURE_TEAM_ID: &str = "file.code_signature.team_id";
+
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const FILE_CODE_SIGNATURE_TIMESTAMP: &str = "file.code_signature.timestamp";
 
     /// Stores the trust status of the certificate chain.
     /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
@@ -1352,6 +2064,144 @@ pub mod file {
     /// - `C`
     pub const FILE_DRIVE_LETTER: &str = "file.drive_letter";
 
+    /// Machine architecture of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `x86-64`
+    pub const FILE_ELF_ARCHITECTURE: &str = "file.elf.architecture";
+
+    /// Byte sequence of ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Little Endian`
+    pub const FILE_ELF_BYTE_ORDER: &str = "file.elf.byte_order";
+
+    /// CPU type of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Intel`
+    pub const FILE_ELF_CPU_TYPE: &str = "file.elf.cpu_type";
+
+    /// Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+    pub const FILE_ELF_CREATION_DATE: &str = "file.elf.creation_date";
+
+    /// List of exported element names and types.
+    pub const FILE_ELF_EXPORTS: &str = "file.elf.exports";
+
+    /// A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const FILE_ELF_GO_IMPORT_HASH: &str = "file.elf.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const FILE_ELF_GO_IMPORTS: &str = "file.elf.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const FILE_ELF_GO_IMPORTS_NAMES_ENTROPY: &str = "file.elf.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const FILE_ELF_GO_IMPORTS_NAMES_VAR_ENTROPY: &str = "file.elf.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const FILE_ELF_GO_STRIPPED: &str = "file.elf.go_stripped";
+
+    /// Version of the ELF Application Binary Interface (ABI).
+    pub const FILE_ELF_HEADER_ABI_VERSION: &str = "file.elf.header.abi_version";
+
+    /// Header class of the ELF file.
+    pub const FILE_ELF_HEADER_CLASS: &str = "file.elf.header.class";
+
+    /// Data table of the ELF header.
+    pub const FILE_ELF_HEADER_DATA: &str = "file.elf.header.data";
+
+    /// Header entrypoint of the ELF file.
+    pub const FILE_ELF_HEADER_ENTRYPOINT: &str = "file.elf.header.entrypoint";
+
+    /// "0x1" for original ELF files.
+    pub const FILE_ELF_HEADER_OBJECT_VERSION: &str = "file.elf.header.object_version";
+
+    /// Application Binary Interface (ABI) of the Linux OS.
+    pub const FILE_ELF_HEADER_OS_ABI: &str = "file.elf.header.os_abi";
+
+    /// Header type of the ELF file.
+    pub const FILE_ELF_HEADER_TYPE: &str = "file.elf.header.type";
+
+    /// Version of the ELF header.
+    pub const FILE_ELF_HEADER_VERSION: &str = "file.elf.header.version";
+
+    /// A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is an ELF implementation of the Windows PE imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const FILE_ELF_IMPORT_HASH: &str = "file.elf.import_hash";
+
+    /// List of imported element names and types.
+    pub const FILE_ELF_IMPORTS: &str = "file.elf.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const FILE_ELF_IMPORTS_NAMES_ENTROPY: &str = "file.elf.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const FILE_ELF_IMPORTS_NAMES_VAR_ENTROPY: &str = "file.elf.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.
+    pub const FILE_ELF_SECTIONS: &str = "file.elf.sections";
+
+    /// Chi-square probability distribution of the section.
+    pub const FILE_ELF_SECTIONS_CHI2: &str = "file.elf.sections.chi2";
+
+    /// Shannon entropy calculation from the section.
+    pub const FILE_ELF_SECTIONS_ENTROPY: &str = "file.elf.sections.entropy";
+
+    /// ELF Section List flags.
+    pub const FILE_ELF_SECTIONS_FLAGS: &str = "file.elf.sections.flags";
+
+    /// ELF Section List name.
+    pub const FILE_ELF_SECTIONS_NAME: &str = "file.elf.sections.name";
+
+    /// ELF Section List offset.
+    pub const FILE_ELF_SECTIONS_PHYSICAL_OFFSET: &str = "file.elf.sections.physical_offset";
+
+    /// ELF Section List physical size.
+    pub const FILE_ELF_SECTIONS_PHYSICAL_SIZE: &str = "file.elf.sections.physical_size";
+
+    /// ELF Section List type.
+    pub const FILE_ELF_SECTIONS_TYPE: &str = "file.elf.sections.type";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const FILE_ELF_SECTIONS_VAR_ENTROPY: &str = "file.elf.sections.var_entropy";
+
+    /// ELF Section List virtual address.
+    pub const FILE_ELF_SECTIONS_VIRTUAL_ADDRESS: &str = "file.elf.sections.virtual_address";
+
+    /// ELF Section List virtual size.
+    pub const FILE_ELF_SECTIONS_VIRTUAL_SIZE: &str = "file.elf.sections.virtual_size";
+
+    /// An array containing an object for each segment of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.
+    pub const FILE_ELF_SEGMENTS: &str = "file.elf.segments";
+
+    /// ELF object segment sections.
+    pub const FILE_ELF_SEGMENTS_SECTIONS: &str = "file.elf.segments.sections";
+
+    /// ELF object segment type.
+    pub const FILE_ELF_SEGMENTS_TYPE: &str = "file.elf.segments.type";
+
+    /// List of shared libraries used by this ELF object.
+    pub const FILE_ELF_SHARED_LIBRARIES: &str = "file.elf.shared_libraries";
+
+    /// telfhash symbol hash for ELF file.
+    pub const FILE_ELF_TELFHASH: &str = "file.elf.telfhash";
+
     /// File extension, excluding the leading dot.
     /// Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").
     ///
@@ -1359,6 +2209,15 @@ pub mod file {
     ///
     /// - `png`
     pub const FILE_EXTENSION: &str = "file.extension";
+
+    /// A fork is additional data associated with a filesystem object.
+    /// On Linux, a resource fork is used to store additional data with a filesystem object. A file always has at least one fork for the data portion, and additional forks may exist.
+    /// On NTFS, this is analogous to an Alternate Data Stream (ADS), and the default data stream for a file is just called $DATA. Zone.Identifier is commonly used by Windows to track contents downloaded from the Internet. An ADS is typically of the form: `C:\path\to\filename.extension:some_fork_name`, and `some_fork_name` is the value that should populate `fork_name`. `filename.extension` should populate `file.name`, and `extension` should populate `file.extension`. The full path, `file.path`, will include the fork name.
+    ///
+    /// # Examples
+    ///
+    /// - `Zone.Identifer`
+    pub const FILE_FORK_NAME: &str = "file.fork_name";
 
     /// Primary group ID (GID) of the file.
     ///
@@ -1383,11 +2242,17 @@ pub mod file {
     /// SHA256 hash.
     pub const FILE_HASH_SHA256: &str = "file.hash.sha256";
 
+    /// SHA384 hash.
+    pub const FILE_HASH_SHA384: &str = "file.hash.sha384";
+
     /// SHA512 hash.
     pub const FILE_HASH_SHA512: &str = "file.hash.sha512";
 
     /// SSDEEP hash.
     pub const FILE_HASH_SSDEEP: &str = "file.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const FILE_HASH_TLSH: &str = "file.hash.tlsh";
 
     /// Inode representing the file in the filesystem.
     ///
@@ -1395,6 +2260,71 @@ pub mod file {
     ///
     /// - `256383`
     pub const FILE_INODE: &str = "file.inode";
+
+    /// A hash of the Go language imports in a Mach-O file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const FILE_MACHO_GO_IMPORT_HASH: &str = "file.macho.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const FILE_MACHO_GO_IMPORTS: &str = "file.macho.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const FILE_MACHO_GO_IMPORTS_NAMES_ENTROPY: &str = "file.macho.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const FILE_MACHO_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "file.macho.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const FILE_MACHO_GO_STRIPPED: &str = "file.macho.go_stripped";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for symhash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const FILE_MACHO_IMPORT_HASH: &str = "file.macho.import_hash";
+
+    /// List of imported element names and types.
+    pub const FILE_MACHO_IMPORTS: &str = "file.macho.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const FILE_MACHO_IMPORTS_NAMES_ENTROPY: &str = "file.macho.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const FILE_MACHO_IMPORTS_NAMES_VAR_ENTROPY: &str = "file.macho.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the Mach-O file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `macho.sections.*`.
+    pub const FILE_MACHO_SECTIONS: &str = "file.macho.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const FILE_MACHO_SECTIONS_ENTROPY: &str = "file.macho.sections.entropy";
+
+    /// Mach-O Section List name.
+    pub const FILE_MACHO_SECTIONS_NAME: &str = "file.macho.sections.name";
+
+    /// Mach-O Section List physical size.
+    pub const FILE_MACHO_SECTIONS_PHYSICAL_SIZE: &str = "file.macho.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const FILE_MACHO_SECTIONS_VAR_ENTROPY: &str = "file.macho.sections.var_entropy";
+
+    /// Mach-O Section List virtual size. This is always the same as `physical_size`.
+    pub const FILE_MACHO_SECTIONS_VIRTUAL_SIZE: &str = "file.macho.sections.virtual_size";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a Mach-O implementation of the Windows PE imphash
+    ///
+    /// # Examples
+    ///
+    /// - `d3ccf195b62a9279c3c19af1080497ec`
+    pub const FILE_MACHO_SYMHASH: &str = "file.macho.symhash";
 
     /// MIME type should identify the format of the file or stream of bytes using https://www.iana.org/assignments/media-types/media-types.xhtml[IANA official types], where possible. When more than one type is applicable, the most specific type should be used.
     pub const FILE_MIME_TYPE: &str = "file.mime_type";
@@ -1458,6 +2388,26 @@ pub mod file {
     /// - `6.3.9600.17415`
     pub const FILE_PE_FILE_VERSION: &str = "file.pe.file_version";
 
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const FILE_PE_GO_IMPORT_HASH: &str = "file.pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const FILE_PE_GO_IMPORTS: &str = "file.pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const FILE_PE_GO_IMPORTS_NAMES_ENTROPY: &str = "file.pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const FILE_PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str = "file.pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const FILE_PE_GO_STRIPPED: &str = "file.pe.go_stripped";
+
     /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
     /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
     ///
@@ -1466,6 +2416,23 @@ pub mod file {
     /// - `0c6803c4e922103c4dca5963aad36ddf`
     pub const FILE_PE_IMPHASH: &str = "file.pe.imphash";
 
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const FILE_PE_IMPORT_HASH: &str = "file.pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const FILE_PE_IMPORTS: &str = "file.pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const FILE_PE_IMPORTS_NAMES_ENTROPY: &str = "file.pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const FILE_PE_IMPORTS_NAMES_VAR_ENTROPY: &str = "file.pe.imports_names_var_entropy";
+
     /// Internal name of the file, provided at compile-time.
     ///
     /// # Examples
@@ -1473,12 +2440,39 @@ pub mod file {
     /// - `MSPAINT.EXE`
     pub const FILE_PE_ORIGINAL_FILE_NAME: &str = "file.pe.original_file_name";
 
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const FILE_PE_PEHASH: &str = "file.pe.pehash";
+
     /// Internal product name of the file, provided at compile-time.
     ///
     /// # Examples
     ///
     /// - `Microsoft® Windows® Operating System`
     pub const FILE_PE_PRODUCT: &str = "file.pe.product";
+
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const FILE_PE_SECTIONS: &str = "file.pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const FILE_PE_SECTIONS_ENTROPY: &str = "file.pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const FILE_PE_SECTIONS_NAME: &str = "file.pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const FILE_PE_SECTIONS_PHYSICAL_SIZE: &str = "file.pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const FILE_PE_SECTIONS_VAR_ENTROPY: &str = "file.pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const FILE_PE_SECTIONS_VIRTUAL_SIZE: &str = "file.pe.sections.virtual_size";
 
     /// File size in bytes.
     /// Only relevant when `file.type` is "file".
@@ -1519,7 +2513,7 @@ pub mod file {
     /// - `Example SHA2 High Assurance Server CA`
     pub const FILE_X509_ISSUER_COMMON_NAME: &str = "file.x509.issuer.common_name";
 
-    /// List of country (C) codes
+    /// List of country \(C) codes
     ///
     /// # Examples
     ///
@@ -1565,14 +2559,14 @@ pub mod file {
     ///
     /// # Examples
     ///
-    /// - `2020-07-16 03:15:39+00:00`
+    /// - `2020-07-16T03:15:39Z`
     pub const FILE_X509_NOT_AFTER: &str = "file.x509.not_after";
 
     /// Time at which the certificate is first considered valid.
     ///
     /// # Examples
     ///
-    /// - `2019-08-16 01:40:25+00:00`
+    /// - `2019-08-16T01:40:25Z`
     pub const FILE_X509_NOT_BEFORE: &str = "file.x509.not_before";
 
     /// Algorithm used to generate the public key.
@@ -1624,7 +2618,7 @@ pub mod file {
     /// - `shared.global.example.net`
     pub const FILE_X509_SUBJECT_COMMON_NAME: &str = "file.x509.subject.common_name";
 
-    /// List of country (C) code
+    /// List of country \(C) code
     ///
     /// # Examples
     ///
@@ -1786,11 +2780,17 @@ pub mod hash {
     /// SHA256 hash.
     pub const HASH_SHA256: &str = "hash.sha256";
 
+    /// SHA384 hash.
+    pub const HASH_SHA384: &str = "hash.sha384";
+
     /// SHA512 hash.
     pub const HASH_SHA512: &str = "hash.sha512";
 
     /// SSDEEP hash.
     pub const HASH_SSDEEP: &str = "hash.ssdeep";
+
+    /// TLSH hash.
+    pub const HASH_TLSH: &str = "hash.tlsh";
 }
 
 /// A host is defined as a general computing instance.
@@ -1804,6 +2804,13 @@ pub mod host {
     ///
     /// - `x86_64`
     pub const HOST_ARCHITECTURE: &str = "host.architecture";
+
+    /// Linux boot uuid taken from /proc/sys/kernel/random/boot_id. Note the boot_id value from /proc may or may not be the same in containers as on the host. Some container runtimes will bind mount a new boot_id value onto the proc file in each container.
+    ///
+    /// # Examples
+    ///
+    /// - `88a1f0ed-5ae5-41ee-af6b-41921c311872`
+    pub const HOST_BOOT_ID: &str = "host.boot.id";
 
     /// Percent CPU used which is normalized by the number of CPU cores and it ranges from 0 to 1.
     /// Scaling factor: 1000.
@@ -1925,7 +2932,7 @@ pub mod host {
     pub const HOST_MAC: &str = "host.mac";
 
     /// Name of the host.
-    /// It can contain what `hostname` returns on Unix systems, the fully qualified domain name, or a name specified by the user. The sender decides which value to use.
+    /// It can contain what hostname returns on Unix systems, the fully qualified domain name (FQDN), or a name specified by the user. The recommended value is the lowercase FQDN of the host.
     pub const HOST_NAME: &str = "host.name";
 
     /// The number of bytes (gauge) sent out on all network interfaces by the host since the last metric collection.
@@ -1976,8 +2983,7 @@ pub mod host {
     pub const HOST_OS_PLATFORM: &str = "host.os.platform";
 
     /// Use the `os.type` field to categorize the operating system into one of the broad commercial families.
-    /// One of these following values should be used (lowercase): linux, macos, unix, windows.
-    /// If the OS you're dealing with is not in the list, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
+    /// If the OS you're dealing with is not listed as an expected value, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
     ///
     /// # Examples
     ///
@@ -1991,6 +2997,55 @@ pub mod host {
     /// - `10.14.1`
     pub const HOST_OS_VERSION: &str = "host.os.version";
 
+    /// This is the inode number of the namespace in the namespace file system (nsfs). Unsigned int inum in include/linux/ns_common.h.
+    ///
+    /// # Examples
+    ///
+    /// - `256383`
+    pub const HOST_PID_NS_INO: &str = "host.pid_ns_ino";
+
+    /// A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+    ///
+    /// # Examples
+    ///
+    /// - `High`
+    pub const HOST_RISK_CALCULATED_LEVEL: &str = "host.risk.calculated_level";
+
+    /// A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+    ///
+    /// # Examples
+    ///
+    /// - `880.73`
+    pub const HOST_RISK_CALCULATED_SCORE: &str = "host.risk.calculated_score";
+
+    /// A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring, and normalized to a range of 0 to 100.
+    ///
+    /// # Examples
+    ///
+    /// - `88.73`
+    pub const HOST_RISK_CALCULATED_SCORE_NORM: &str = "host.risk.calculated_score_norm";
+
+    /// A risk classification level obtained from outside the system, such as from some external Threat Intelligence Platform.
+    ///
+    /// # Examples
+    ///
+    /// - `High`
+    pub const HOST_RISK_STATIC_LEVEL: &str = "host.risk.static_level";
+
+    /// A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+    ///
+    /// # Examples
+    ///
+    /// - `830.0`
+    pub const HOST_RISK_STATIC_SCORE: &str = "host.risk.static_score";
+
+    /// A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform, and normalized to a range of 0 to 100.
+    ///
+    /// # Examples
+    ///
+    /// - `83.0`
+    pub const HOST_RISK_STATIC_SCORE_NORM: &str = "host.risk.static_score_norm";
+
     /// Type of host.
     /// For Cloud providers this can be the machine type like `t2.medium`. If vm, this could be the container, for example, or other information meaningful in your environment.
     pub const HOST_TYPE: &str = "host.type";
@@ -2001,51 +3056,6 @@ pub mod host {
     ///
     /// - `1325`
     pub const HOST_UPTIME: &str = "host.uptime";
-
-    /// Name of the directory the user is a member of.
-    /// For example, an LDAP or Active Directory domain name.
-    pub const HOST_USER_DOMAIN: &str = "host.user.domain";
-
-    /// User email address.
-    pub const HOST_USER_EMAIL: &str = "host.user.email";
-
-    /// User's full name, if available.
-    ///
-    /// # Examples
-    ///
-    /// - `Albert Einstein`
-    pub const HOST_USER_FULL_NAME: &str = "host.user.full_name";
-
-    /// Name of the directory the group is a member of.
-    /// For example, an LDAP or Active Directory domain name.
-    pub const HOST_USER_GROUP_DOMAIN: &str = "host.user.group.domain";
-
-    /// Unique identifier for the group on the system/platform.
-    pub const HOST_USER_GROUP_ID: &str = "host.user.group.id";
-
-    /// Name of the group.
-    pub const HOST_USER_GROUP_NAME: &str = "host.user.group.name";
-
-    /// Unique user hash to correlate information for a user in anonymized form.
-    /// Useful if `user.id` or `user.name` contain confidential information and cannot be used.
-    pub const HOST_USER_HASH: &str = "host.user.hash";
-
-    /// Unique identifier of the user.
-    pub const HOST_USER_ID: &str = "host.user.id";
-
-    /// Short name or login of the user.
-    ///
-    /// # Examples
-    ///
-    /// - `albert`
-    pub const HOST_USER_NAME: &str = "host.user.name";
-
-    /// Array of user roles at the time of the event.
-    ///
-    /// # Examples
-    ///
-    /// - `["kibana_admin", "reporting_user"]`
-    pub const HOST_USER_ROLES: &str = "host.user.roles";
 }
 
 /// Fields related to HTTP activity. Use the `url` field set to store the url of the request.
@@ -2081,13 +3091,11 @@ pub mod http {
     pub const HTTP_REQUEST_ID: &str = "http.request.id";
 
     /// HTTP request method.
-    /// Prior to ECS 1.6.0 the following guidance was provided:
-    /// "The field value must be normalized to lowercase for querying."
-    /// As of ECS 1.6.0, the guidance is deprecated because the original case of the method may be useful in anomaly detection.  Original case will be mandated in ECS 2.0.0
+    /// The value should retain its casing from the original event. For example, `GET`, `get`, and `GeT` are all considered valid values for this field.
     ///
     /// # Examples
     ///
-    /// - `GET, POST, PUT, PoST`
+    /// - `POST`
     pub const HTTP_REQUEST_METHOD: &str = "http.request.method";
 
     /// Mime type of the body of the request.
@@ -2227,17 +3235,15 @@ pub mod log {
     /// - `init`
     pub const LOG_ORIGIN_FUNCTION: &str = "log.origin.function";
 
-    /// This is the original log message and contains the full log message before splitting it up in multiple parts.
-    /// In contrast to the `message` field which can contain an extracted part of the log message, this field contains the original, full log message. It can have already some modifications applied like encoding or new lines removed to clean up the log message.
-    /// This field is not indexed and doc_values are disabled so it can't be queried but the value can be retrieved from `_source`.
+    /// The Syslog metadata of the event, if the event was transmitted via Syslog. Please see RFCs 5424 or 3164.
+    pub const LOG_SYSLOG: &str = "log.syslog";
+
+    /// The device or application that originated the Syslog message, if available.
     ///
     /// # Examples
     ///
-    /// - `Sep 19 08:26:10 localhost My log`
-    pub const LOG_ORIGINAL: &str = "log.original";
-
-    /// The Syslog metadata of the event, if the event was transmitted via Syslog. Please see RFCs 5424 or 3164.
-    pub const LOG_SYSLOG: &str = "log.syslog";
+    /// - `sshd`
+    pub const LOG_SYSLOG_APPNAME: &str = "log.syslog.appname";
 
     /// The Syslog numeric facility of the log event, if available.
     /// According to RFCs 5424 and 3164, this value should be an integer between 0 and 23.
@@ -2254,6 +3260,20 @@ pub mod log {
     /// - `local7`
     pub const LOG_SYSLOG_FACILITY_NAME: &str = "log.syslog.facility.name";
 
+    /// The hostname, FQDN, or IP of the machine that originally sent the Syslog message. This is sourced from the hostname field of the syslog header. Depending on the environment, this value may be different from the host that handled the event, especially if the host handling the events is acting as a collector.
+    ///
+    /// # Examples
+    ///
+    /// - `example-host`
+    pub const LOG_SYSLOG_HOSTNAME: &str = "log.syslog.hostname";
+
+    /// An identifier for the type of Syslog message, if available. Only applicable for RFC 5424 messages.
+    ///
+    /// # Examples
+    ///
+    /// - `ID47`
+    pub const LOG_SYSLOG_MSGID: &str = "log.syslog.msgid";
+
     /// Syslog numeric priority of the event, if available.
     /// According to RFCs 5424 and 3164, the priority is 8 * facility + severity. This number is therefore expected to contain a value between 0 and 191.
     ///
@@ -2261,6 +3281,13 @@ pub mod log {
     ///
     /// - `135`
     pub const LOG_SYSLOG_PRIORITY: &str = "log.syslog.priority";
+
+    /// The process name or ID that originated the Syslog message, if available.
+    ///
+    /// # Examples
+    ///
+    /// - `12345`
+    pub const LOG_SYSLOG_PROCID: &str = "log.syslog.procid";
 
     /// The Syslog numeric severity of the log event, if available.
     /// If the event source publishing via Syslog provides a different numeric severity value (e.g. firewall, IDS), your source's numeric severity should go to `event.severity`. If the event source does not specify a distinct severity, you can optionally copy the Syslog severity to `event.severity`.
@@ -2277,6 +3304,84 @@ pub mod log {
     ///
     /// - `Error`
     pub const LOG_SYSLOG_SEVERITY_NAME: &str = "log.syslog.severity.name";
+
+    /// Structured data expressed in RFC 5424 messages, if available. These are key-value pairs formed from the structured data portion of the syslog message, as defined in RFC 5424 Section 6.3.
+    pub const LOG_SYSLOG_STRUCTURED_DATA: &str = "log.syslog.structured_data";
+
+    /// The version of the Syslog protocol specification. Only applicable for RFC 5424 messages.
+    ///
+    /// # Examples
+    ///
+    /// - `1`
+    pub const LOG_SYSLOG_VERSION: &str = "log.syslog.version";
+}
+
+/// These fields contain Mac OS Mach Object file format (Mach-O) metadata.
+pub mod macho {
+
+    /// A hash of the Go language imports in a Mach-O file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const MACHO_GO_IMPORT_HASH: &str = "macho.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const MACHO_GO_IMPORTS: &str = "macho.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const MACHO_GO_IMPORTS_NAMES_ENTROPY: &str = "macho.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const MACHO_GO_IMPORTS_NAMES_VAR_ENTROPY: &str = "macho.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const MACHO_GO_STRIPPED: &str = "macho.go_stripped";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for symhash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const MACHO_IMPORT_HASH: &str = "macho.import_hash";
+
+    /// List of imported element names and types.
+    pub const MACHO_IMPORTS: &str = "macho.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const MACHO_IMPORTS_NAMES_ENTROPY: &str = "macho.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const MACHO_IMPORTS_NAMES_VAR_ENTROPY: &str = "macho.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the Mach-O file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `macho.sections.*`.
+    pub const MACHO_SECTIONS: &str = "macho.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const MACHO_SECTIONS_ENTROPY: &str = "macho.sections.entropy";
+
+    /// Mach-O Section List name.
+    pub const MACHO_SECTIONS_NAME: &str = "macho.sections.name";
+
+    /// Mach-O Section List physical size.
+    pub const MACHO_SECTIONS_PHYSICAL_SIZE: &str = "macho.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const MACHO_SECTIONS_VAR_ENTROPY: &str = "macho.sections.var_entropy";
+
+    /// Mach-O Section List virtual size. This is always the same as `physical_size`.
+    pub const MACHO_SECTIONS_VIRTUAL_SIZE: &str = "macho.sections.virtual_size";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a Mach-O implementation of the Windows PE imphash
+    ///
+    /// # Examples
+    ///
+    /// - `d3ccf195b62a9279c3c19af1080497ec`
+    pub const MACHO_SYMHASH: &str = "macho.symhash";
 }
 
 /// The network is defined as the communication path over which a host or network event happens.
@@ -2284,8 +3389,9 @@ pub mod log {
 /// The network.* fields should be populated with details about the network activity associated with an event.
 pub mod network {
 
-    /// A name given to an application level protocol. This can be arbitrarily assigned for things like microservices, but also apply to things like skype, icq, facebook, twitter. This would be used in situations where the vendor or service can be decoded such as from the source/dest IP owners, ports, or wire format.
-    /// The field value must be normalized to lowercase for querying. See the documentation section "Implementing ECS".
+    /// When a specific application or service is identified from network connection details (source/dest IPs, ports, certificates, or wire format), this field captures the application's or service's name.
+    /// For example, the original event identifies the network connection being from a specific web service in a `https` network connection, like `facebook` or `twitter`.
+    /// The field value must be normalized to lowercase for querying.
     ///
     /// # Examples
     ///
@@ -2309,15 +3415,6 @@ pub mod network {
     pub const NETWORK_COMMUNITY_ID: &str = "network.community_id";
 
     /// Direction of the network traffic.
-    /// Recommended values are:
-    ///   * ingress
-    ///   * egress
-    ///   * inbound
-    ///   * outbound
-    ///   * internal
-    ///   * external
-    ///   * unknown
-    ///
     /// When mapping events from a host-based monitoring context, populate this field from the host's point of view, using the values "ingress" or "egress".
     /// When mapping events from a network or perimeter-based monitoring context, populate this field from the point of view of the network perimeter, using the values "inbound", "outbound", "internal" or "external".
     /// Note that "internal" is not crossing perimeter boundaries, and is meant to describe communication between two hosts within the perimeter. Note also that "external" is meant to describe traffic between two hosts that are external to the perimeter. This could for example be useful for ISPs or VPN service providers.
@@ -2373,8 +3470,8 @@ pub mod network {
     /// - `24`
     pub const NETWORK_PACKETS: &str = "network.packets";
 
-    /// L7 Network protocol name. ex. http, lumberjack, transport protocol.
-    /// The field value must be normalized to lowercase for querying. See the documentation section "Implementing ECS".
+    /// In the OSI Model this would be the Application Layer protocol. For example, `http`, `dns`, or `ssh`.
+    /// The field value must be normalized to lowercase for querying.
     ///
     /// # Examples
     ///
@@ -2382,7 +3479,7 @@ pub mod network {
     pub const NETWORK_PROTOCOL: &str = "network.protocol";
 
     /// Same as network.iana_number, but instead using the Keyword name of the transport layer (udp, tcp, ipv6-icmp, etc.)
-    /// The field value must be normalized to lowercase for querying. See the documentation section "Implementing ECS".
+    /// The field value must be normalized to lowercase for querying.
     ///
     /// # Examples
     ///
@@ -2390,7 +3487,7 @@ pub mod network {
     pub const NETWORK_TRANSPORT: &str = "network.transport";
 
     /// In the OSI Model this would be the Network Layer. ipv4, ipv6, ipsec, pim, etc
-    /// The field value must be normalized to lowercase for querying. See the documentation section "Implementing ECS".
+    /// The field value must be normalized to lowercase for querying.
     ///
     /// # Examples
     ///
@@ -2646,8 +3743,7 @@ pub mod observer {
     pub const OBSERVER_OS_PLATFORM: &str = "observer.os.platform";
 
     /// Use the `os.type` field to categorize the operating system into one of the broad commercial families.
-    /// One of these following values should be used (lowercase): linux, macos, unix, windows.
-    /// If the OS you're dealing with is not in the list, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
+    /// If the OS you're dealing with is not listed as an expected value, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
     ///
     /// # Examples
     ///
@@ -2700,6 +3796,9 @@ pub mod orchestrator {
     /// - `v1beta1`
     pub const ORCHESTRATOR_API_VERSION: &str = "orchestrator.api_version";
 
+    /// Unique ID of the cluster.
+    pub const ORCHESTRATOR_CLUSTER_ID: &str = "orchestrator.cluster.id";
+
     /// Name of the cluster.
     pub const ORCHESTRATOR_CLUSTER_NAME: &str = "orchestrator.cluster.name";
 
@@ -2723,12 +3822,39 @@ pub mod orchestrator {
     /// - `elastic`
     pub const ORCHESTRATOR_ORGANIZATION: &str = "orchestrator.organization";
 
+    /// The list of annotations added to the resource.
+    ///
+    /// # Examples
+    ///
+    /// - `['key1:value1', 'key2:value2', 'key3:value3']`
+    pub const ORCHESTRATOR_RESOURCE_ANNOTATION: &str = "orchestrator.resource.annotation";
+
+    /// Unique ID of the resource being acted upon.
+    pub const ORCHESTRATOR_RESOURCE_ID: &str = "orchestrator.resource.id";
+
+    /// IP address assigned to the resource associated with the event being observed. In the case of a Kubernetes Pod, this array would contain only one element: the IP of the Pod (as opposed to the Node on which the Pod is running).
+    pub const ORCHESTRATOR_RESOURCE_IP: &str = "orchestrator.resource.ip";
+
+    /// The list of labels added to the resource.
+    ///
+    /// # Examples
+    ///
+    /// - `['key1:value1', 'key2:value2', 'key3:value3']`
+    pub const ORCHESTRATOR_RESOURCE_LABEL: &str = "orchestrator.resource.label";
+
     /// Name of the resource being acted upon.
     ///
     /// # Examples
     ///
     /// - `test-pod-cdcws`
     pub const ORCHESTRATOR_RESOURCE_NAME: &str = "orchestrator.resource.name";
+
+    /// Type or kind of the parent resource associated with the event being observed. In Kubernetes, this will be the name of a built-in workload resource (e.g., Deployment, StatefulSet, DaemonSet).
+    ///
+    /// # Examples
+    ///
+    /// - `DaemonSet`
+    pub const ORCHESTRATOR_RESOURCE_PARENT_TYPE: &str = "orchestrator.resource.parent.type";
 
     /// Type of resource being acted upon.
     ///
@@ -2796,8 +3922,7 @@ pub mod os {
     pub const OS_PLATFORM: &str = "os.platform";
 
     /// Use the `os.type` field to categorize the operating system into one of the broad commercial families.
-    /// One of these following values should be used (lowercase): linux, macos, unix, windows.
-    /// If the OS you're dealing with is not in the list, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
+    /// If the OS you're dealing with is not listed as an expected value, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
     ///
     /// # Examples
     ///
@@ -2937,6 +4062,26 @@ pub mod pe {
     /// - `6.3.9600.17415`
     pub const PE_FILE_VERSION: &str = "pe.file_version";
 
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PE_GO_IMPORT_HASH: &str = "pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PE_GO_IMPORTS: &str = "pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PE_GO_IMPORTS_NAMES_ENTROPY: &str = "pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str = "pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PE_GO_STRIPPED: &str = "pe.go_stripped";
+
     /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
     /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
     ///
@@ -2945,6 +4090,23 @@ pub mod pe {
     /// - `0c6803c4e922103c4dca5963aad36ddf`
     pub const PE_IMPHASH: &str = "pe.imphash";
 
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PE_IMPORT_HASH: &str = "pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const PE_IMPORTS: &str = "pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PE_IMPORTS_NAMES_ENTROPY: &str = "pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PE_IMPORTS_NAMES_VAR_ENTROPY: &str = "pe.imports_names_var_entropy";
+
     /// Internal name of the file, provided at compile-time.
     ///
     /// # Examples
@@ -2952,12 +4114,39 @@ pub mod pe {
     /// - `MSPAINT.EXE`
     pub const PE_ORIGINAL_FILE_NAME: &str = "pe.original_file_name";
 
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const PE_PEHASH: &str = "pe.pehash";
+
     /// Internal product name of the file, provided at compile-time.
     ///
     /// # Examples
     ///
     /// - `Microsoft® Windows® Operating System`
     pub const PE_PRODUCT: &str = "pe.product";
+
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const PE_SECTIONS: &str = "pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const PE_SECTIONS_ENTROPY: &str = "pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const PE_SECTIONS_NAME: &str = "pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const PE_SECTIONS_PHYSICAL_SIZE: &str = "pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PE_SECTIONS_VAR_ENTROPY: &str = "pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const PE_SECTIONS_VIRTUAL_SIZE: &str = "pe.sections.virtual_size";
 }
 
 /// These fields contain information about a process.
@@ -2980,6 +4169,15 @@ pub mod process {
     ///
     /// - `4`
     pub const PROCESS_ARGS_COUNT: &str = "process.args_count";
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const PROCESS_CODE_SIGNATURE_DIGEST_ALGORITHM: &str =
+        "process.code_signature.digest_algorithm";
 
     /// Boolean to capture if a signature is present.
     ///
@@ -3019,6 +4217,13 @@ pub mod process {
     /// - `EQHXZ8M8AV`
     pub const PROCESS_CODE_SIGNATURE_TEAM_ID: &str = "process.code_signature.team_id";
 
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const PROCESS_CODE_SIGNATURE_TIMESTAMP: &str = "process.code_signature.timestamp";
+
     /// Stores the trust status of the certificate chain.
     /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
     ///
@@ -3043,6 +4248,152 @@ pub mod process {
     /// - `/usr/bin/ssh -l user 10.0.0.16`
     pub const PROCESS_COMMAND_LINE: &str = "process.command_line";
 
+    /// Machine architecture of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `x86-64`
+    pub const PROCESS_ELF_ARCHITECTURE: &str = "process.elf.architecture";
+
+    /// Byte sequence of ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Little Endian`
+    pub const PROCESS_ELF_BYTE_ORDER: &str = "process.elf.byte_order";
+
+    /// CPU type of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Intel`
+    pub const PROCESS_ELF_CPU_TYPE: &str = "process.elf.cpu_type";
+
+    /// Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+    pub const PROCESS_ELF_CREATION_DATE: &str = "process.elf.creation_date";
+
+    /// List of exported element names and types.
+    pub const PROCESS_ELF_EXPORTS: &str = "process.elf.exports";
+
+    /// A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PROCESS_ELF_GO_IMPORT_HASH: &str = "process.elf.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PROCESS_ELF_GO_IMPORTS: &str = "process.elf.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_ELF_GO_IMPORTS_NAMES_ENTROPY: &str = "process.elf.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_ELF_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.elf.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PROCESS_ELF_GO_STRIPPED: &str = "process.elf.go_stripped";
+
+    /// Version of the ELF Application Binary Interface (ABI).
+    pub const PROCESS_ELF_HEADER_ABI_VERSION: &str = "process.elf.header.abi_version";
+
+    /// Header class of the ELF file.
+    pub const PROCESS_ELF_HEADER_CLASS: &str = "process.elf.header.class";
+
+    /// Data table of the ELF header.
+    pub const PROCESS_ELF_HEADER_DATA: &str = "process.elf.header.data";
+
+    /// Header entrypoint of the ELF file.
+    pub const PROCESS_ELF_HEADER_ENTRYPOINT: &str = "process.elf.header.entrypoint";
+
+    /// "0x1" for original ELF files.
+    pub const PROCESS_ELF_HEADER_OBJECT_VERSION: &str = "process.elf.header.object_version";
+
+    /// Application Binary Interface (ABI) of the Linux OS.
+    pub const PROCESS_ELF_HEADER_OS_ABI: &str = "process.elf.header.os_abi";
+
+    /// Header type of the ELF file.
+    pub const PROCESS_ELF_HEADER_TYPE: &str = "process.elf.header.type";
+
+    /// Version of the ELF header.
+    pub const PROCESS_ELF_HEADER_VERSION: &str = "process.elf.header.version";
+
+    /// A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is an ELF implementation of the Windows PE imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PROCESS_ELF_IMPORT_HASH: &str = "process.elf.import_hash";
+
+    /// List of imported element names and types.
+    pub const PROCESS_ELF_IMPORTS: &str = "process.elf.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_ELF_IMPORTS_NAMES_ENTROPY: &str = "process.elf.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_ELF_IMPORTS_NAMES_VAR_ENTROPY: &str = "process.elf.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.
+    pub const PROCESS_ELF_SECTIONS: &str = "process.elf.sections";
+
+    /// Chi-square probability distribution of the section.
+    pub const PROCESS_ELF_SECTIONS_CHI2: &str = "process.elf.sections.chi2";
+
+    /// Shannon entropy calculation from the section.
+    pub const PROCESS_ELF_SECTIONS_ENTROPY: &str = "process.elf.sections.entropy";
+
+    /// ELF Section List flags.
+    pub const PROCESS_ELF_SECTIONS_FLAGS: &str = "process.elf.sections.flags";
+
+    /// ELF Section List name.
+    pub const PROCESS_ELF_SECTIONS_NAME: &str = "process.elf.sections.name";
+
+    /// ELF Section List offset.
+    pub const PROCESS_ELF_SECTIONS_PHYSICAL_OFFSET: &str = "process.elf.sections.physical_offset";
+
+    /// ELF Section List physical size.
+    pub const PROCESS_ELF_SECTIONS_PHYSICAL_SIZE: &str = "process.elf.sections.physical_size";
+
+    /// ELF Section List type.
+    pub const PROCESS_ELF_SECTIONS_TYPE: &str = "process.elf.sections.type";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PROCESS_ELF_SECTIONS_VAR_ENTROPY: &str = "process.elf.sections.var_entropy";
+
+    /// ELF Section List virtual address.
+    pub const PROCESS_ELF_SECTIONS_VIRTUAL_ADDRESS: &str = "process.elf.sections.virtual_address";
+
+    /// ELF Section List virtual size.
+    pub const PROCESS_ELF_SECTIONS_VIRTUAL_SIZE: &str = "process.elf.sections.virtual_size";
+
+    /// An array containing an object for each segment of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.
+    pub const PROCESS_ELF_SEGMENTS: &str = "process.elf.segments";
+
+    /// ELF object segment sections.
+    pub const PROCESS_ELF_SEGMENTS_SECTIONS: &str = "process.elf.segments.sections";
+
+    /// ELF object segment type.
+    pub const PROCESS_ELF_SEGMENTS_TYPE: &str = "process.elf.segments.type";
+
+    /// List of shared libraries used by this ELF object.
+    pub const PROCESS_ELF_SHARED_LIBRARIES: &str = "process.elf.shared_libraries";
+
+    /// telfhash symbol hash for ELF file.
+    pub const PROCESS_ELF_TELFHASH: &str = "process.elf.telfhash";
+
+    /// The time the process ended.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_END: &str = "process.end";
+
     /// Unique identifier for the process.
     /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
     /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
@@ -3051,6 +4402,292 @@ pub mod process {
     ///
     /// - `c2c455d9f99375d`
     pub const PROCESS_ENTITY_ID: &str = "process.entity_id";
+
+    /// Array of process arguments, starting with the absolute path to the executable.
+    /// May be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `["/usr/bin/ssh", "-l", "user", "10.0.0.16"]`
+    pub const PROCESS_ENTRY_LEADER_ARGS: &str = "process.entry_leader.args";
+
+    /// Length of the process.args array.
+    /// This field can be useful for querying or performing bucket analysis on how many arguments were provided to start a process. More arguments may be an indication of suspicious activity.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_ENTRY_LEADER_ARGS_COUNT: &str = "process.entry_leader.args_count";
+
+    /// Name of the group.
+    pub const PROCESS_ENTRY_LEADER_ATTESTED_GROUPS_NAME: &str =
+        "process.entry_leader.attested_groups.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_ENTRY_LEADER_ATTESTED_USER_ID: &str = "process.entry_leader.attested_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_ENTRY_LEADER_ATTESTED_USER_NAME: &str =
+        "process.entry_leader.attested_user.name";
+
+    /// Full command line that started the process, including the absolute path to the executable, and all arguments.
+    /// Some arguments may be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh -l user 10.0.0.16`
+    pub const PROCESS_ENTRY_LEADER_COMMAND_LINE: &str = "process.entry_leader.command_line";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_ENTRY_LEADER_ENTITY_ID: &str = "process.entry_leader.entity_id";
+
+    /// IP address of the source (IPv4 or IPv6).
+    pub const PROCESS_ENTRY_LEADER_ENTRY_META_SOURCE_IP: &str =
+        "process.entry_leader.entry_meta.source.ip";
+
+    /// The entry type for the entry session leader. Values include: init(e.g systemd), sshd, ssm, kubelet, teleport, terminal, console
+    /// Note: This field is only set on process.session_leader.
+    pub const PROCESS_ENTRY_LEADER_ENTRY_META_TYPE: &str = "process.entry_leader.entry_meta.type";
+
+    /// Absolute path to the process executable.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh`
+    pub const PROCESS_ENTRY_LEADER_EXECUTABLE: &str = "process.entry_leader.executable";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_ENTRY_LEADER_GROUP_ID: &str = "process.entry_leader.group.id";
+
+    /// Name of the group.
+    pub const PROCESS_ENTRY_LEADER_GROUP_NAME: &str = "process.entry_leader.group.name";
+
+    /// Whether the process is connected to an interactive shell.
+    /// Process interactivity is inferred from the processes file descriptors. If the character device for the controlling tty is the same as stdin and stderr for the process, the process is considered interactive.
+    /// Note: A non-interactive process can belong to an interactive session and is simply one that does not have open file descriptors reading the controlling TTY on FD 0 (stdin) or writing to the controlling TTY on FD 2 (stderr). A backgrounded process is still considered interactive if stdin and stderr are connected to the controlling TTY.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_ENTRY_LEADER_INTERACTIVE: &str = "process.entry_leader.interactive";
+
+    /// Process name.
+    /// Sometimes called program name or similar.
+    ///
+    /// # Examples
+    ///
+    /// - `ssh`
+    pub const PROCESS_ENTRY_LEADER_NAME: &str = "process.entry_leader.name";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_ENTRY_LEADER_PARENT_ENTITY_ID: &str = "process.entry_leader.parent.entity_id";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_ENTRY_LEADER_PARENT_PID: &str = "process.entry_leader.parent.pid";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_ENTRY_LEADER_PARENT_SESSION_LEADER_ENTITY_ID: &str =
+        "process.entry_leader.parent.session_leader.entity_id";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_ENTRY_LEADER_PARENT_SESSION_LEADER_PID: &str =
+        "process.entry_leader.parent.session_leader.pid";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_ENTRY_LEADER_PARENT_SESSION_LEADER_START: &str =
+        "process.entry_leader.parent.session_leader.start";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_ENTRY_LEADER_PARENT_SESSION_LEADER_VPID: &str =
+        "process.entry_leader.parent.session_leader.vpid";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_ENTRY_LEADER_PARENT_START: &str = "process.entry_leader.parent.start";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_ENTRY_LEADER_PARENT_VPID: &str = "process.entry_leader.parent.vpid";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_ENTRY_LEADER_PID: &str = "process.entry_leader.pid";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_ENTRY_LEADER_REAL_GROUP_ID: &str = "process.entry_leader.real_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_ENTRY_LEADER_REAL_GROUP_NAME: &str = "process.entry_leader.real_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_ENTRY_LEADER_REAL_USER_ID: &str = "process.entry_leader.real_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_ENTRY_LEADER_REAL_USER_NAME: &str = "process.entry_leader.real_user.name";
+
+    /// This boolean is used to identify if a leader process is the same as the top level process.
+    /// For example, if `process.group_leader.same_as_process = true`, it means the process event in question is the leader of its process group. Details under `process.*` like `pid` would be the same under `process.group_leader.*` The same applies for both `process.session_leader` and `process.entry_leader`.
+    /// This field exists to the benefit of EQL and other rule engines since it's not possible to compare equality between two fields in a single document. e.g `process.entity_id` = `process.group_leader.entity_id` (top level process is the process group leader) OR `process.entity_id` = `process.entry_leader.entity_id` (top level process is the entry session leader)
+    /// Instead these rules could be written like: `process.group_leader.same_as_process: true` OR `process.entry_leader.same_as_process: true`
+    /// Note: This field is only set on `process.entry_leader`, `process.session_leader` and `process.group_leader`.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_ENTRY_LEADER_SAME_AS_PROCESS: &str = "process.entry_leader.same_as_process";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_ENTRY_LEADER_SAVED_GROUP_ID: &str = "process.entry_leader.saved_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_ENTRY_LEADER_SAVED_GROUP_NAME: &str = "process.entry_leader.saved_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_ENTRY_LEADER_SAVED_USER_ID: &str = "process.entry_leader.saved_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_ENTRY_LEADER_SAVED_USER_NAME: &str = "process.entry_leader.saved_user.name";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_ENTRY_LEADER_START: &str = "process.entry_leader.start";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_ENTRY_LEADER_SUPPLEMENTAL_GROUPS_ID: &str =
+        "process.entry_leader.supplemental_groups.id";
+
+    /// Name of the group.
+    pub const PROCESS_ENTRY_LEADER_SUPPLEMENTAL_GROUPS_NAME: &str =
+        "process.entry_leader.supplemental_groups.name";
+
+    /// Information about the controlling TTY device. If set, the process belongs to an interactive session.
+    pub const PROCESS_ENTRY_LEADER_TTY: &str = "process.entry_leader.tty";
+
+    /// The major number identifies the driver associated with the device. The character device's major and minor numbers can be algorithmically combined to produce the more familiar terminal identifiers such as "ttyS0" and "pts/0". For more details, please refer to the Linux kernel documentation.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_ENTRY_LEADER_TTY_CHAR_DEVICE_MAJOR: &str =
+        "process.entry_leader.tty.char_device.major";
+
+    /// The minor number is used only by the driver specified by the major number; other parts of the kernel don’t use it, and merely pass it along to the driver. It is common for a driver to control several devices; the minor number provides a way for the driver to differentiate among them.
+    ///
+    /// # Examples
+    ///
+    /// - `1`
+    pub const PROCESS_ENTRY_LEADER_TTY_CHAR_DEVICE_MINOR: &str =
+        "process.entry_leader.tty.char_device.minor";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_ENTRY_LEADER_USER_ID: &str = "process.entry_leader.user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_ENTRY_LEADER_USER_NAME: &str = "process.entry_leader.user.name";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_ENTRY_LEADER_VPID: &str = "process.entry_leader.vpid";
+
+    /// The working directory of the process.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice`
+    pub const PROCESS_ENTRY_LEADER_WORKING_DIRECTORY: &str =
+        "process.entry_leader.working_directory";
+
+    /// Array of environment variable bindings. Captured from a snapshot of the environment at the time of execution.
+    /// May be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `["PATH=/usr/local/bin:/usr/bin", "USER=ubuntu"]`
+    pub const PROCESS_ENV_VARS: &str = "process.env_vars";
 
     /// Absolute path to the process executable.
     ///
@@ -3067,6 +4704,191 @@ pub mod process {
     /// - `137`
     pub const PROCESS_EXIT_CODE: &str = "process.exit_code";
 
+    /// Array of process arguments, starting with the absolute path to the executable.
+    /// May be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `["/usr/bin/ssh", "-l", "user", "10.0.0.16"]`
+    pub const PROCESS_GROUP_LEADER_ARGS: &str = "process.group_leader.args";
+
+    /// Length of the process.args array.
+    /// This field can be useful for querying or performing bucket analysis on how many arguments were provided to start a process. More arguments may be an indication of suspicious activity.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_GROUP_LEADER_ARGS_COUNT: &str = "process.group_leader.args_count";
+
+    /// Full command line that started the process, including the absolute path to the executable, and all arguments.
+    /// Some arguments may be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh -l user 10.0.0.16`
+    pub const PROCESS_GROUP_LEADER_COMMAND_LINE: &str = "process.group_leader.command_line";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_GROUP_LEADER_ENTITY_ID: &str = "process.group_leader.entity_id";
+
+    /// Absolute path to the process executable.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh`
+    pub const PROCESS_GROUP_LEADER_EXECUTABLE: &str = "process.group_leader.executable";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_GROUP_LEADER_GROUP_ID: &str = "process.group_leader.group.id";
+
+    /// Name of the group.
+    pub const PROCESS_GROUP_LEADER_GROUP_NAME: &str = "process.group_leader.group.name";
+
+    /// Whether the process is connected to an interactive shell.
+    /// Process interactivity is inferred from the processes file descriptors. If the character device for the controlling tty is the same as stdin and stderr for the process, the process is considered interactive.
+    /// Note: A non-interactive process can belong to an interactive session and is simply one that does not have open file descriptors reading the controlling TTY on FD 0 (stdin) or writing to the controlling TTY on FD 2 (stderr). A backgrounded process is still considered interactive if stdin and stderr are connected to the controlling TTY.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_GROUP_LEADER_INTERACTIVE: &str = "process.group_leader.interactive";
+
+    /// Process name.
+    /// Sometimes called program name or similar.
+    ///
+    /// # Examples
+    ///
+    /// - `ssh`
+    pub const PROCESS_GROUP_LEADER_NAME: &str = "process.group_leader.name";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_GROUP_LEADER_PID: &str = "process.group_leader.pid";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_GROUP_LEADER_REAL_GROUP_ID: &str = "process.group_leader.real_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_GROUP_LEADER_REAL_GROUP_NAME: &str = "process.group_leader.real_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_GROUP_LEADER_REAL_USER_ID: &str = "process.group_leader.real_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_GROUP_LEADER_REAL_USER_NAME: &str = "process.group_leader.real_user.name";
+
+    /// This boolean is used to identify if a leader process is the same as the top level process.
+    /// For example, if `process.group_leader.same_as_process = true`, it means the process event in question is the leader of its process group. Details under `process.*` like `pid` would be the same under `process.group_leader.*` The same applies for both `process.session_leader` and `process.entry_leader`.
+    /// This field exists to the benefit of EQL and other rule engines since it's not possible to compare equality between two fields in a single document. e.g `process.entity_id` = `process.group_leader.entity_id` (top level process is the process group leader) OR `process.entity_id` = `process.entry_leader.entity_id` (top level process is the entry session leader)
+    /// Instead these rules could be written like: `process.group_leader.same_as_process: true` OR `process.entry_leader.same_as_process: true`
+    /// Note: This field is only set on `process.entry_leader`, `process.session_leader` and `process.group_leader`.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_GROUP_LEADER_SAME_AS_PROCESS: &str = "process.group_leader.same_as_process";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_GROUP_LEADER_SAVED_GROUP_ID: &str = "process.group_leader.saved_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_GROUP_LEADER_SAVED_GROUP_NAME: &str = "process.group_leader.saved_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_GROUP_LEADER_SAVED_USER_ID: &str = "process.group_leader.saved_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_GROUP_LEADER_SAVED_USER_NAME: &str = "process.group_leader.saved_user.name";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_GROUP_LEADER_START: &str = "process.group_leader.start";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_GROUP_LEADER_SUPPLEMENTAL_GROUPS_ID: &str =
+        "process.group_leader.supplemental_groups.id";
+
+    /// Name of the group.
+    pub const PROCESS_GROUP_LEADER_SUPPLEMENTAL_GROUPS_NAME: &str =
+        "process.group_leader.supplemental_groups.name";
+
+    /// Information about the controlling TTY device. If set, the process belongs to an interactive session.
+    pub const PROCESS_GROUP_LEADER_TTY: &str = "process.group_leader.tty";
+
+    /// The major number identifies the driver associated with the device. The character device's major and minor numbers can be algorithmically combined to produce the more familiar terminal identifiers such as "ttyS0" and "pts/0". For more details, please refer to the Linux kernel documentation.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_GROUP_LEADER_TTY_CHAR_DEVICE_MAJOR: &str =
+        "process.group_leader.tty.char_device.major";
+
+    /// The minor number is used only by the driver specified by the major number; other parts of the kernel don’t use it, and merely pass it along to the driver. It is common for a driver to control several devices; the minor number provides a way for the driver to differentiate among them.
+    ///
+    /// # Examples
+    ///
+    /// - `1`
+    pub const PROCESS_GROUP_LEADER_TTY_CHAR_DEVICE_MINOR: &str =
+        "process.group_leader.tty.char_device.minor";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_GROUP_LEADER_USER_ID: &str = "process.group_leader.user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_GROUP_LEADER_USER_NAME: &str = "process.group_leader.user.name";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_GROUP_LEADER_VPID: &str = "process.group_leader.vpid";
+
+    /// The working directory of the process.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice`
+    pub const PROCESS_GROUP_LEADER_WORKING_DIRECTORY: &str =
+        "process.group_leader.working_directory";
+
     /// MD5 hash.
     pub const PROCESS_HASH_MD5: &str = "process.hash.md5";
 
@@ -3076,11 +4898,124 @@ pub mod process {
     /// SHA256 hash.
     pub const PROCESS_HASH_SHA256: &str = "process.hash.sha256";
 
+    /// SHA384 hash.
+    pub const PROCESS_HASH_SHA384: &str = "process.hash.sha384";
+
     /// SHA512 hash.
     pub const PROCESS_HASH_SHA512: &str = "process.hash.sha512";
 
     /// SSDEEP hash.
     pub const PROCESS_HASH_SSDEEP: &str = "process.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const PROCESS_HASH_TLSH: &str = "process.hash.tlsh";
+
+    /// Whether the process is connected to an interactive shell.
+    /// Process interactivity is inferred from the processes file descriptors. If the character device for the controlling tty is the same as stdin and stderr for the process, the process is considered interactive.
+    /// Note: A non-interactive process can belong to an interactive session and is simply one that does not have open file descriptors reading the controlling TTY on FD 0 (stdin) or writing to the controlling TTY on FD 2 (stderr). A backgrounded process is still considered interactive if stdin and stderr are connected to the controlling TTY.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_INTERACTIVE: &str = "process.interactive";
+
+    /// A chunk of input or output (IO) from a single process.
+    /// This field only appears on the top level process object, which is the process that wrote the output or read the input.
+    pub const PROCESS_IO: &str = "process.io";
+
+    /// An array of byte offsets and lengths denoting where IO data has been skipped.
+    pub const PROCESS_IO_BYTES_SKIPPED: &str = "process.io.bytes_skipped";
+
+    /// The length of bytes skipped.
+    pub const PROCESS_IO_BYTES_SKIPPED_LENGTH: &str = "process.io.bytes_skipped.length";
+
+    /// The byte offset into this event's io.text (or io.bytes in the future) where length bytes were skipped.
+    pub const PROCESS_IO_BYTES_SKIPPED_OFFSET: &str = "process.io.bytes_skipped.offset";
+
+    /// If true, the process producing the output has exceeded the max_kilobytes_per_process configuration setting.
+    pub const PROCESS_IO_MAX_BYTES_PER_PROCESS_EXCEEDED: &str =
+        "process.io.max_bytes_per_process_exceeded";
+
+    /// A chunk of output or input sanitized to UTF-8.
+    /// Best efforts are made to ensure complete lines are captured in these events. Assumptions should NOT be made that multiple lines will appear in the same event. TTY output may contain terminal control codes such as for cursor movement, so some string queries may not match due to terminal codes inserted between characters of a word.
+    pub const PROCESS_IO_TEXT: &str = "process.io.text";
+
+    /// The total number of bytes captured in this event.
+    pub const PROCESS_IO_TOTAL_BYTES_CAPTURED: &str = "process.io.total_bytes_captured";
+
+    /// The total number of bytes that were not captured due to implementation restrictions such as buffer size limits. Implementors should strive to ensure this value is always zero
+    pub const PROCESS_IO_TOTAL_BYTES_SKIPPED: &str = "process.io.total_bytes_skipped";
+
+    /// The type of object on which the IO action (read or write) was taken.
+    /// Currently only 'tty' is supported. Other types may be added in the future for 'file' and 'socket' support.
+    pub const PROCESS_IO_TYPE: &str = "process.io.type";
+
+    /// A hash of the Go language imports in a Mach-O file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PROCESS_MACHO_GO_IMPORT_HASH: &str = "process.macho.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PROCESS_MACHO_GO_IMPORTS: &str = "process.macho.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_MACHO_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "process.macho.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_MACHO_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.macho.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PROCESS_MACHO_GO_STRIPPED: &str = "process.macho.go_stripped";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for symhash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PROCESS_MACHO_IMPORT_HASH: &str = "process.macho.import_hash";
+
+    /// List of imported element names and types.
+    pub const PROCESS_MACHO_IMPORTS: &str = "process.macho.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_MACHO_IMPORTS_NAMES_ENTROPY: &str = "process.macho.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_MACHO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.macho.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the Mach-O file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `macho.sections.*`.
+    pub const PROCESS_MACHO_SECTIONS: &str = "process.macho.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const PROCESS_MACHO_SECTIONS_ENTROPY: &str = "process.macho.sections.entropy";
+
+    /// Mach-O Section List name.
+    pub const PROCESS_MACHO_SECTIONS_NAME: &str = "process.macho.sections.name";
+
+    /// Mach-O Section List physical size.
+    pub const PROCESS_MACHO_SECTIONS_PHYSICAL_SIZE: &str = "process.macho.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PROCESS_MACHO_SECTIONS_VAR_ENTROPY: &str = "process.macho.sections.var_entropy";
+
+    /// Mach-O Section List virtual size. This is always the same as `physical_size`.
+    pub const PROCESS_MACHO_SECTIONS_VIRTUAL_SIZE: &str = "process.macho.sections.virtual_size";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a Mach-O implementation of the Windows PE imphash
+    ///
+    /// # Examples
+    ///
+    /// - `d3ccf195b62a9279c3c19af1080497ec`
+    pub const PROCESS_MACHO_SYMHASH: &str = "process.macho.symhash";
 
     /// Process name.
     /// Sometimes called program name or similar.
@@ -3105,6 +5040,15 @@ pub mod process {
     ///
     /// - `4`
     pub const PROCESS_PARENT_ARGS_COUNT: &str = "process.parent.args_count";
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const PROCESS_PARENT_CODE_SIGNATURE_DIGEST_ALGORITHM: &str =
+        "process.parent.code_signature.digest_algorithm";
 
     /// Boolean to capture if a signature is present.
     ///
@@ -3146,6 +5090,14 @@ pub mod process {
     /// - `EQHXZ8M8AV`
     pub const PROCESS_PARENT_CODE_SIGNATURE_TEAM_ID: &str = "process.parent.code_signature.team_id";
 
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const PROCESS_PARENT_CODE_SIGNATURE_TIMESTAMP: &str =
+        "process.parent.code_signature.timestamp";
+
     /// Stores the trust status of the certificate chain.
     /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
     ///
@@ -3169,6 +5121,161 @@ pub mod process {
     ///
     /// - `/usr/bin/ssh -l user 10.0.0.16`
     pub const PROCESS_PARENT_COMMAND_LINE: &str = "process.parent.command_line";
+
+    /// Machine architecture of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `x86-64`
+    pub const PROCESS_PARENT_ELF_ARCHITECTURE: &str = "process.parent.elf.architecture";
+
+    /// Byte sequence of ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Little Endian`
+    pub const PROCESS_PARENT_ELF_BYTE_ORDER: &str = "process.parent.elf.byte_order";
+
+    /// CPU type of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Intel`
+    pub const PROCESS_PARENT_ELF_CPU_TYPE: &str = "process.parent.elf.cpu_type";
+
+    /// Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+    pub const PROCESS_PARENT_ELF_CREATION_DATE: &str = "process.parent.elf.creation_date";
+
+    /// List of exported element names and types.
+    pub const PROCESS_PARENT_ELF_EXPORTS: &str = "process.parent.elf.exports";
+
+    /// A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PROCESS_PARENT_ELF_GO_IMPORT_HASH: &str = "process.parent.elf.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PROCESS_PARENT_ELF_GO_IMPORTS: &str = "process.parent.elf.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PARENT_ELF_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "process.parent.elf.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PARENT_ELF_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.parent.elf.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PROCESS_PARENT_ELF_GO_STRIPPED: &str = "process.parent.elf.go_stripped";
+
+    /// Version of the ELF Application Binary Interface (ABI).
+    pub const PROCESS_PARENT_ELF_HEADER_ABI_VERSION: &str = "process.parent.elf.header.abi_version";
+
+    /// Header class of the ELF file.
+    pub const PROCESS_PARENT_ELF_HEADER_CLASS: &str = "process.parent.elf.header.class";
+
+    /// Data table of the ELF header.
+    pub const PROCESS_PARENT_ELF_HEADER_DATA: &str = "process.parent.elf.header.data";
+
+    /// Header entrypoint of the ELF file.
+    pub const PROCESS_PARENT_ELF_HEADER_ENTRYPOINT: &str = "process.parent.elf.header.entrypoint";
+
+    /// "0x1" for original ELF files.
+    pub const PROCESS_PARENT_ELF_HEADER_OBJECT_VERSION: &str =
+        "process.parent.elf.header.object_version";
+
+    /// Application Binary Interface (ABI) of the Linux OS.
+    pub const PROCESS_PARENT_ELF_HEADER_OS_ABI: &str = "process.parent.elf.header.os_abi";
+
+    /// Header type of the ELF file.
+    pub const PROCESS_PARENT_ELF_HEADER_TYPE: &str = "process.parent.elf.header.type";
+
+    /// Version of the ELF header.
+    pub const PROCESS_PARENT_ELF_HEADER_VERSION: &str = "process.parent.elf.header.version";
+
+    /// A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is an ELF implementation of the Windows PE imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PROCESS_PARENT_ELF_IMPORT_HASH: &str = "process.parent.elf.import_hash";
+
+    /// List of imported element names and types.
+    pub const PROCESS_PARENT_ELF_IMPORTS: &str = "process.parent.elf.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PARENT_ELF_IMPORTS_NAMES_ENTROPY: &str =
+        "process.parent.elf.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PARENT_ELF_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.parent.elf.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.
+    pub const PROCESS_PARENT_ELF_SECTIONS: &str = "process.parent.elf.sections";
+
+    /// Chi-square probability distribution of the section.
+    pub const PROCESS_PARENT_ELF_SECTIONS_CHI2: &str = "process.parent.elf.sections.chi2";
+
+    /// Shannon entropy calculation from the section.
+    pub const PROCESS_PARENT_ELF_SECTIONS_ENTROPY: &str = "process.parent.elf.sections.entropy";
+
+    /// ELF Section List flags.
+    pub const PROCESS_PARENT_ELF_SECTIONS_FLAGS: &str = "process.parent.elf.sections.flags";
+
+    /// ELF Section List name.
+    pub const PROCESS_PARENT_ELF_SECTIONS_NAME: &str = "process.parent.elf.sections.name";
+
+    /// ELF Section List offset.
+    pub const PROCESS_PARENT_ELF_SECTIONS_PHYSICAL_OFFSET: &str =
+        "process.parent.elf.sections.physical_offset";
+
+    /// ELF Section List physical size.
+    pub const PROCESS_PARENT_ELF_SECTIONS_PHYSICAL_SIZE: &str =
+        "process.parent.elf.sections.physical_size";
+
+    /// ELF Section List type.
+    pub const PROCESS_PARENT_ELF_SECTIONS_TYPE: &str = "process.parent.elf.sections.type";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PROCESS_PARENT_ELF_SECTIONS_VAR_ENTROPY: &str =
+        "process.parent.elf.sections.var_entropy";
+
+    /// ELF Section List virtual address.
+    pub const PROCESS_PARENT_ELF_SECTIONS_VIRTUAL_ADDRESS: &str =
+        "process.parent.elf.sections.virtual_address";
+
+    /// ELF Section List virtual size.
+    pub const PROCESS_PARENT_ELF_SECTIONS_VIRTUAL_SIZE: &str =
+        "process.parent.elf.sections.virtual_size";
+
+    /// An array containing an object for each segment of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.
+    pub const PROCESS_PARENT_ELF_SEGMENTS: &str = "process.parent.elf.segments";
+
+    /// ELF object segment sections.
+    pub const PROCESS_PARENT_ELF_SEGMENTS_SECTIONS: &str = "process.parent.elf.segments.sections";
+
+    /// ELF object segment type.
+    pub const PROCESS_PARENT_ELF_SEGMENTS_TYPE: &str = "process.parent.elf.segments.type";
+
+    /// List of shared libraries used by this ELF object.
+    pub const PROCESS_PARENT_ELF_SHARED_LIBRARIES: &str = "process.parent.elf.shared_libraries";
+
+    /// telfhash symbol hash for ELF file.
+    pub const PROCESS_PARENT_ELF_TELFHASH: &str = "process.parent.elf.telfhash";
+
+    /// The time the process ended.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_PARENT_END: &str = "process.parent.end";
 
     /// Unique identifier for the process.
     /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
@@ -3194,6 +5301,43 @@ pub mod process {
     /// - `137`
     pub const PROCESS_PARENT_EXIT_CODE: &str = "process.parent.exit_code";
 
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_PARENT_GROUP_ID: &str = "process.parent.group.id";
+
+    /// Name of the group.
+    pub const PROCESS_PARENT_GROUP_NAME: &str = "process.parent.group.name";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_PARENT_GROUP_LEADER_ENTITY_ID: &str = "process.parent.group_leader.entity_id";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_PARENT_GROUP_LEADER_PID: &str = "process.parent.group_leader.pid";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_PARENT_GROUP_LEADER_START: &str = "process.parent.group_leader.start";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_PARENT_GROUP_LEADER_VPID: &str = "process.parent.group_leader.vpid";
+
     /// MD5 hash.
     pub const PROCESS_PARENT_HASH_MD5: &str = "process.parent.hash.md5";
 
@@ -3203,11 +5347,97 @@ pub mod process {
     /// SHA256 hash.
     pub const PROCESS_PARENT_HASH_SHA256: &str = "process.parent.hash.sha256";
 
+    /// SHA384 hash.
+    pub const PROCESS_PARENT_HASH_SHA384: &str = "process.parent.hash.sha384";
+
     /// SHA512 hash.
     pub const PROCESS_PARENT_HASH_SHA512: &str = "process.parent.hash.sha512";
 
     /// SSDEEP hash.
     pub const PROCESS_PARENT_HASH_SSDEEP: &str = "process.parent.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const PROCESS_PARENT_HASH_TLSH: &str = "process.parent.hash.tlsh";
+
+    /// Whether the process is connected to an interactive shell.
+    /// Process interactivity is inferred from the processes file descriptors. If the character device for the controlling tty is the same as stdin and stderr for the process, the process is considered interactive.
+    /// Note: A non-interactive process can belong to an interactive session and is simply one that does not have open file descriptors reading the controlling TTY on FD 0 (stdin) or writing to the controlling TTY on FD 2 (stderr). A backgrounded process is still considered interactive if stdin and stderr are connected to the controlling TTY.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_PARENT_INTERACTIVE: &str = "process.parent.interactive";
+
+    /// A hash of the Go language imports in a Mach-O file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PROCESS_PARENT_MACHO_GO_IMPORT_HASH: &str = "process.parent.macho.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PROCESS_PARENT_MACHO_GO_IMPORTS: &str = "process.parent.macho.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PARENT_MACHO_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "process.parent.macho.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PARENT_MACHO_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.parent.macho.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PROCESS_PARENT_MACHO_GO_STRIPPED: &str = "process.parent.macho.go_stripped";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for symhash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PROCESS_PARENT_MACHO_IMPORT_HASH: &str = "process.parent.macho.import_hash";
+
+    /// List of imported element names and types.
+    pub const PROCESS_PARENT_MACHO_IMPORTS: &str = "process.parent.macho.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PARENT_MACHO_IMPORTS_NAMES_ENTROPY: &str =
+        "process.parent.macho.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PARENT_MACHO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.parent.macho.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the Mach-O file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `macho.sections.*`.
+    pub const PROCESS_PARENT_MACHO_SECTIONS: &str = "process.parent.macho.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const PROCESS_PARENT_MACHO_SECTIONS_ENTROPY: &str = "process.parent.macho.sections.entropy";
+
+    /// Mach-O Section List name.
+    pub const PROCESS_PARENT_MACHO_SECTIONS_NAME: &str = "process.parent.macho.sections.name";
+
+    /// Mach-O Section List physical size.
+    pub const PROCESS_PARENT_MACHO_SECTIONS_PHYSICAL_SIZE: &str =
+        "process.parent.macho.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PROCESS_PARENT_MACHO_SECTIONS_VAR_ENTROPY: &str =
+        "process.parent.macho.sections.var_entropy";
+
+    /// Mach-O Section List virtual size. This is always the same as `physical_size`.
+    pub const PROCESS_PARENT_MACHO_SECTIONS_VIRTUAL_SIZE: &str =
+        "process.parent.macho.sections.virtual_size";
+
+    /// A hash of the imports in a Mach-O file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a Mach-O implementation of the Windows PE imphash
+    ///
+    /// # Examples
+    ///
+    /// - `d3ccf195b62a9279c3c19af1080497ec`
+    pub const PROCESS_PARENT_MACHO_SYMHASH: &str = "process.parent.macho.symhash";
 
     /// Process name.
     /// Sometimes called program name or similar.
@@ -3245,6 +5475,28 @@ pub mod process {
     /// - `6.3.9600.17415`
     pub const PROCESS_PARENT_PE_FILE_VERSION: &str = "process.parent.pe.file_version";
 
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PROCESS_PARENT_PE_GO_IMPORT_HASH: &str = "process.parent.pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PROCESS_PARENT_PE_GO_IMPORTS: &str = "process.parent.pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PARENT_PE_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "process.parent.pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PARENT_PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.parent.pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PROCESS_PARENT_PE_GO_STRIPPED: &str = "process.parent.pe.go_stripped";
+
     /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
     /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
     ///
@@ -3253,12 +5505,39 @@ pub mod process {
     /// - `0c6803c4e922103c4dca5963aad36ddf`
     pub const PROCESS_PARENT_PE_IMPHASH: &str = "process.parent.pe.imphash";
 
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PROCESS_PARENT_PE_IMPORT_HASH: &str = "process.parent.pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const PROCESS_PARENT_PE_IMPORTS: &str = "process.parent.pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PARENT_PE_IMPORTS_NAMES_ENTROPY: &str =
+        "process.parent.pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PARENT_PE_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.parent.pe.imports_names_var_entropy";
+
     /// Internal name of the file, provided at compile-time.
     ///
     /// # Examples
     ///
     /// - `MSPAINT.EXE`
     pub const PROCESS_PARENT_PE_ORIGINAL_FILE_NAME: &str = "process.parent.pe.original_file_name";
+
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const PROCESS_PARENT_PE_PEHASH: &str = "process.parent.pe.pehash";
 
     /// Internal product name of the file, provided at compile-time.
     ///
@@ -3267,6 +5546,29 @@ pub mod process {
     /// - `Microsoft® Windows® Operating System`
     pub const PROCESS_PARENT_PE_PRODUCT: &str = "process.parent.pe.product";
 
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const PROCESS_PARENT_PE_SECTIONS: &str = "process.parent.pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const PROCESS_PARENT_PE_SECTIONS_ENTROPY: &str = "process.parent.pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const PROCESS_PARENT_PE_SECTIONS_NAME: &str = "process.parent.pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const PROCESS_PARENT_PE_SECTIONS_PHYSICAL_SIZE: &str =
+        "process.parent.pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PROCESS_PARENT_PE_SECTIONS_VAR_ENTROPY: &str =
+        "process.parent.pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const PROCESS_PARENT_PE_SECTIONS_VIRTUAL_SIZE: &str =
+        "process.parent.pe.sections.virtual_size";
+
+    /// Deprecated for removal in next major version release. This field is superseded by `process.group_leader.pid`.
     /// Identifier of the group of processes the process belongs to.
     pub const PROCESS_PARENT_PGID: &str = "process.parent.pgid";
 
@@ -3277,12 +5579,45 @@ pub mod process {
     /// - `4242`
     pub const PROCESS_PARENT_PID: &str = "process.parent.pid";
 
-    /// Parent process' pid.
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_PARENT_REAL_GROUP_ID: &str = "process.parent.real_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_PARENT_REAL_GROUP_NAME: &str = "process.parent.real_group.name";
+
+    /// Unique identifier of the user.
     ///
     /// # Examples
     ///
-    /// - `4241`
-    pub const PROCESS_PARENT_PPID: &str = "process.parent.ppid";
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_PARENT_REAL_USER_ID: &str = "process.parent.real_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_PARENT_REAL_USER_NAME: &str = "process.parent.real_user.name";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_PARENT_SAVED_GROUP_ID: &str = "process.parent.saved_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_PARENT_SAVED_GROUP_NAME: &str = "process.parent.saved_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_PARENT_SAVED_USER_ID: &str = "process.parent.saved_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_PARENT_SAVED_USER_NAME: &str = "process.parent.saved_user.name";
 
     /// The time the process started.
     ///
@@ -3290,6 +5625,29 @@ pub mod process {
     ///
     /// - `2016-05-23T08:05:34.853Z`
     pub const PROCESS_PARENT_START: &str = "process.parent.start";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_PARENT_SUPPLEMENTAL_GROUPS_ID: &str = "process.parent.supplemental_groups.id";
+
+    /// Name of the group.
+    pub const PROCESS_PARENT_SUPPLEMENTAL_GROUPS_NAME: &str =
+        "process.parent.supplemental_groups.name";
+
+    /// This is the set of capabilities used by the kernel to perform permission checks for the thread.
+    ///
+    /// # Examples
+    ///
+    /// - `["CAP_BPF", "CAP_SYS_ADMIN"]`
+    pub const PROCESS_PARENT_THREAD_CAPABILITIES_EFFECTIVE: &str =
+        "process.parent.thread.capabilities.effective";
+
+    /// This is a limiting superset for the effective capabilities that the thread may assume.
+    ///
+    /// # Examples
+    ///
+    /// - `["CAP_BPF", "CAP_SYS_ADMIN"]`
+    pub const PROCESS_PARENT_THREAD_CAPABILITIES_PERMITTED: &str =
+        "process.parent.thread.capabilities.permitted";
 
     /// Thread ID.
     ///
@@ -3309,12 +5667,51 @@ pub mod process {
     /// The proctitle, some times the same as process name. Can also be different: for example a browser setting its title to the web page currently opened.
     pub const PROCESS_PARENT_TITLE: &str = "process.parent.title";
 
+    /// Information about the controlling TTY device. If set, the process belongs to an interactive session.
+    pub const PROCESS_PARENT_TTY: &str = "process.parent.tty";
+
+    /// The major number identifies the driver associated with the device. The character device's major and minor numbers can be algorithmically combined to produce the more familiar terminal identifiers such as "ttyS0" and "pts/0". For more details, please refer to the Linux kernel documentation.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_PARENT_TTY_CHAR_DEVICE_MAJOR: &str = "process.parent.tty.char_device.major";
+
+    /// The minor number is used only by the driver specified by the major number; other parts of the kernel don’t use it, and merely pass it along to the driver. It is common for a driver to control several devices; the minor number provides a way for the driver to differentiate among them.
+    ///
+    /// # Examples
+    ///
+    /// - `1`
+    pub const PROCESS_PARENT_TTY_CHAR_DEVICE_MINOR: &str = "process.parent.tty.char_device.minor";
+
     /// Seconds the process has been up.
     ///
     /// # Examples
     ///
     /// - `1325`
     pub const PROCESS_PARENT_UPTIME: &str = "process.parent.uptime";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_PARENT_USER_ID: &str = "process.parent.user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_PARENT_USER_NAME: &str = "process.parent.user.name";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_PARENT_VPID: &str = "process.parent.vpid";
 
     /// The working directory of the process.
     ///
@@ -3351,6 +5748,27 @@ pub mod process {
     /// - `6.3.9600.17415`
     pub const PROCESS_PE_FILE_VERSION: &str = "process.pe.file_version";
 
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const PROCESS_PE_GO_IMPORT_HASH: &str = "process.pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const PROCESS_PE_GO_IMPORTS: &str = "process.pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PE_GO_IMPORTS_NAMES_ENTROPY: &str = "process.pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const PROCESS_PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "process.pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const PROCESS_PE_GO_STRIPPED: &str = "process.pe.go_stripped";
+
     /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
     /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
     ///
@@ -3359,12 +5777,37 @@ pub mod process {
     /// - `0c6803c4e922103c4dca5963aad36ddf`
     pub const PROCESS_PE_IMPHASH: &str = "process.pe.imphash";
 
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const PROCESS_PE_IMPORT_HASH: &str = "process.pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const PROCESS_PE_IMPORTS: &str = "process.pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PE_IMPORTS_NAMES_ENTROPY: &str = "process.pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const PROCESS_PE_IMPORTS_NAMES_VAR_ENTROPY: &str = "process.pe.imports_names_var_entropy";
+
     /// Internal name of the file, provided at compile-time.
     ///
     /// # Examples
     ///
     /// - `MSPAINT.EXE`
     pub const PROCESS_PE_ORIGINAL_FILE_NAME: &str = "process.pe.original_file_name";
+
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const PROCESS_PE_PEHASH: &str = "process.pe.pehash";
 
     /// Internal product name of the file, provided at compile-time.
     ///
@@ -3373,6 +5816,26 @@ pub mod process {
     /// - `Microsoft® Windows® Operating System`
     pub const PROCESS_PE_PRODUCT: &str = "process.pe.product";
 
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const PROCESS_PE_SECTIONS: &str = "process.pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const PROCESS_PE_SECTIONS_ENTROPY: &str = "process.pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const PROCESS_PE_SECTIONS_NAME: &str = "process.pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const PROCESS_PE_SECTIONS_PHYSICAL_SIZE: &str = "process.pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const PROCESS_PE_SECTIONS_VAR_ENTROPY: &str = "process.pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const PROCESS_PE_SECTIONS_VIRTUAL_SIZE: &str = "process.pe.sections.virtual_size";
+
+    /// Deprecated for removal in next major version release. This field is superseded by `process.group_leader.pid`.
     /// Identifier of the group of processes the process belongs to.
     pub const PROCESS_PGID: &str = "process.pgid";
 
@@ -3383,12 +5846,324 @@ pub mod process {
     /// - `4242`
     pub const PROCESS_PID: &str = "process.pid";
 
-    /// Parent process' pid.
+    /// Array of process arguments, starting with the absolute path to the executable.
+    /// May be filtered to protect sensitive information.
     ///
     /// # Examples
     ///
-    /// - `4241`
-    pub const PROCESS_PPID: &str = "process.ppid";
+    /// - `["/usr/bin/ssh", "-l", "user", "10.0.0.16"]`
+    pub const PROCESS_PREVIOUS_ARGS: &str = "process.previous.args";
+
+    /// Length of the process.args array.
+    /// This field can be useful for querying or performing bucket analysis on how many arguments were provided to start a process. More arguments may be an indication of suspicious activity.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_PREVIOUS_ARGS_COUNT: &str = "process.previous.args_count";
+
+    /// Absolute path to the process executable.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh`
+    pub const PROCESS_PREVIOUS_EXECUTABLE: &str = "process.previous.executable";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_REAL_GROUP_ID: &str = "process.real_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_REAL_GROUP_NAME: &str = "process.real_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_REAL_USER_ID: &str = "process.real_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_REAL_USER_NAME: &str = "process.real_user.name";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_SAVED_GROUP_ID: &str = "process.saved_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_SAVED_GROUP_NAME: &str = "process.saved_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_SAVED_USER_ID: &str = "process.saved_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_SAVED_USER_NAME: &str = "process.saved_user.name";
+
+    /// Array of process arguments, starting with the absolute path to the executable.
+    /// May be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `["/usr/bin/ssh", "-l", "user", "10.0.0.16"]`
+    pub const PROCESS_SESSION_LEADER_ARGS: &str = "process.session_leader.args";
+
+    /// Length of the process.args array.
+    /// This field can be useful for querying or performing bucket analysis on how many arguments were provided to start a process. More arguments may be an indication of suspicious activity.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_SESSION_LEADER_ARGS_COUNT: &str = "process.session_leader.args_count";
+
+    /// Full command line that started the process, including the absolute path to the executable, and all arguments.
+    /// Some arguments may be filtered to protect sensitive information.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh -l user 10.0.0.16`
+    pub const PROCESS_SESSION_LEADER_COMMAND_LINE: &str = "process.session_leader.command_line";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_SESSION_LEADER_ENTITY_ID: &str = "process.session_leader.entity_id";
+
+    /// Absolute path to the process executable.
+    ///
+    /// # Examples
+    ///
+    /// - `/usr/bin/ssh`
+    pub const PROCESS_SESSION_LEADER_EXECUTABLE: &str = "process.session_leader.executable";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_SESSION_LEADER_GROUP_ID: &str = "process.session_leader.group.id";
+
+    /// Name of the group.
+    pub const PROCESS_SESSION_LEADER_GROUP_NAME: &str = "process.session_leader.group.name";
+
+    /// Whether the process is connected to an interactive shell.
+    /// Process interactivity is inferred from the processes file descriptors. If the character device for the controlling tty is the same as stdin and stderr for the process, the process is considered interactive.
+    /// Note: A non-interactive process can belong to an interactive session and is simply one that does not have open file descriptors reading the controlling TTY on FD 0 (stdin) or writing to the controlling TTY on FD 2 (stderr). A backgrounded process is still considered interactive if stdin and stderr are connected to the controlling TTY.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_SESSION_LEADER_INTERACTIVE: &str = "process.session_leader.interactive";
+
+    /// Process name.
+    /// Sometimes called program name or similar.
+    ///
+    /// # Examples
+    ///
+    /// - `ssh`
+    pub const PROCESS_SESSION_LEADER_NAME: &str = "process.session_leader.name";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_SESSION_LEADER_PARENT_ENTITY_ID: &str =
+        "process.session_leader.parent.entity_id";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_SESSION_LEADER_PARENT_PID: &str = "process.session_leader.parent.pid";
+
+    /// Unique identifier for the process.
+    /// The implementation of this is specified by the data source, but some examples of what could be used here are a process-generated UUID, Sysmon Process GUIDs, or a hash of some uniquely identifying components of a process.
+    /// Constructing a globally unique identifier is a common practice to mitigate PID reuse as well as to identify a specific process over time, across multiple monitored hosts.
+    ///
+    /// # Examples
+    ///
+    /// - `c2c455d9f99375d`
+    pub const PROCESS_SESSION_LEADER_PARENT_SESSION_LEADER_ENTITY_ID: &str =
+        "process.session_leader.parent.session_leader.entity_id";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_SESSION_LEADER_PARENT_SESSION_LEADER_PID: &str =
+        "process.session_leader.parent.session_leader.pid";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_SESSION_LEADER_PARENT_SESSION_LEADER_START: &str =
+        "process.session_leader.parent.session_leader.start";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_SESSION_LEADER_PARENT_SESSION_LEADER_VPID: &str =
+        "process.session_leader.parent.session_leader.vpid";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_SESSION_LEADER_PARENT_START: &str = "process.session_leader.parent.start";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_SESSION_LEADER_PARENT_VPID: &str = "process.session_leader.parent.vpid";
+
+    /// Process id.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_SESSION_LEADER_PID: &str = "process.session_leader.pid";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_SESSION_LEADER_REAL_GROUP_ID: &str = "process.session_leader.real_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_SESSION_LEADER_REAL_GROUP_NAME: &str =
+        "process.session_leader.real_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_SESSION_LEADER_REAL_USER_ID: &str = "process.session_leader.real_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_SESSION_LEADER_REAL_USER_NAME: &str = "process.session_leader.real_user.name";
+
+    /// This boolean is used to identify if a leader process is the same as the top level process.
+    /// For example, if `process.group_leader.same_as_process = true`, it means the process event in question is the leader of its process group. Details under `process.*` like `pid` would be the same under `process.group_leader.*` The same applies for both `process.session_leader` and `process.entry_leader`.
+    /// This field exists to the benefit of EQL and other rule engines since it's not possible to compare equality between two fields in a single document. e.g `process.entity_id` = `process.group_leader.entity_id` (top level process is the process group leader) OR `process.entity_id` = `process.entry_leader.entity_id` (top level process is the entry session leader)
+    /// Instead these rules could be written like: `process.group_leader.same_as_process: true` OR `process.entry_leader.same_as_process: true`
+    /// Note: This field is only set on `process.entry_leader`, `process.session_leader` and `process.group_leader`.
+    ///
+    /// # Examples
+    ///
+    /// - `True`
+    pub const PROCESS_SESSION_LEADER_SAME_AS_PROCESS: &str =
+        "process.session_leader.same_as_process";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_SESSION_LEADER_SAVED_GROUP_ID: &str = "process.session_leader.saved_group.id";
+
+    /// Name of the group.
+    pub const PROCESS_SESSION_LEADER_SAVED_GROUP_NAME: &str =
+        "process.session_leader.saved_group.name";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_SESSION_LEADER_SAVED_USER_ID: &str = "process.session_leader.saved_user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_SESSION_LEADER_SAVED_USER_NAME: &str =
+        "process.session_leader.saved_user.name";
+
+    /// The time the process started.
+    ///
+    /// # Examples
+    ///
+    /// - `2016-05-23T08:05:34.853Z`
+    pub const PROCESS_SESSION_LEADER_START: &str = "process.session_leader.start";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_SESSION_LEADER_SUPPLEMENTAL_GROUPS_ID: &str =
+        "process.session_leader.supplemental_groups.id";
+
+    /// Name of the group.
+    pub const PROCESS_SESSION_LEADER_SUPPLEMENTAL_GROUPS_NAME: &str =
+        "process.session_leader.supplemental_groups.name";
+
+    /// Information about the controlling TTY device. If set, the process belongs to an interactive session.
+    pub const PROCESS_SESSION_LEADER_TTY: &str = "process.session_leader.tty";
+
+    /// The major number identifies the driver associated with the device. The character device's major and minor numbers can be algorithmically combined to produce the more familiar terminal identifiers such as "ttyS0" and "pts/0". For more details, please refer to the Linux kernel documentation.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_SESSION_LEADER_TTY_CHAR_DEVICE_MAJOR: &str =
+        "process.session_leader.tty.char_device.major";
+
+    /// The minor number is used only by the driver specified by the major number; other parts of the kernel don’t use it, and merely pass it along to the driver. It is common for a driver to control several devices; the minor number provides a way for the driver to differentiate among them.
+    ///
+    /// # Examples
+    ///
+    /// - `1`
+    pub const PROCESS_SESSION_LEADER_TTY_CHAR_DEVICE_MINOR: &str =
+        "process.session_leader.tty.char_device.minor";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_SESSION_LEADER_USER_ID: &str = "process.session_leader.user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_SESSION_LEADER_USER_NAME: &str = "process.session_leader.user.name";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_SESSION_LEADER_VPID: &str = "process.session_leader.vpid";
+
+    /// The working directory of the process.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice`
+    pub const PROCESS_SESSION_LEADER_WORKING_DIRECTORY: &str =
+        "process.session_leader.working_directory";
 
     /// The time the process started.
     ///
@@ -3396,6 +6171,26 @@ pub mod process {
     ///
     /// - `2016-05-23T08:05:34.853Z`
     pub const PROCESS_START: &str = "process.start";
+
+    /// Unique identifier for the group on the system/platform.
+    pub const PROCESS_SUPPLEMENTAL_GROUPS_ID: &str = "process.supplemental_groups.id";
+
+    /// Name of the group.
+    pub const PROCESS_SUPPLEMENTAL_GROUPS_NAME: &str = "process.supplemental_groups.name";
+
+    /// This is the set of capabilities used by the kernel to perform permission checks for the thread.
+    ///
+    /// # Examples
+    ///
+    /// - `["CAP_BPF", "CAP_SYS_ADMIN"]`
+    pub const PROCESS_THREAD_CAPABILITIES_EFFECTIVE: &str = "process.thread.capabilities.effective";
+
+    /// This is a limiting superset for the effective capabilities that the thread may assume.
+    ///
+    /// # Examples
+    ///
+    /// - `["CAP_BPF", "CAP_SYS_ADMIN"]`
+    pub const PROCESS_THREAD_CAPABILITIES_PERMITTED: &str = "process.thread.capabilities.permitted";
 
     /// Thread ID.
     ///
@@ -3415,12 +6210,67 @@ pub mod process {
     /// The proctitle, some times the same as process name. Can also be different: for example a browser setting its title to the web page currently opened.
     pub const PROCESS_TITLE: &str = "process.title";
 
+    /// Information about the controlling TTY device. If set, the process belongs to an interactive session.
+    pub const PROCESS_TTY: &str = "process.tty";
+
+    /// The major number identifies the driver associated with the device. The character device's major and minor numbers can be algorithmically combined to produce the more familiar terminal identifiers such as "ttyS0" and "pts/0". For more details, please refer to the Linux kernel documentation.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const PROCESS_TTY_CHAR_DEVICE_MAJOR: &str = "process.tty.char_device.major";
+
+    /// The minor number is used only by the driver specified by the major number; other parts of the kernel don’t use it, and merely pass it along to the driver. It is common for a driver to control several devices; the minor number provides a way for the driver to differentiate among them.
+    ///
+    /// # Examples
+    ///
+    /// - `1`
+    pub const PROCESS_TTY_CHAR_DEVICE_MINOR: &str = "process.tty.char_device.minor";
+
+    /// The number of character columns per line. e.g terminal width
+    /// Terminal sizes can change, so this value reflects the maximum value for a given IO event. i.e. where event.action = 'text_output'
+    ///
+    /// # Examples
+    ///
+    /// - `80`
+    pub const PROCESS_TTY_COLUMNS: &str = "process.tty.columns";
+
+    /// The number of character rows in the terminal. e.g terminal height
+    /// Terminal sizes can change, so this value reflects the maximum value for a given IO event. i.e. where event.action = 'text_output'
+    ///
+    /// # Examples
+    ///
+    /// - `24`
+    pub const PROCESS_TTY_ROWS: &str = "process.tty.rows";
+
     /// Seconds the process has been up.
     ///
     /// # Examples
     ///
     /// - `1325`
     pub const PROCESS_UPTIME: &str = "process.uptime";
+
+    /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
+    pub const PROCESS_USER_ID: &str = "process.user.id";
+
+    /// Short name or login of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `a.einstein`
+    pub const PROCESS_USER_NAME: &str = "process.user.name";
+
+    /// Virtual process id.
+    /// The process id within a pid namespace. This is not necessarily unique across all processes on the host but it is unique within the process namespace that the process exists within.
+    ///
+    /// # Examples
+    ///
+    /// - `4242`
+    pub const PROCESS_VPID: &str = "process.vpid";
 
     /// The working directory of the process.
     ///
@@ -3501,8 +6351,54 @@ pub mod related {
     /// All of the IPs seen on your event.
     pub const RELATED_IP: &str = "related.ip";
 
-    /// All the user names seen on your event.
+    /// All the user names or other user identifiers seen on the event.
     pub const RELATED_USER: &str = "related.user";
+}
+
+/// Fields for describing risk score and risk level of entities such as hosts and users.  These fields are not allowed to be nested under `event.*`. Please continue to use  `event.risk_score` and `event.risk_score_norm` for event risk.
+pub mod risk {
+
+    /// A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+    ///
+    /// # Examples
+    ///
+    /// - `High`
+    pub const RISK_CALCULATED_LEVEL: &str = "risk.calculated_level";
+
+    /// A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+    ///
+    /// # Examples
+    ///
+    /// - `880.73`
+    pub const RISK_CALCULATED_SCORE: &str = "risk.calculated_score";
+
+    /// A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring, and normalized to a range of 0 to 100.
+    ///
+    /// # Examples
+    ///
+    /// - `88.73`
+    pub const RISK_CALCULATED_SCORE_NORM: &str = "risk.calculated_score_norm";
+
+    /// A risk classification level obtained from outside the system, such as from some external Threat Intelligence Platform.
+    ///
+    /// # Examples
+    ///
+    /// - `High`
+    pub const RISK_STATIC_LEVEL: &str = "risk.static_level";
+
+    /// A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+    ///
+    /// # Examples
+    ///
+    /// - `830.0`
+    pub const RISK_STATIC_SCORE: &str = "risk.static_score";
+
+    /// A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform, and normalized to a range of 0 to 100.
+    ///
+    /// # Examples
+    ///
+    /// - `83.0`
+    pub const RISK_STATIC_SCORE_NORM: &str = "risk.static_score_norm";
 }
 
 /// Rule fields are used to capture the specifics of any observer or agent rules that generate alerts or other notable events.
@@ -3614,7 +6510,12 @@ pub mod server {
     /// - `184`
     pub const SERVER_BYTES: &str = "server.bytes";
 
-    /// Server domain.
+    /// The domain name of the server system.
+    /// This value may be a host name, a fully qualified domain name, or another host naming format. The value may derive from the original event or be added from enrichment.
+    ///
+    /// # Examples
+    ///
+    /// - `foo.example.com`
     pub const SERVER_DOMAIN: &str = "server.domain";
 
     /// City name.
@@ -3780,13 +6681,17 @@ pub mod server {
     pub const SERVER_USER_HASH: &str = "server.user.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const SERVER_USER_ID: &str = "server.user.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const SERVER_USER_NAME: &str = "server.user.name";
 
     /// Array of user roles at the time of the event.
@@ -3801,6 +6706,22 @@ pub mod server {
 
 /// These fields help you find and correlate logs for a specific service and version.
 pub mod service {
+
+    /// Address where data about this service was collected from.
+    /// This should be a URI, network address (ipv4:port or [ipv6]:port) or a resource path (sockets).
+    ///
+    /// # Examples
+    ///
+    /// - `172.26.0.2:5432`
+    pub const SERVICE_ADDRESS: &str = "service.address";
+
+    /// Identifies the environment where the service is running.
+    /// If the same service runs in different environments (production, staging, QA, development, etc.), the environment can identify other instances of the same service. Can also group services and applications from the same environment.
+    ///
+    /// # Examples
+    ///
+    /// - `production`
+    pub const SERVICE_ENVIRONMENT: &str = "service.environment";
 
     /// Ephemeral identifier of this service (if one exists).
     /// This id normally changes across restarts, but `service.id` does not.
@@ -3837,8 +6758,219 @@ pub mod service {
     /// - `instance-0000000016`
     pub const SERVICE_NODE_NAME: &str = "service.node.name";
 
+    /// Deprecated for removal in next major version release. This field will be superseded by `node.roles`.
+    /// Role of a service node.
+    /// This allows for distinction between different running roles of the same service.
+    /// In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks`.
+    /// In the case of Elasticsearch, the `service.node.role` could be `master` or `data`.
+    /// Other services could use this to distinguish between a `web` and `worker` role running as part of the service.
+    ///
+    /// # Examples
+    ///
+    /// - `background_tasks`
+    pub const SERVICE_NODE_ROLE: &str = "service.node.role";
+
+    /// Roles of a service node.
+    /// This allows for distinction between different running roles of the same service.
+    /// In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks` or both.
+    /// In the case of Elasticsearch, the `service.node.role` could be `master` or `data` or both.
+    /// Other services could use this to distinguish between a `web` and `worker` role running as part of the service.
+    ///
+    /// # Examples
+    ///
+    /// - `["ui", "background_tasks"]`
+    pub const SERVICE_NODE_ROLES: &str = "service.node.roles";
+
+    /// Address where data about this service was collected from.
+    /// This should be a URI, network address (ipv4:port or [ipv6]:port) or a resource path (sockets).
+    ///
+    /// # Examples
+    ///
+    /// - `172.26.0.2:5432`
+    pub const SERVICE_ORIGIN_ADDRESS: &str = "service.origin.address";
+
+    /// Identifies the environment where the service is running.
+    /// If the same service runs in different environments (production, staging, QA, development, etc.), the environment can identify other instances of the same service. Can also group services and applications from the same environment.
+    ///
+    /// # Examples
+    ///
+    /// - `production`
+    pub const SERVICE_ORIGIN_ENVIRONMENT: &str = "service.origin.environment";
+
+    /// Ephemeral identifier of this service (if one exists).
+    /// This id normally changes across restarts, but `service.id` does not.
+    ///
+    /// # Examples
+    ///
+    /// - `8a4f500f`
+    pub const SERVICE_ORIGIN_EPHEMERAL_ID: &str = "service.origin.ephemeral_id";
+
+    /// Unique identifier of the running service. If the service is comprised of many nodes, the `service.id` should be the same for all nodes.
+    /// This id should uniquely identify the service. This makes it possible to correlate logs and metrics for one specific service, no matter which particular node emitted the event.
+    /// Note that if you need to see the events from one specific host of the service, you should filter on that `host.name` or `host.id` instead.
+    ///
+    /// # Examples
+    ///
+    /// - `d37e5ebfe0ae6c4972dbe9f0174a1637bb8247f6`
+    pub const SERVICE_ORIGIN_ID: &str = "service.origin.id";
+
+    /// Name of the service data is collected from.
+    /// The name of the service is normally user given. This allows for distributed services that run on multiple hosts to correlate the related instances based on the name.
+    /// In the case of Elasticsearch the `service.name` could contain the cluster name. For Beats the `service.name` is by default a copy of the `service.type` field if no name is specified.
+    ///
+    /// # Examples
+    ///
+    /// - `elasticsearch-metrics`
+    pub const SERVICE_ORIGIN_NAME: &str = "service.origin.name";
+
+    /// Name of a service node.
+    /// This allows for two nodes of the same service running on the same host to be differentiated. Therefore, `service.node.name` should typically be unique across nodes of a given service.
+    /// In the case of Elasticsearch, the `service.node.name` could contain the unique node name within the Elasticsearch cluster. In cases where the service doesn't have the concept of a node name, the host name or container name can be used to distinguish running instances that make up this service. If those do not provide uniqueness (e.g. multiple instances of the service running on the same host) - the node name can be manually set.
+    ///
+    /// # Examples
+    ///
+    /// - `instance-0000000016`
+    pub const SERVICE_ORIGIN_NODE_NAME: &str = "service.origin.node.name";
+
+    /// Deprecated for removal in next major version release. This field will be superseded by `node.roles`.
+    /// Role of a service node.
+    /// This allows for distinction between different running roles of the same service.
+    /// In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks`.
+    /// In the case of Elasticsearch, the `service.node.role` could be `master` or `data`.
+    /// Other services could use this to distinguish between a `web` and `worker` role running as part of the service.
+    ///
+    /// # Examples
+    ///
+    /// - `background_tasks`
+    pub const SERVICE_ORIGIN_NODE_ROLE: &str = "service.origin.node.role";
+
+    /// Roles of a service node.
+    /// This allows for distinction between different running roles of the same service.
+    /// In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks` or both.
+    /// In the case of Elasticsearch, the `service.node.role` could be `master` or `data` or both.
+    /// Other services could use this to distinguish between a `web` and `worker` role running as part of the service.
+    ///
+    /// # Examples
+    ///
+    /// - `["ui", "background_tasks"]`
+    pub const SERVICE_ORIGIN_NODE_ROLES: &str = "service.origin.node.roles";
+
+    /// Current state of the service.
+    pub const SERVICE_ORIGIN_STATE: &str = "service.origin.state";
+
+    /// The type of the service data is collected from.
+    /// The type can be used to group and correlate logs and metrics from one service type.
+    /// Example: If logs or metrics are collected from Elasticsearch, `service.type` would be `elasticsearch`.
+    ///
+    /// # Examples
+    ///
+    /// - `elasticsearch`
+    pub const SERVICE_ORIGIN_TYPE: &str = "service.origin.type";
+
+    /// Version of the service the data was collected from.
+    /// This allows to look at a data set only for a specific version of a service.
+    ///
+    /// # Examples
+    ///
+    /// - `3.2.4`
+    pub const SERVICE_ORIGIN_VERSION: &str = "service.origin.version";
+
     /// Current state of the service.
     pub const SERVICE_STATE: &str = "service.state";
+
+    /// Address where data about this service was collected from.
+    /// This should be a URI, network address (ipv4:port or [ipv6]:port) or a resource path (sockets).
+    ///
+    /// # Examples
+    ///
+    /// - `172.26.0.2:5432`
+    pub const SERVICE_TARGET_ADDRESS: &str = "service.target.address";
+
+    /// Identifies the environment where the service is running.
+    /// If the same service runs in different environments (production, staging, QA, development, etc.), the environment can identify other instances of the same service. Can also group services and applications from the same environment.
+    ///
+    /// # Examples
+    ///
+    /// - `production`
+    pub const SERVICE_TARGET_ENVIRONMENT: &str = "service.target.environment";
+
+    /// Ephemeral identifier of this service (if one exists).
+    /// This id normally changes across restarts, but `service.id` does not.
+    ///
+    /// # Examples
+    ///
+    /// - `8a4f500f`
+    pub const SERVICE_TARGET_EPHEMERAL_ID: &str = "service.target.ephemeral_id";
+
+    /// Unique identifier of the running service. If the service is comprised of many nodes, the `service.id` should be the same for all nodes.
+    /// This id should uniquely identify the service. This makes it possible to correlate logs and metrics for one specific service, no matter which particular node emitted the event.
+    /// Note that if you need to see the events from one specific host of the service, you should filter on that `host.name` or `host.id` instead.
+    ///
+    /// # Examples
+    ///
+    /// - `d37e5ebfe0ae6c4972dbe9f0174a1637bb8247f6`
+    pub const SERVICE_TARGET_ID: &str = "service.target.id";
+
+    /// Name of the service data is collected from.
+    /// The name of the service is normally user given. This allows for distributed services that run on multiple hosts to correlate the related instances based on the name.
+    /// In the case of Elasticsearch the `service.name` could contain the cluster name. For Beats the `service.name` is by default a copy of the `service.type` field if no name is specified.
+    ///
+    /// # Examples
+    ///
+    /// - `elasticsearch-metrics`
+    pub const SERVICE_TARGET_NAME: &str = "service.target.name";
+
+    /// Name of a service node.
+    /// This allows for two nodes of the same service running on the same host to be differentiated. Therefore, `service.node.name` should typically be unique across nodes of a given service.
+    /// In the case of Elasticsearch, the `service.node.name` could contain the unique node name within the Elasticsearch cluster. In cases where the service doesn't have the concept of a node name, the host name or container name can be used to distinguish running instances that make up this service. If those do not provide uniqueness (e.g. multiple instances of the service running on the same host) - the node name can be manually set.
+    ///
+    /// # Examples
+    ///
+    /// - `instance-0000000016`
+    pub const SERVICE_TARGET_NODE_NAME: &str = "service.target.node.name";
+
+    /// Deprecated for removal in next major version release. This field will be superseded by `node.roles`.
+    /// Role of a service node.
+    /// This allows for distinction between different running roles of the same service.
+    /// In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks`.
+    /// In the case of Elasticsearch, the `service.node.role` could be `master` or `data`.
+    /// Other services could use this to distinguish between a `web` and `worker` role running as part of the service.
+    ///
+    /// # Examples
+    ///
+    /// - `background_tasks`
+    pub const SERVICE_TARGET_NODE_ROLE: &str = "service.target.node.role";
+
+    /// Roles of a service node.
+    /// This allows for distinction between different running roles of the same service.
+    /// In the case of Kibana, the `service.node.role` could be `ui` or `background_tasks` or both.
+    /// In the case of Elasticsearch, the `service.node.role` could be `master` or `data` or both.
+    /// Other services could use this to distinguish between a `web` and `worker` role running as part of the service.
+    ///
+    /// # Examples
+    ///
+    /// - `["ui", "background_tasks"]`
+    pub const SERVICE_TARGET_NODE_ROLES: &str = "service.target.node.roles";
+
+    /// Current state of the service.
+    pub const SERVICE_TARGET_STATE: &str = "service.target.state";
+
+    /// The type of the service data is collected from.
+    /// The type can be used to group and correlate logs and metrics from one service type.
+    /// Example: If logs or metrics are collected from Elasticsearch, `service.type` would be `elasticsearch`.
+    ///
+    /// # Examples
+    ///
+    /// - `elasticsearch`
+    pub const SERVICE_TARGET_TYPE: &str = "service.target.type";
+
+    /// Version of the service the data was collected from.
+    /// This allows to look at a data set only for a specific version of a service.
+    ///
+    /// # Examples
+    ///
+    /// - `3.2.4`
+    pub const SERVICE_TARGET_VERSION: &str = "service.target.version";
 
     /// The type of the service data is collected from.
     /// The type can be used to group and correlate logs and metrics from one service type.
@@ -3888,7 +7020,12 @@ pub mod source {
     /// - `184`
     pub const SOURCE_BYTES: &str = "source.bytes";
 
-    /// Source domain.
+    /// The domain name of the source system.
+    /// This value may be a host name, a fully qualified domain name, or another host naming format. The value may derive from the original event or be added from enrichment.
+    ///
+    /// # Examples
+    ///
+    /// - `foo.example.com`
     pub const SOURCE_DOMAIN: &str = "source.domain";
 
     /// City name.
@@ -4054,13 +7191,17 @@ pub mod source {
     pub const SOURCE_USER_HASH: &str = "source.user.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const SOURCE_USER_ID: &str = "source.user.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const SOURCE_USER_NAME: &str = "source.user.name";
 
     /// Array of user roles at the time of the event.
@@ -4073,8 +7214,1429 @@ pub mod source {
 
 /// Fields to classify events and alerts according to a threat taxonomy such as the MITRE ATT&CK® framework.
 
-/// These fields are for users to classify alerts from all of their sources (e.g. IDS, NGFW, etc.) within a common taxonomy. The threat.tactic.* are meant to capture the high level category of the threat (e.g. "impact"). The threat.technique.* fields are meant to capture which kind of approach is used by this detected threat, to accomplish the goal (e.g. "endpoint denial of service").
+/// These fields are for users to classify alerts from all of their sources (e.g. IDS, NGFW, etc.) within a common taxonomy. The threat.tactic.* fields are meant to capture the high level category of the threat (e.g. "impact"). The threat.technique.* fields are meant to capture which kind of approach is used by this detected threat, to accomplish the goal (e.g. "endpoint denial of service").
 pub mod threat {
+
+    /// A list of associated indicators objects enriching the event, and the context of that association/enrichment.
+    pub const THREAT_ENRICHMENTS: &str = "threat.enrichments";
+
+    /// Object containing associated indicators enriching the event.
+    pub const THREAT_ENRICHMENTS_INDICATOR: &str = "threat.enrichments.indicator";
+
+    /// Unique number allocated to the autonomous system. The autonomous system number (ASN) uniquely identifies each network on the Internet.
+    ///
+    /// # Examples
+    ///
+    /// - `15169`
+    pub const THREAT_ENRICHMENTS_INDICATOR_AS_NUMBER: &str =
+        "threat.enrichments.indicator.as.number";
+
+    /// Organization name.
+    ///
+    /// # Examples
+    ///
+    /// - `Google LLC`
+    pub const THREAT_ENRICHMENTS_INDICATOR_AS_ORGANIZATION_NAME: &str =
+        "threat.enrichments.indicator.as.organization.name";
+
+    /// Identifies the vendor-neutral confidence rating using the None/Low/Medium/High scale defined in Appendix A of the STIX 2.1 framework. Vendor-specific confidence scales may be added as custom fields.
+    ///
+    /// # Examples
+    ///
+    /// - `Medium`
+    pub const THREAT_ENRICHMENTS_INDICATOR_CONFIDENCE: &str =
+        "threat.enrichments.indicator.confidence";
+
+    /// Describes the type of action conducted by the threat.
+    ///
+    /// # Examples
+    ///
+    /// - `IP x.x.x.x was observed delivering the Angler EK.`
+    pub const THREAT_ENRICHMENTS_INDICATOR_DESCRIPTION: &str =
+        "threat.enrichments.indicator.description";
+
+    /// Identifies a threat indicator as an email address (irrespective of direction).
+    ///
+    /// # Examples
+    ///
+    /// - `phish@example.com`
+    pub const THREAT_ENRICHMENTS_INDICATOR_EMAIL_ADDRESS: &str =
+        "threat.enrichments.indicator.email.address";
+
+    /// Last time the file was accessed.
+    /// Note that not all filesystems keep track of access time.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ACCESSED: &str =
+        "threat.enrichments.indicator.file.accessed";
+
+    /// Array of file attributes.
+    /// Attributes names will vary by platform. Here's a non-exhaustive list of values that are expected in this field: archive, compressed, directory, encrypted, execute, hidden, read, readonly, system, write.
+    ///
+    /// # Examples
+    ///
+    /// - `["readonly", "system"]`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ATTRIBUTES: &str =
+        "threat.enrichments.indicator.file.attributes";
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_DIGEST_ALGORITHM: &str =
+        "threat.enrichments.indicator.file.code_signature.digest_algorithm";
+
+    /// Boolean to capture if a signature is present.
+    ///
+    /// # Examples
+    ///
+    /// - `true`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_EXISTS: &str =
+        "threat.enrichments.indicator.file.code_signature.exists";
+
+    /// The identifier used to sign the process.
+    /// This is used to identify the application manufactured by a software vendor. The field is relevant to Apple *OS only.
+    ///
+    /// # Examples
+    ///
+    /// - `com.apple.xpc.proxy`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_SIGNING_ID: &str =
+        "threat.enrichments.indicator.file.code_signature.signing_id";
+
+    /// Additional information about the certificate status.
+    /// This is useful for logging cryptographic errors with the certificate validity or trust status. Leave unpopulated if the validity or trust of the certificate was unchecked.
+    ///
+    /// # Examples
+    ///
+    /// - `ERROR_UNTRUSTED_ROOT`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_STATUS: &str =
+        "threat.enrichments.indicator.file.code_signature.status";
+
+    /// Subject name of the code signer
+    ///
+    /// # Examples
+    ///
+    /// - `Microsoft Corporation`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_SUBJECT_NAME: &str =
+        "threat.enrichments.indicator.file.code_signature.subject_name";
+
+    /// The team identifier used to sign the process.
+    /// This is used to identify the team or vendor of a software product. The field is relevant to Apple *OS only.
+    ///
+    /// # Examples
+    ///
+    /// - `EQHXZ8M8AV`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_TEAM_ID: &str =
+        "threat.enrichments.indicator.file.code_signature.team_id";
+
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_TIMESTAMP: &str =
+        "threat.enrichments.indicator.file.code_signature.timestamp";
+
+    /// Stores the trust status of the certificate chain.
+    /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
+    ///
+    /// # Examples
+    ///
+    /// - `true`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_TRUSTED: &str =
+        "threat.enrichments.indicator.file.code_signature.trusted";
+
+    /// Boolean to capture if the digital signature is verified against the binary content.
+    /// Leave unpopulated if a certificate was unchecked.
+    ///
+    /// # Examples
+    ///
+    /// - `true`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CODE_SIGNATURE_VALID: &str =
+        "threat.enrichments.indicator.file.code_signature.valid";
+
+    /// File creation time.
+    /// Note that not all filesystems store the creation time.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CREATED: &str =
+        "threat.enrichments.indicator.file.created";
+
+    /// Last time the file attributes or metadata changed.
+    /// Note that changes to the file content will update `mtime`. This implies `ctime` will be adjusted at the same time, since `mtime` is an attribute of the file.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_CTIME: &str =
+        "threat.enrichments.indicator.file.ctime";
+
+    /// Device that is the source of the file.
+    ///
+    /// # Examples
+    ///
+    /// - `sda`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_DEVICE: &str =
+        "threat.enrichments.indicator.file.device";
+
+    /// Directory where the file is located. It should include the drive letter, when appropriate.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_DIRECTORY: &str =
+        "threat.enrichments.indicator.file.directory";
+
+    /// Drive letter where the file is located. This field is only relevant on Windows.
+    /// The value should be uppercase, and not include the colon.
+    ///
+    /// # Examples
+    ///
+    /// - `C`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_DRIVE_LETTER: &str =
+        "threat.enrichments.indicator.file.drive_letter";
+
+    /// Machine architecture of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `x86-64`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_ARCHITECTURE: &str =
+        "threat.enrichments.indicator.file.elf.architecture";
+
+    /// Byte sequence of ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Little Endian`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_BYTE_ORDER: &str =
+        "threat.enrichments.indicator.file.elf.byte_order";
+
+    /// CPU type of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Intel`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_CPU_TYPE: &str =
+        "threat.enrichments.indicator.file.elf.cpu_type";
+
+    /// Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_CREATION_DATE: &str =
+        "threat.enrichments.indicator.file.elf.creation_date";
+
+    /// List of exported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_EXPORTS: &str =
+        "threat.enrichments.indicator.file.elf.exports";
+
+    /// A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_GO_IMPORT_HASH: &str =
+        "threat.enrichments.indicator.file.elf.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_GO_IMPORTS: &str =
+        "threat.enrichments.indicator.file.elf.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.enrichments.indicator.file.elf.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.enrichments.indicator.file.elf.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_GO_STRIPPED: &str =
+        "threat.enrichments.indicator.file.elf.go_stripped";
+
+    /// Version of the ELF Application Binary Interface (ABI).
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_ABI_VERSION: &str =
+        "threat.enrichments.indicator.file.elf.header.abi_version";
+
+    /// Header class of the ELF file.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_CLASS: &str =
+        "threat.enrichments.indicator.file.elf.header.class";
+
+    /// Data table of the ELF header.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_DATA: &str =
+        "threat.enrichments.indicator.file.elf.header.data";
+
+    /// Header entrypoint of the ELF file.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_ENTRYPOINT: &str =
+        "threat.enrichments.indicator.file.elf.header.entrypoint";
+
+    /// "0x1" for original ELF files.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_OBJECT_VERSION: &str =
+        "threat.enrichments.indicator.file.elf.header.object_version";
+
+    /// Application Binary Interface (ABI) of the Linux OS.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_OS_ABI: &str =
+        "threat.enrichments.indicator.file.elf.header.os_abi";
+
+    /// Header type of the ELF file.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_TYPE: &str =
+        "threat.enrichments.indicator.file.elf.header.type";
+
+    /// Version of the ELF header.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_HEADER_VERSION: &str =
+        "threat.enrichments.indicator.file.elf.header.version";
+
+    /// A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is an ELF implementation of the Windows PE imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_IMPORT_HASH: &str =
+        "threat.enrichments.indicator.file.elf.import_hash";
+
+    /// List of imported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_IMPORTS: &str =
+        "threat.enrichments.indicator.file.elf.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.enrichments.indicator.file.elf.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.enrichments.indicator.file.elf.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS: &str =
+        "threat.enrichments.indicator.file.elf.sections";
+
+    /// Chi-square probability distribution of the section.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_CHI2: &str =
+        "threat.enrichments.indicator.file.elf.sections.chi2";
+
+    /// Shannon entropy calculation from the section.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_ENTROPY: &str =
+        "threat.enrichments.indicator.file.elf.sections.entropy";
+
+    /// ELF Section List flags.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_FLAGS: &str =
+        "threat.enrichments.indicator.file.elf.sections.flags";
+
+    /// ELF Section List name.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_NAME: &str =
+        "threat.enrichments.indicator.file.elf.sections.name";
+
+    /// ELF Section List offset.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_PHYSICAL_OFFSET: &str =
+        "threat.enrichments.indicator.file.elf.sections.physical_offset";
+
+    /// ELF Section List physical size.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_PHYSICAL_SIZE: &str =
+        "threat.enrichments.indicator.file.elf.sections.physical_size";
+
+    /// ELF Section List type.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_TYPE: &str =
+        "threat.enrichments.indicator.file.elf.sections.type";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_VAR_ENTROPY: &str =
+        "threat.enrichments.indicator.file.elf.sections.var_entropy";
+
+    /// ELF Section List virtual address.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_VIRTUAL_ADDRESS: &str =
+        "threat.enrichments.indicator.file.elf.sections.virtual_address";
+
+    /// ELF Section List virtual size.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SECTIONS_VIRTUAL_SIZE: &str =
+        "threat.enrichments.indicator.file.elf.sections.virtual_size";
+
+    /// An array containing an object for each segment of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SEGMENTS: &str =
+        "threat.enrichments.indicator.file.elf.segments";
+
+    /// ELF object segment sections.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SEGMENTS_SECTIONS: &str =
+        "threat.enrichments.indicator.file.elf.segments.sections";
+
+    /// ELF object segment type.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SEGMENTS_TYPE: &str =
+        "threat.enrichments.indicator.file.elf.segments.type";
+
+    /// List of shared libraries used by this ELF object.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_SHARED_LIBRARIES: &str =
+        "threat.enrichments.indicator.file.elf.shared_libraries";
+
+    /// telfhash symbol hash for ELF file.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_ELF_TELFHASH: &str =
+        "threat.enrichments.indicator.file.elf.telfhash";
+
+    /// File extension, excluding the leading dot.
+    /// Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").
+    ///
+    /// # Examples
+    ///
+    /// - `png`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_EXTENSION: &str =
+        "threat.enrichments.indicator.file.extension";
+
+    /// A fork is additional data associated with a filesystem object.
+    /// On Linux, a resource fork is used to store additional data with a filesystem object. A file always has at least one fork for the data portion, and additional forks may exist.
+    /// On NTFS, this is analogous to an Alternate Data Stream (ADS), and the default data stream for a file is just called $DATA. Zone.Identifier is commonly used by Windows to track contents downloaded from the Internet. An ADS is typically of the form: `C:\path\to\filename.extension:some_fork_name`, and `some_fork_name` is the value that should populate `fork_name`. `filename.extension` should populate `file.name`, and `extension` should populate `file.extension`. The full path, `file.path`, will include the fork name.
+    ///
+    /// # Examples
+    ///
+    /// - `Zone.Identifer`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_FORK_NAME: &str =
+        "threat.enrichments.indicator.file.fork_name";
+
+    /// Primary group ID (GID) of the file.
+    ///
+    /// # Examples
+    ///
+    /// - `1001`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_GID: &str = "threat.enrichments.indicator.file.gid";
+
+    /// Primary group name of the file.
+    ///
+    /// # Examples
+    ///
+    /// - `alice`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_GROUP: &str =
+        "threat.enrichments.indicator.file.group";
+
+    /// MD5 hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_MD5: &str =
+        "threat.enrichments.indicator.file.hash.md5";
+
+    /// SHA1 hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_SHA1: &str =
+        "threat.enrichments.indicator.file.hash.sha1";
+
+    /// SHA256 hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_SHA256: &str =
+        "threat.enrichments.indicator.file.hash.sha256";
+
+    /// SHA384 hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_SHA384: &str =
+        "threat.enrichments.indicator.file.hash.sha384";
+
+    /// SHA512 hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_SHA512: &str =
+        "threat.enrichments.indicator.file.hash.sha512";
+
+    /// SSDEEP hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_SSDEEP: &str =
+        "threat.enrichments.indicator.file.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_HASH_TLSH: &str =
+        "threat.enrichments.indicator.file.hash.tlsh";
+
+    /// Inode representing the file in the filesystem.
+    ///
+    /// # Examples
+    ///
+    /// - `256383`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_INODE: &str =
+        "threat.enrichments.indicator.file.inode";
+
+    /// MIME type should identify the format of the file or stream of bytes using https://www.iana.org/assignments/media-types/media-types.xhtml[IANA official types], where possible. When more than one type is applicable, the most specific type should be used.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_MIME_TYPE: &str =
+        "threat.enrichments.indicator.file.mime_type";
+
+    /// Mode of the file in octal representation.
+    ///
+    /// # Examples
+    ///
+    /// - `0640`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_MODE: &str =
+        "threat.enrichments.indicator.file.mode";
+
+    /// Last time the file content was modified.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_MTIME: &str =
+        "threat.enrichments.indicator.file.mtime";
+
+    /// Name of the file including the extension, without the directory.
+    ///
+    /// # Examples
+    ///
+    /// - `example.png`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_NAME: &str =
+        "threat.enrichments.indicator.file.name";
+
+    /// File owner's username.
+    ///
+    /// # Examples
+    ///
+    /// - `alice`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_OWNER: &str =
+        "threat.enrichments.indicator.file.owner";
+
+    /// Full path to the file, including the file name. It should include the drive letter, when appropriate.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice/example.png`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PATH: &str =
+        "threat.enrichments.indicator.file.path";
+
+    /// CPU architecture target for the file.
+    ///
+    /// # Examples
+    ///
+    /// - `x64`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_ARCHITECTURE: &str =
+        "threat.enrichments.indicator.file.pe.architecture";
+
+    /// Internal company name of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `Microsoft Corporation`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_COMPANY: &str =
+        "threat.enrichments.indicator.file.pe.company";
+
+    /// Internal description of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `Paint`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_DESCRIPTION: &str =
+        "threat.enrichments.indicator.file.pe.description";
+
+    /// Internal version of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `6.3.9600.17415`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_FILE_VERSION: &str =
+        "threat.enrichments.indicator.file.pe.file_version";
+
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_GO_IMPORT_HASH: &str =
+        "threat.enrichments.indicator.file.pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_GO_IMPORTS: &str =
+        "threat.enrichments.indicator.file.pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.enrichments.indicator.file.pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.enrichments.indicator.file.pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_GO_STRIPPED: &str =
+        "threat.enrichments.indicator.file.pe.go_stripped";
+
+    /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
+    ///
+    /// # Examples
+    ///
+    /// - `0c6803c4e922103c4dca5963aad36ddf`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_IMPHASH: &str =
+        "threat.enrichments.indicator.file.pe.imphash";
+
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_IMPORT_HASH: &str =
+        "threat.enrichments.indicator.file.pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_IMPORTS: &str =
+        "threat.enrichments.indicator.file.pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.enrichments.indicator.file.pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.enrichments.indicator.file.pe.imports_names_var_entropy";
+
+    /// Internal name of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `MSPAINT.EXE`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_ORIGINAL_FILE_NAME: &str =
+        "threat.enrichments.indicator.file.pe.original_file_name";
+
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_PEHASH: &str =
+        "threat.enrichments.indicator.file.pe.pehash";
+
+    /// Internal product name of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `Microsoft® Windows® Operating System`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_PRODUCT: &str =
+        "threat.enrichments.indicator.file.pe.product";
+
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_SECTIONS: &str =
+        "threat.enrichments.indicator.file.pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_SECTIONS_ENTROPY: &str =
+        "threat.enrichments.indicator.file.pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_SECTIONS_NAME: &str =
+        "threat.enrichments.indicator.file.pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_SECTIONS_PHYSICAL_SIZE: &str =
+        "threat.enrichments.indicator.file.pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_SECTIONS_VAR_ENTROPY: &str =
+        "threat.enrichments.indicator.file.pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_PE_SECTIONS_VIRTUAL_SIZE: &str =
+        "threat.enrichments.indicator.file.pe.sections.virtual_size";
+
+    /// File size in bytes.
+    /// Only relevant when `file.type` is "file".
+    ///
+    /// # Examples
+    ///
+    /// - `16384`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_SIZE: &str =
+        "threat.enrichments.indicator.file.size";
+
+    /// Target path for symlinks.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_TARGET_PATH: &str =
+        "threat.enrichments.indicator.file.target_path";
+
+    /// File type (file, dir, or symlink).
+    ///
+    /// # Examples
+    ///
+    /// - `file`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_TYPE: &str =
+        "threat.enrichments.indicator.file.type";
+
+    /// The user ID (UID) or security identifier (SID) of the file owner.
+    ///
+    /// # Examples
+    ///
+    /// - `1001`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_UID: &str = "threat.enrichments.indicator.file.uid";
+
+    /// List of subject alternative names (SAN). Name types vary by certificate authority and certificate type but commonly contain IP addresses, DNS names (and wildcards), and email addresses.
+    ///
+    /// # Examples
+    ///
+    /// - `*.elastic.co`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ALTERNATIVE_NAMES: &str =
+        "threat.enrichments.indicator.file.x509.alternative_names";
+
+    /// List of common name (CN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example SHA2 High Assurance Server CA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_COMMON_NAME: &str =
+        "threat.enrichments.indicator.file.x509.issuer.common_name";
+
+    /// List of country \(C) codes
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_COUNTRY: &str =
+        "threat.enrichments.indicator.file.x509.issuer.country";
+
+    /// Distinguished name (DN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, O=Example Inc, OU=www.example.com, CN=Example SHA2 High Assurance Server CA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_DISTINGUISHED_NAME: &str =
+        "threat.enrichments.indicator.file.x509.issuer.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `Mountain View`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_LOCALITY: &str =
+        "threat.enrichments.indicator.file.x509.issuer.locality";
+
+    /// List of organizations (O) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example Inc`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_ORGANIZATION: &str =
+        "threat.enrichments.indicator.file.x509.issuer.organization";
+
+    /// List of organizational units (OU) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `www.example.com`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_ORGANIZATIONAL_UNIT: &str =
+        "threat.enrichments.indicator.file.x509.issuer.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_ISSUER_STATE_OR_PROVINCE: &str =
+        "threat.enrichments.indicator.file.x509.issuer.state_or_province";
+
+    /// Time at which the certificate is no longer considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-07-16T03:15:39Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_NOT_AFTER: &str =
+        "threat.enrichments.indicator.file.x509.not_after";
+
+    /// Time at which the certificate is first considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2019-08-16T01:40:25Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_NOT_BEFORE: &str =
+        "threat.enrichments.indicator.file.x509.not_before";
+
+    /// Algorithm used to generate the public key.
+    ///
+    /// # Examples
+    ///
+    /// - `RSA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_PUBLIC_KEY_ALGORITHM: &str =
+        "threat.enrichments.indicator.file.x509.public_key_algorithm";
+
+    /// The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `nistp521`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_PUBLIC_KEY_CURVE: &str =
+        "threat.enrichments.indicator.file.x509.public_key_curve";
+
+    /// Exponent used to derive the public key. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `65537`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_PUBLIC_KEY_EXPONENT: &str =
+        "threat.enrichments.indicator.file.x509.public_key_exponent";
+
+    /// The size of the public key space in bits.
+    ///
+    /// # Examples
+    ///
+    /// - `2048`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_PUBLIC_KEY_SIZE: &str =
+        "threat.enrichments.indicator.file.x509.public_key_size";
+
+    /// Unique serial number issued by the certificate authority. For consistency, if this value is alphanumeric, it should be formatted without colons and uppercase characters.
+    ///
+    /// # Examples
+    ///
+    /// - `55FBB9C7DEBF09809D12CCAA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SERIAL_NUMBER: &str =
+        "threat.enrichments.indicator.file.x509.serial_number";
+
+    /// Identifier for certificate signature algorithm. We recommend using names found in Go Lang Crypto library. See https://github.com/golang/go/blob/go1.14/src/crypto/x509/x509.go#L337-L353.
+    ///
+    /// # Examples
+    ///
+    /// - `SHA256-RSA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SIGNATURE_ALGORITHM: &str =
+        "threat.enrichments.indicator.file.x509.signature_algorithm";
+
+    /// List of common names (CN) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `shared.global.example.net`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_COMMON_NAME: &str =
+        "threat.enrichments.indicator.file.x509.subject.common_name";
+
+    /// List of country \(C) code
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_COUNTRY: &str =
+        "threat.enrichments.indicator.file.x509.subject.country";
+
+    /// Distinguished name (DN) of the certificate subject entity.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, ST=California, L=San Francisco, O=Example, Inc., CN=shared.global.example.net`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_DISTINGUISHED_NAME: &str =
+        "threat.enrichments.indicator.file.x509.subject.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `San Francisco`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_LOCALITY: &str =
+        "threat.enrichments.indicator.file.x509.subject.locality";
+
+    /// List of organizations (O) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `Example, Inc.`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_ORGANIZATION: &str =
+        "threat.enrichments.indicator.file.x509.subject.organization";
+
+    /// List of organizational units (OU) of subject.
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_ORGANIZATIONAL_UNIT: &str =
+        "threat.enrichments.indicator.file.x509.subject.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_SUBJECT_STATE_OR_PROVINCE: &str =
+        "threat.enrichments.indicator.file.x509.subject.state_or_province";
+
+    /// Version of x509 format.
+    ///
+    /// # Examples
+    ///
+    /// - `3`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FILE_X509_VERSION_NUMBER: &str =
+        "threat.enrichments.indicator.file.x509.version_number";
+
+    /// The date and time when intelligence source first reported sighting this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-05T17:25:47.000Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_FIRST_SEEN: &str =
+        "threat.enrichments.indicator.first_seen";
+
+    /// City name.
+    ///
+    /// # Examples
+    ///
+    /// - `Montreal`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_CITY_NAME: &str =
+        "threat.enrichments.indicator.geo.city_name";
+
+    /// Two-letter code representing continent's name.
+    ///
+    /// # Examples
+    ///
+    /// - `NA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_CONTINENT_CODE: &str =
+        "threat.enrichments.indicator.geo.continent_code";
+
+    /// Name of the continent.
+    ///
+    /// # Examples
+    ///
+    /// - `North America`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_CONTINENT_NAME: &str =
+        "threat.enrichments.indicator.geo.continent_name";
+
+    /// Country ISO code.
+    ///
+    /// # Examples
+    ///
+    /// - `CA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_COUNTRY_ISO_CODE: &str =
+        "threat.enrichments.indicator.geo.country_iso_code";
+
+    /// Country name.
+    ///
+    /// # Examples
+    ///
+    /// - `Canada`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_COUNTRY_NAME: &str =
+        "threat.enrichments.indicator.geo.country_name";
+
+    /// Longitude and latitude.
+    ///
+    /// # Examples
+    ///
+    /// - `{ "lon": -73.614830, "lat": 45.505918 }`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_LOCATION: &str =
+        "threat.enrichments.indicator.geo.location";
+
+    /// User-defined description of a location, at the level of granularity they care about.
+    /// Could be the name of their data centers, the floor number, if this describes a local physical entity, city names.
+    /// Not typically used in automated geolocation.
+    ///
+    /// # Examples
+    ///
+    /// - `boston-dc`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_NAME: &str = "threat.enrichments.indicator.geo.name";
+
+    /// Postal code associated with the location.
+    /// Values appropriate for this field may also be known as a postcode or ZIP code and will vary widely from country to country.
+    ///
+    /// # Examples
+    ///
+    /// - `94040`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_POSTAL_CODE: &str =
+        "threat.enrichments.indicator.geo.postal_code";
+
+    /// Region ISO code.
+    ///
+    /// # Examples
+    ///
+    /// - `CA-QC`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_REGION_ISO_CODE: &str =
+        "threat.enrichments.indicator.geo.region_iso_code";
+
+    /// Region name.
+    ///
+    /// # Examples
+    ///
+    /// - `Quebec`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_REGION_NAME: &str =
+        "threat.enrichments.indicator.geo.region_name";
+
+    /// The time zone of the location, such as IANA time zone name.
+    ///
+    /// # Examples
+    ///
+    /// - `America/Argentina/Buenos_Aires`
+    pub const THREAT_ENRICHMENTS_INDICATOR_GEO_TIMEZONE: &str =
+        "threat.enrichments.indicator.geo.timezone";
+
+    /// Identifies a threat indicator as an IP address (irrespective of direction).
+    ///
+    /// # Examples
+    ///
+    /// - `1.2.3.4`
+    pub const THREAT_ENRICHMENTS_INDICATOR_IP: &str = "threat.enrichments.indicator.ip";
+
+    /// The date and time when intelligence source last reported sighting this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-05T17:25:47.000Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_LAST_SEEN: &str =
+        "threat.enrichments.indicator.last_seen";
+
+    /// Traffic Light Protocol sharing markings.
+    ///
+    /// # Examples
+    ///
+    /// - `CLEAR`
+    pub const THREAT_ENRICHMENTS_INDICATOR_MARKING_TLP: &str =
+        "threat.enrichments.indicator.marking.tlp";
+
+    /// Traffic Light Protocol version.
+    ///
+    /// # Examples
+    ///
+    /// - `2.0`
+    pub const THREAT_ENRICHMENTS_INDICATOR_MARKING_TLP_VERSION: &str =
+        "threat.enrichments.indicator.marking.tlp_version";
+
+    /// The date and time when intelligence source last modified information for this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-05T17:25:47.000Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_MODIFIED_AT: &str =
+        "threat.enrichments.indicator.modified_at";
+
+    /// The display name indicator in an UI friendly format
+    /// URL, IP address, email address, registry key, port number, hash value, or other relevant name can serve as the display name.
+    ///
+    /// # Examples
+    ///
+    /// - `5.2.75.227`
+    pub const THREAT_ENRICHMENTS_INDICATOR_NAME: &str = "threat.enrichments.indicator.name";
+
+    /// Identifies a threat indicator as a port number (irrespective of direction).
+    ///
+    /// # Examples
+    ///
+    /// - `443`
+    pub const THREAT_ENRICHMENTS_INDICATOR_PORT: &str = "threat.enrichments.indicator.port";
+
+    /// The name of the indicator's provider.
+    ///
+    /// # Examples
+    ///
+    /// - `lrz_urlhaus`
+    pub const THREAT_ENRICHMENTS_INDICATOR_PROVIDER: &str = "threat.enrichments.indicator.provider";
+
+    /// Reference URL linking to additional information about this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `https://system.example.com/indicator/0001234`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REFERENCE: &str =
+        "threat.enrichments.indicator.reference";
+
+    /// Original bytes written with base64 encoding.
+    /// For Windows registry operations, such as SetValueEx and RegQueryValueEx, this corresponds to the data pointed by `lp_data`. This is optional but provides better recoverability and should be populated for REG_BINARY encoded values.
+    ///
+    /// # Examples
+    ///
+    /// - `ZQBuAC0AVQBTAAAAZQBuAAAAAAA=`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_DATA_BYTES: &str =
+        "threat.enrichments.indicator.registry.data.bytes";
+
+    /// Content when writing string types.
+    /// Populated as an array when writing string data to the registry. For single string registry types (REG_SZ, REG_EXPAND_SZ), this should be an array with one string. For sequences of string with REG_MULTI_SZ, this array will be variable length. For numeric data, such as REG_DWORD and REG_QWORD, this should be populated with the decimal representation (e.g `"1"`).
+    ///
+    /// # Examples
+    ///
+    /// - `["C:\rta\red_ttp\bin\myapp.exe"]`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_DATA_STRINGS: &str =
+        "threat.enrichments.indicator.registry.data.strings";
+
+    /// Standard registry type for encoding contents
+    ///
+    /// # Examples
+    ///
+    /// - `REG_SZ`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_DATA_TYPE: &str =
+        "threat.enrichments.indicator.registry.data.type";
+
+    /// Abbreviated name for the hive.
+    ///
+    /// # Examples
+    ///
+    /// - `HKLM`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_HIVE: &str =
+        "threat.enrichments.indicator.registry.hive";
+
+    /// Hive-relative path of keys.
+    ///
+    /// # Examples
+    ///
+    /// - `SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winword.exe`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_KEY: &str =
+        "threat.enrichments.indicator.registry.key";
+
+    /// Full path, including hive, key and value
+    ///
+    /// # Examples
+    ///
+    /// - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winword.exe\Debugger`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_PATH: &str =
+        "threat.enrichments.indicator.registry.path";
+
+    /// Name of the value written.
+    ///
+    /// # Examples
+    ///
+    /// - `Debugger`
+    pub const THREAT_ENRICHMENTS_INDICATOR_REGISTRY_VALUE: &str =
+        "threat.enrichments.indicator.registry.value";
+
+    /// Count of AV/EDR vendors that successfully detected malicious file or URL.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const THREAT_ENRICHMENTS_INDICATOR_SCANNER_STATS: &str =
+        "threat.enrichments.indicator.scanner_stats";
+
+    /// Number of times this indicator was observed conducting threat activity.
+    ///
+    /// # Examples
+    ///
+    /// - `20`
+    pub const THREAT_ENRICHMENTS_INDICATOR_SIGHTINGS: &str =
+        "threat.enrichments.indicator.sightings";
+
+    /// Type of indicator as represented by Cyber Observable in STIX 2.0.
+    ///
+    /// # Examples
+    ///
+    /// - `ipv4-addr`
+    pub const THREAT_ENRICHMENTS_INDICATOR_TYPE: &str = "threat.enrichments.indicator.type";
+
+    /// Domain of the url, such as "www.elastic.co".
+    /// In some cases a URL may refer to an IP and/or port directly, without a domain name. In this case, the IP address would go to the `domain` field.
+    /// If the URL contains a literal IPv6 address enclosed by `[` and `]` (IETF RFC 2732), the `[` and `]` characters should also be captured in the `domain` field.
+    ///
+    /// # Examples
+    ///
+    /// - `www.elastic.co`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_DOMAIN: &str =
+        "threat.enrichments.indicator.url.domain";
+
+    /// The field contains the file extension from the original request url, excluding the leading dot.
+    /// The file extension is only set if it exists, as not every url has a file extension.
+    /// The leading period must not be included. For example, the value must be "png", not ".png".
+    /// Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").
+    ///
+    /// # Examples
+    ///
+    /// - `png`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_EXTENSION: &str =
+        "threat.enrichments.indicator.url.extension";
+
+    /// Portion of the url after the `#`, such as "top".
+    /// The `#` is not part of the fragment.
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_FRAGMENT: &str =
+        "threat.enrichments.indicator.url.fragment";
+
+    /// If full URLs are important to your use case, they should be stored in `url.full`, whether this field is reconstructed or present in the event source.
+    ///
+    /// # Examples
+    ///
+    /// - `https://www.elastic.co:443/search?q=elasticsearch#top`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_FULL: &str = "threat.enrichments.indicator.url.full";
+
+    /// Unmodified original url as seen in the event source.
+    /// Note that in network monitoring, the observed URL may be a full URL, whereas in access logs, the URL is often just represented as a path.
+    /// This field is meant to represent the URL as it was observed, complete or not.
+    ///
+    /// # Examples
+    ///
+    /// - `https://www.elastic.co:443/search?q=elasticsearch#top or /search?q=elasticsearch`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_ORIGINAL: &str =
+        "threat.enrichments.indicator.url.original";
+
+    /// Password of the request.
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_PASSWORD: &str =
+        "threat.enrichments.indicator.url.password";
+
+    /// Path of the request, such as "/search".
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_PATH: &str = "threat.enrichments.indicator.url.path";
+
+    /// Port of the request, such as 443.
+    ///
+    /// # Examples
+    ///
+    /// - `443`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_PORT: &str = "threat.enrichments.indicator.url.port";
+
+    /// The query field describes the query string of the request, such as "q=elasticsearch".
+    /// The `?` is excluded from the query string. If a URL contains no `?`, there is no query field. If there is a `?` but no query, the query field exists with an empty string. The `exists` query can be used to differentiate between the two cases.
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_QUERY: &str =
+        "threat.enrichments.indicator.url.query";
+
+    /// The highest registered url domain, stripped of the subdomain.
+    /// For example, the registered domain for "foo.example.com" is "example.com".
+    /// This value can be determined precisely with a list like the public suffix list (http://publicsuffix.org). Trying to approximate this by simply taking the last two labels will not work well for TLDs such as "co.uk".
+    ///
+    /// # Examples
+    ///
+    /// - `example.com`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_REGISTERED_DOMAIN: &str =
+        "threat.enrichments.indicator.url.registered_domain";
+
+    /// Scheme of the request, such as "https".
+    /// Note: The `:` is not part of the scheme.
+    ///
+    /// # Examples
+    ///
+    /// - `https`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_SCHEME: &str =
+        "threat.enrichments.indicator.url.scheme";
+
+    /// The subdomain portion of a fully qualified domain name includes all of the names except the host name under the registered_domain.  In a partially qualified domain, or if the the qualification level of the full name cannot be determined, subdomain contains all of the names below the registered domain.
+    /// For example the subdomain portion of "www.east.mydomain.co.uk" is "east". If the domain has multiple levels of subdomain, such as "sub2.sub1.example.com", the subdomain field should contain "sub2.sub1", with no trailing period.
+    ///
+    /// # Examples
+    ///
+    /// - `east`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_SUBDOMAIN: &str =
+        "threat.enrichments.indicator.url.subdomain";
+
+    /// The effective top level domain (eTLD), also known as the domain suffix, is the last part of the domain name. For example, the top level domain for example.com is "com".
+    /// This value can be determined precisely with a list like the public suffix list (http://publicsuffix.org). Trying to approximate this by simply taking the last label will not work well for effective TLDs such as "co.uk".
+    ///
+    /// # Examples
+    ///
+    /// - `co.uk`
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_TOP_LEVEL_DOMAIN: &str =
+        "threat.enrichments.indicator.url.top_level_domain";
+
+    /// Username of the request.
+    pub const THREAT_ENRICHMENTS_INDICATOR_URL_USERNAME: &str =
+        "threat.enrichments.indicator.url.username";
+
+    /// List of subject alternative names (SAN). Name types vary by certificate authority and certificate type but commonly contain IP addresses, DNS names (and wildcards), and email addresses.
+    ///
+    /// # Examples
+    ///
+    /// - `*.elastic.co`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ALTERNATIVE_NAMES: &str =
+        "threat.enrichments.indicator.x509.alternative_names";
+
+    /// List of common name (CN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example SHA2 High Assurance Server CA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_COMMON_NAME: &str =
+        "threat.enrichments.indicator.x509.issuer.common_name";
+
+    /// List of country \(C) codes
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_COUNTRY: &str =
+        "threat.enrichments.indicator.x509.issuer.country";
+
+    /// Distinguished name (DN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, O=Example Inc, OU=www.example.com, CN=Example SHA2 High Assurance Server CA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_DISTINGUISHED_NAME: &str =
+        "threat.enrichments.indicator.x509.issuer.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `Mountain View`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_LOCALITY: &str =
+        "threat.enrichments.indicator.x509.issuer.locality";
+
+    /// List of organizations (O) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example Inc`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_ORGANIZATION: &str =
+        "threat.enrichments.indicator.x509.issuer.organization";
+
+    /// List of organizational units (OU) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `www.example.com`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_ORGANIZATIONAL_UNIT: &str =
+        "threat.enrichments.indicator.x509.issuer.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_ISSUER_STATE_OR_PROVINCE: &str =
+        "threat.enrichments.indicator.x509.issuer.state_or_province";
+
+    /// Time at which the certificate is no longer considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-07-16T03:15:39Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_NOT_AFTER: &str =
+        "threat.enrichments.indicator.x509.not_after";
+
+    /// Time at which the certificate is first considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2019-08-16T01:40:25Z`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_NOT_BEFORE: &str =
+        "threat.enrichments.indicator.x509.not_before";
+
+    /// Algorithm used to generate the public key.
+    ///
+    /// # Examples
+    ///
+    /// - `RSA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_PUBLIC_KEY_ALGORITHM: &str =
+        "threat.enrichments.indicator.x509.public_key_algorithm";
+
+    /// The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `nistp521`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_PUBLIC_KEY_CURVE: &str =
+        "threat.enrichments.indicator.x509.public_key_curve";
+
+    /// Exponent used to derive the public key. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `65537`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_PUBLIC_KEY_EXPONENT: &str =
+        "threat.enrichments.indicator.x509.public_key_exponent";
+
+    /// The size of the public key space in bits.
+    ///
+    /// # Examples
+    ///
+    /// - `2048`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_PUBLIC_KEY_SIZE: &str =
+        "threat.enrichments.indicator.x509.public_key_size";
+
+    /// Unique serial number issued by the certificate authority. For consistency, if this value is alphanumeric, it should be formatted without colons and uppercase characters.
+    ///
+    /// # Examples
+    ///
+    /// - `55FBB9C7DEBF09809D12CCAA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SERIAL_NUMBER: &str =
+        "threat.enrichments.indicator.x509.serial_number";
+
+    /// Identifier for certificate signature algorithm. We recommend using names found in Go Lang Crypto library. See https://github.com/golang/go/blob/go1.14/src/crypto/x509/x509.go#L337-L353.
+    ///
+    /// # Examples
+    ///
+    /// - `SHA256-RSA`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SIGNATURE_ALGORITHM: &str =
+        "threat.enrichments.indicator.x509.signature_algorithm";
+
+    /// List of common names (CN) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `shared.global.example.net`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_COMMON_NAME: &str =
+        "threat.enrichments.indicator.x509.subject.common_name";
+
+    /// List of country \(C) code
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_COUNTRY: &str =
+        "threat.enrichments.indicator.x509.subject.country";
+
+    /// Distinguished name (DN) of the certificate subject entity.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, ST=California, L=San Francisco, O=Example, Inc., CN=shared.global.example.net`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_DISTINGUISHED_NAME: &str =
+        "threat.enrichments.indicator.x509.subject.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `San Francisco`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_LOCALITY: &str =
+        "threat.enrichments.indicator.x509.subject.locality";
+
+    /// List of organizations (O) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `Example, Inc.`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_ORGANIZATION: &str =
+        "threat.enrichments.indicator.x509.subject.organization";
+
+    /// List of organizational units (OU) of subject.
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_ORGANIZATIONAL_UNIT: &str =
+        "threat.enrichments.indicator.x509.subject.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_SUBJECT_STATE_OR_PROVINCE: &str =
+        "threat.enrichments.indicator.x509.subject.state_or_province";
+
+    /// Version of x509 format.
+    ///
+    /// # Examples
+    ///
+    /// - `3`
+    pub const THREAT_ENRICHMENTS_INDICATOR_X509_VERSION_NUMBER: &str =
+        "threat.enrichments.indicator.x509.version_number";
+
+    /// Identifies the atomic indicator value that matched a local environment endpoint or network event.
+    ///
+    /// # Examples
+    ///
+    /// - `bad-domain.com`
+    pub const THREAT_ENRICHMENTS_MATCHED_ATOMIC: &str = "threat.enrichments.matched.atomic";
+
+    /// Identifies the field of the atomic indicator that matched a local environment endpoint or network event.
+    ///
+    /// # Examples
+    ///
+    /// - `file.hash.sha256`
+    pub const THREAT_ENRICHMENTS_MATCHED_FIELD: &str = "threat.enrichments.matched.field";
+
+    /// Identifies the _id of the indicator document enriching the event.
+    ///
+    /// # Examples
+    ///
+    /// - `ff93aee5-86a1-4a61-b0e6-0cdc313d01b5`
+    pub const THREAT_ENRICHMENTS_MATCHED_ID: &str = "threat.enrichments.matched.id";
+
+    /// Identifies the _index of the indicator document enriching the event.
+    ///
+    /// # Examples
+    ///
+    /// - `filebeat-8.0.0-2021.05.23-000011`
+    pub const THREAT_ENRICHMENTS_MATCHED_INDEX: &str = "threat.enrichments.matched.index";
+
+    /// Indicates when the indicator match was generated
+    ///
+    /// # Examples
+    ///
+    /// - `2021-10-05T17:00:58.326Z`
+    pub const THREAT_ENRICHMENTS_MATCHED_OCCURRED: &str = "threat.enrichments.matched.occurred";
+
+    /// Identifies the type of match that caused the event to be enriched with the given indicator
+    ///
+    /// # Examples
+    ///
+    /// - `indicator_match_rule`
+    pub const THREAT_ENRICHMENTS_MATCHED_TYPE: &str = "threat.enrichments.matched.type";
+
+    /// The saved object ID of the dashboard belonging to the threat feed for displaying dashboard links to threat feeds in Kibana.
+    ///
+    /// # Examples
+    ///
+    /// - `5ba16340-72e6-11eb-a3e3-b3cc7c78a70f`
+    pub const THREAT_FEED_DASHBOARD_ID: &str = "threat.feed.dashboard_id";
+
+    /// Description of the threat feed in a UI friendly format.
+    ///
+    /// # Examples
+    ///
+    /// - `Threat feed from the AlienVault Open Threat eXchange network.`
+    pub const THREAT_FEED_DESCRIPTION: &str = "threat.feed.description";
+
+    /// The name of the threat feed in UI friendly format.
+    ///
+    /// # Examples
+    ///
+    /// - `AlienVault OTX`
+    pub const THREAT_FEED_NAME: &str = "threat.feed.name";
+
+    /// Reference information for the threat feed in a UI friendly format.
+    ///
+    /// # Examples
+    ///
+    /// - `https://otx.alienvault.com`
+    pub const THREAT_FEED_REFERENCE: &str = "threat.feed.reference";
 
     /// Name of the threat framework used to further categorize and classify the tactic and technique of the reported threat. Framework classification can be provided by detecting systems, evaluated at ingest time, or retrospectively tagged to events.
     ///
@@ -4082,6 +8644,1331 @@ pub mod threat {
     ///
     /// - `MITRE ATT&CK`
     pub const THREAT_FRAMEWORK: &str = "threat.framework";
+
+    /// The alias(es) of the group for a set of related intrusion activity that are tracked by a common name in the security community.
+    /// While not required, you can use a MITRE ATT&CK® group alias(es).
+    ///
+    /// # Examples
+    ///
+    /// - `[ "Magecart Group 6" ]`
+    pub const THREAT_GROUP_ALIAS: &str = "threat.group.alias";
+
+    /// The id of the group for a set of related intrusion activity that are tracked by a common name in the security community.
+    /// While not required, you can use a MITRE ATT&CK® group id.
+    ///
+    /// # Examples
+    ///
+    /// - `G0037`
+    pub const THREAT_GROUP_ID: &str = "threat.group.id";
+
+    /// The name of the group for a set of related intrusion activity that are tracked by a common name in the security community.
+    /// While not required, you can use a MITRE ATT&CK® group name.
+    ///
+    /// # Examples
+    ///
+    /// - `FIN6`
+    pub const THREAT_GROUP_NAME: &str = "threat.group.name";
+
+    /// The reference URL of the group for a set of related intrusion activity that are tracked by a common name in the security community.
+    /// While not required, you can use a MITRE ATT&CK® group reference URL.
+    ///
+    /// # Examples
+    ///
+    /// - `https://attack.mitre.org/groups/G0037/`
+    pub const THREAT_GROUP_REFERENCE: &str = "threat.group.reference";
+
+    /// Unique number allocated to the autonomous system. The autonomous system number (ASN) uniquely identifies each network on the Internet.
+    ///
+    /// # Examples
+    ///
+    /// - `15169`
+    pub const THREAT_INDICATOR_AS_NUMBER: &str = "threat.indicator.as.number";
+
+    /// Organization name.
+    ///
+    /// # Examples
+    ///
+    /// - `Google LLC`
+    pub const THREAT_INDICATOR_AS_ORGANIZATION_NAME: &str = "threat.indicator.as.organization.name";
+
+    /// Identifies the vendor-neutral confidence rating using the None/Low/Medium/High scale defined in Appendix A of the STIX 2.1 framework. Vendor-specific confidence scales may be added as custom fields.
+    ///
+    /// # Examples
+    ///
+    /// - `Medium`
+    pub const THREAT_INDICATOR_CONFIDENCE: &str = "threat.indicator.confidence";
+
+    /// Describes the type of action conducted by the threat.
+    ///
+    /// # Examples
+    ///
+    /// - `IP x.x.x.x was observed delivering the Angler EK.`
+    pub const THREAT_INDICATOR_DESCRIPTION: &str = "threat.indicator.description";
+
+    /// Identifies a threat indicator as an email address (irrespective of direction).
+    ///
+    /// # Examples
+    ///
+    /// - `phish@example.com`
+    pub const THREAT_INDICATOR_EMAIL_ADDRESS: &str = "threat.indicator.email.address";
+
+    /// Last time the file was accessed.
+    /// Note that not all filesystems keep track of access time.
+    pub const THREAT_INDICATOR_FILE_ACCESSED: &str = "threat.indicator.file.accessed";
+
+    /// Array of file attributes.
+    /// Attributes names will vary by platform. Here's a non-exhaustive list of values that are expected in this field: archive, compressed, directory, encrypted, execute, hidden, read, readonly, system, write.
+    ///
+    /// # Examples
+    ///
+    /// - `["readonly", "system"]`
+    pub const THREAT_INDICATOR_FILE_ATTRIBUTES: &str = "threat.indicator.file.attributes";
+
+    /// The hashing algorithm used to sign the process.
+    /// This value can distinguish signatures when a file is signed multiple times by the same signer but with a different digest algorithm.
+    ///
+    /// # Examples
+    ///
+    /// - `sha256`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_DIGEST_ALGORITHM: &str =
+        "threat.indicator.file.code_signature.digest_algorithm";
+
+    /// Boolean to capture if a signature is present.
+    ///
+    /// # Examples
+    ///
+    /// - `true`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_EXISTS: &str =
+        "threat.indicator.file.code_signature.exists";
+
+    /// The identifier used to sign the process.
+    /// This is used to identify the application manufactured by a software vendor. The field is relevant to Apple *OS only.
+    ///
+    /// # Examples
+    ///
+    /// - `com.apple.xpc.proxy`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_SIGNING_ID: &str =
+        "threat.indicator.file.code_signature.signing_id";
+
+    /// Additional information about the certificate status.
+    /// This is useful for logging cryptographic errors with the certificate validity or trust status. Leave unpopulated if the validity or trust of the certificate was unchecked.
+    ///
+    /// # Examples
+    ///
+    /// - `ERROR_UNTRUSTED_ROOT`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_STATUS: &str =
+        "threat.indicator.file.code_signature.status";
+
+    /// Subject name of the code signer
+    ///
+    /// # Examples
+    ///
+    /// - `Microsoft Corporation`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_SUBJECT_NAME: &str =
+        "threat.indicator.file.code_signature.subject_name";
+
+    /// The team identifier used to sign the process.
+    /// This is used to identify the team or vendor of a software product. The field is relevant to Apple *OS only.
+    ///
+    /// # Examples
+    ///
+    /// - `EQHXZ8M8AV`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_TEAM_ID: &str =
+        "threat.indicator.file.code_signature.team_id";
+
+    /// Date and time when the code signature was generated and signed.
+    ///
+    /// # Examples
+    ///
+    /// - `2021-01-01T12:10:30Z`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_TIMESTAMP: &str =
+        "threat.indicator.file.code_signature.timestamp";
+
+    /// Stores the trust status of the certificate chain.
+    /// Validating the trust of the certificate chain may be complicated, and this field should only be populated by tools that actively check the status.
+    ///
+    /// # Examples
+    ///
+    /// - `true`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_TRUSTED: &str =
+        "threat.indicator.file.code_signature.trusted";
+
+    /// Boolean to capture if the digital signature is verified against the binary content.
+    /// Leave unpopulated if a certificate was unchecked.
+    ///
+    /// # Examples
+    ///
+    /// - `true`
+    pub const THREAT_INDICATOR_FILE_CODE_SIGNATURE_VALID: &str =
+        "threat.indicator.file.code_signature.valid";
+
+    /// File creation time.
+    /// Note that not all filesystems store the creation time.
+    pub const THREAT_INDICATOR_FILE_CREATED: &str = "threat.indicator.file.created";
+
+    /// Last time the file attributes or metadata changed.
+    /// Note that changes to the file content will update `mtime`. This implies `ctime` will be adjusted at the same time, since `mtime` is an attribute of the file.
+    pub const THREAT_INDICATOR_FILE_CTIME: &str = "threat.indicator.file.ctime";
+
+    /// Device that is the source of the file.
+    ///
+    /// # Examples
+    ///
+    /// - `sda`
+    pub const THREAT_INDICATOR_FILE_DEVICE: &str = "threat.indicator.file.device";
+
+    /// Directory where the file is located. It should include the drive letter, when appropriate.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice`
+    pub const THREAT_INDICATOR_FILE_DIRECTORY: &str = "threat.indicator.file.directory";
+
+    /// Drive letter where the file is located. This field is only relevant on Windows.
+    /// The value should be uppercase, and not include the colon.
+    ///
+    /// # Examples
+    ///
+    /// - `C`
+    pub const THREAT_INDICATOR_FILE_DRIVE_LETTER: &str = "threat.indicator.file.drive_letter";
+
+    /// Machine architecture of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `x86-64`
+    pub const THREAT_INDICATOR_FILE_ELF_ARCHITECTURE: &str =
+        "threat.indicator.file.elf.architecture";
+
+    /// Byte sequence of ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Little Endian`
+    pub const THREAT_INDICATOR_FILE_ELF_BYTE_ORDER: &str = "threat.indicator.file.elf.byte_order";
+
+    /// CPU type of the ELF file.
+    ///
+    /// # Examples
+    ///
+    /// - `Intel`
+    pub const THREAT_INDICATOR_FILE_ELF_CPU_TYPE: &str = "threat.indicator.file.elf.cpu_type";
+
+    /// Extracted when possible from the file's metadata. Indicates when it was built or compiled. It can also be faked by malware creators.
+    pub const THREAT_INDICATOR_FILE_ELF_CREATION_DATE: &str =
+        "threat.indicator.file.elf.creation_date";
+
+    /// List of exported element names and types.
+    pub const THREAT_INDICATOR_FILE_ELF_EXPORTS: &str = "threat.indicator.file.elf.exports";
+
+    /// A hash of the Go language imports in an ELF file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const THREAT_INDICATOR_FILE_ELF_GO_IMPORT_HASH: &str =
+        "threat.indicator.file.elf.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const THREAT_INDICATOR_FILE_ELF_GO_IMPORTS: &str = "threat.indicator.file.elf.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_INDICATOR_FILE_ELF_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.indicator.file.elf.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_INDICATOR_FILE_ELF_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.indicator.file.elf.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const THREAT_INDICATOR_FILE_ELF_GO_STRIPPED: &str = "threat.indicator.file.elf.go_stripped";
+
+    /// Version of the ELF Application Binary Interface (ABI).
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_ABI_VERSION: &str =
+        "threat.indicator.file.elf.header.abi_version";
+
+    /// Header class of the ELF file.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_CLASS: &str =
+        "threat.indicator.file.elf.header.class";
+
+    /// Data table of the ELF header.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_DATA: &str = "threat.indicator.file.elf.header.data";
+
+    /// Header entrypoint of the ELF file.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_ENTRYPOINT: &str =
+        "threat.indicator.file.elf.header.entrypoint";
+
+    /// "0x1" for original ELF files.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_OBJECT_VERSION: &str =
+        "threat.indicator.file.elf.header.object_version";
+
+    /// Application Binary Interface (ABI) of the Linux OS.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_OS_ABI: &str =
+        "threat.indicator.file.elf.header.os_abi";
+
+    /// Header type of the ELF file.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_TYPE: &str = "threat.indicator.file.elf.header.type";
+
+    /// Version of the ELF header.
+    pub const THREAT_INDICATOR_FILE_ELF_HEADER_VERSION: &str =
+        "threat.indicator.file.elf.header.version";
+
+    /// A hash of the imports in an ELF file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is an ELF implementation of the Windows PE imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const THREAT_INDICATOR_FILE_ELF_IMPORT_HASH: &str = "threat.indicator.file.elf.import_hash";
+
+    /// List of imported element names and types.
+    pub const THREAT_INDICATOR_FILE_ELF_IMPORTS: &str = "threat.indicator.file.elf.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_INDICATOR_FILE_ELF_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.indicator.file.elf.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_INDICATOR_FILE_ELF_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.indicator.file.elf.imports_names_var_entropy";
+
+    /// An array containing an object for each section of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.sections.*`.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS: &str = "threat.indicator.file.elf.sections";
+
+    /// Chi-square probability distribution of the section.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_CHI2: &str =
+        "threat.indicator.file.elf.sections.chi2";
+
+    /// Shannon entropy calculation from the section.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_ENTROPY: &str =
+        "threat.indicator.file.elf.sections.entropy";
+
+    /// ELF Section List flags.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_FLAGS: &str =
+        "threat.indicator.file.elf.sections.flags";
+
+    /// ELF Section List name.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_NAME: &str =
+        "threat.indicator.file.elf.sections.name";
+
+    /// ELF Section List offset.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_PHYSICAL_OFFSET: &str =
+        "threat.indicator.file.elf.sections.physical_offset";
+
+    /// ELF Section List physical size.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_PHYSICAL_SIZE: &str =
+        "threat.indicator.file.elf.sections.physical_size";
+
+    /// ELF Section List type.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_TYPE: &str =
+        "threat.indicator.file.elf.sections.type";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_VAR_ENTROPY: &str =
+        "threat.indicator.file.elf.sections.var_entropy";
+
+    /// ELF Section List virtual address.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_VIRTUAL_ADDRESS: &str =
+        "threat.indicator.file.elf.sections.virtual_address";
+
+    /// ELF Section List virtual size.
+    pub const THREAT_INDICATOR_FILE_ELF_SECTIONS_VIRTUAL_SIZE: &str =
+        "threat.indicator.file.elf.sections.virtual_size";
+
+    /// An array containing an object for each segment of the ELF file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `elf.segments.*`.
+    pub const THREAT_INDICATOR_FILE_ELF_SEGMENTS: &str = "threat.indicator.file.elf.segments";
+
+    /// ELF object segment sections.
+    pub const THREAT_INDICATOR_FILE_ELF_SEGMENTS_SECTIONS: &str =
+        "threat.indicator.file.elf.segments.sections";
+
+    /// ELF object segment type.
+    pub const THREAT_INDICATOR_FILE_ELF_SEGMENTS_TYPE: &str =
+        "threat.indicator.file.elf.segments.type";
+
+    /// List of shared libraries used by this ELF object.
+    pub const THREAT_INDICATOR_FILE_ELF_SHARED_LIBRARIES: &str =
+        "threat.indicator.file.elf.shared_libraries";
+
+    /// telfhash symbol hash for ELF file.
+    pub const THREAT_INDICATOR_FILE_ELF_TELFHASH: &str = "threat.indicator.file.elf.telfhash";
+
+    /// File extension, excluding the leading dot.
+    /// Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").
+    ///
+    /// # Examples
+    ///
+    /// - `png`
+    pub const THREAT_INDICATOR_FILE_EXTENSION: &str = "threat.indicator.file.extension";
+
+    /// A fork is additional data associated with a filesystem object.
+    /// On Linux, a resource fork is used to store additional data with a filesystem object. A file always has at least one fork for the data portion, and additional forks may exist.
+    /// On NTFS, this is analogous to an Alternate Data Stream (ADS), and the default data stream for a file is just called $DATA. Zone.Identifier is commonly used by Windows to track contents downloaded from the Internet. An ADS is typically of the form: `C:\path\to\filename.extension:some_fork_name`, and `some_fork_name` is the value that should populate `fork_name`. `filename.extension` should populate `file.name`, and `extension` should populate `file.extension`. The full path, `file.path`, will include the fork name.
+    ///
+    /// # Examples
+    ///
+    /// - `Zone.Identifer`
+    pub const THREAT_INDICATOR_FILE_FORK_NAME: &str = "threat.indicator.file.fork_name";
+
+    /// Primary group ID (GID) of the file.
+    ///
+    /// # Examples
+    ///
+    /// - `1001`
+    pub const THREAT_INDICATOR_FILE_GID: &str = "threat.indicator.file.gid";
+
+    /// Primary group name of the file.
+    ///
+    /// # Examples
+    ///
+    /// - `alice`
+    pub const THREAT_INDICATOR_FILE_GROUP: &str = "threat.indicator.file.group";
+
+    /// MD5 hash.
+    pub const THREAT_INDICATOR_FILE_HASH_MD5: &str = "threat.indicator.file.hash.md5";
+
+    /// SHA1 hash.
+    pub const THREAT_INDICATOR_FILE_HASH_SHA1: &str = "threat.indicator.file.hash.sha1";
+
+    /// SHA256 hash.
+    pub const THREAT_INDICATOR_FILE_HASH_SHA256: &str = "threat.indicator.file.hash.sha256";
+
+    /// SHA384 hash.
+    pub const THREAT_INDICATOR_FILE_HASH_SHA384: &str = "threat.indicator.file.hash.sha384";
+
+    /// SHA512 hash.
+    pub const THREAT_INDICATOR_FILE_HASH_SHA512: &str = "threat.indicator.file.hash.sha512";
+
+    /// SSDEEP hash.
+    pub const THREAT_INDICATOR_FILE_HASH_SSDEEP: &str = "threat.indicator.file.hash.ssdeep";
+
+    /// TLSH hash.
+    pub const THREAT_INDICATOR_FILE_HASH_TLSH: &str = "threat.indicator.file.hash.tlsh";
+
+    /// Inode representing the file in the filesystem.
+    ///
+    /// # Examples
+    ///
+    /// - `256383`
+    pub const THREAT_INDICATOR_FILE_INODE: &str = "threat.indicator.file.inode";
+
+    /// MIME type should identify the format of the file or stream of bytes using https://www.iana.org/assignments/media-types/media-types.xhtml[IANA official types], where possible. When more than one type is applicable, the most specific type should be used.
+    pub const THREAT_INDICATOR_FILE_MIME_TYPE: &str = "threat.indicator.file.mime_type";
+
+    /// Mode of the file in octal representation.
+    ///
+    /// # Examples
+    ///
+    /// - `0640`
+    pub const THREAT_INDICATOR_FILE_MODE: &str = "threat.indicator.file.mode";
+
+    /// Last time the file content was modified.
+    pub const THREAT_INDICATOR_FILE_MTIME: &str = "threat.indicator.file.mtime";
+
+    /// Name of the file including the extension, without the directory.
+    ///
+    /// # Examples
+    ///
+    /// - `example.png`
+    pub const THREAT_INDICATOR_FILE_NAME: &str = "threat.indicator.file.name";
+
+    /// File owner's username.
+    ///
+    /// # Examples
+    ///
+    /// - `alice`
+    pub const THREAT_INDICATOR_FILE_OWNER: &str = "threat.indicator.file.owner";
+
+    /// Full path to the file, including the file name. It should include the drive letter, when appropriate.
+    ///
+    /// # Examples
+    ///
+    /// - `/home/alice/example.png`
+    pub const THREAT_INDICATOR_FILE_PATH: &str = "threat.indicator.file.path";
+
+    /// CPU architecture target for the file.
+    ///
+    /// # Examples
+    ///
+    /// - `x64`
+    pub const THREAT_INDICATOR_FILE_PE_ARCHITECTURE: &str = "threat.indicator.file.pe.architecture";
+
+    /// Internal company name of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `Microsoft Corporation`
+    pub const THREAT_INDICATOR_FILE_PE_COMPANY: &str = "threat.indicator.file.pe.company";
+
+    /// Internal description of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `Paint`
+    pub const THREAT_INDICATOR_FILE_PE_DESCRIPTION: &str = "threat.indicator.file.pe.description";
+
+    /// Internal version of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `6.3.9600.17415`
+    pub const THREAT_INDICATOR_FILE_PE_FILE_VERSION: &str = "threat.indicator.file.pe.file_version";
+
+    /// A hash of the Go language imports in a PE file excluding standard library imports. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// The algorithm used to calculate the Go symbol hash and a reference implementation are available [here](https://github.com/elastic/toutoumomoma).
+    ///
+    /// # Examples
+    ///
+    /// - `10bddcb4cee42080f76c88d9ff964491`
+    pub const THREAT_INDICATOR_FILE_PE_GO_IMPORT_HASH: &str =
+        "threat.indicator.file.pe.go_import_hash";
+
+    /// List of imported Go language element names and types.
+    pub const THREAT_INDICATOR_FILE_PE_GO_IMPORTS: &str = "threat.indicator.file.pe.go_imports";
+
+    /// Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_INDICATOR_FILE_PE_GO_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.indicator.file.pe.go_imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of Go imports.
+    pub const THREAT_INDICATOR_FILE_PE_GO_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.indicator.file.pe.go_imports_names_var_entropy";
+
+    /// Set to true if the file is a Go executable that has had its symbols stripped or obfuscated and false if an unobfuscated Go executable.
+    pub const THREAT_INDICATOR_FILE_PE_GO_STRIPPED: &str = "threat.indicator.file.pe.go_stripped";
+
+    /// A hash of the imports in a PE file. An imphash -- or import hash -- can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// Learn more at https://www.fireeye.com/blog/threat-research/2014/01/tracking-malware-import-hashing.html.
+    ///
+    /// # Examples
+    ///
+    /// - `0c6803c4e922103c4dca5963aad36ddf`
+    pub const THREAT_INDICATOR_FILE_PE_IMPHASH: &str = "threat.indicator.file.pe.imphash";
+
+    /// A hash of the imports in a PE file. An import hash can be used to fingerprint binaries even after recompilation or other code-level transformations have occurred, which would change more traditional hash values.
+    /// This is a synonym for imphash.
+    ///
+    /// # Examples
+    ///
+    /// - `d41d8cd98f00b204e9800998ecf8427e`
+    pub const THREAT_INDICATOR_FILE_PE_IMPORT_HASH: &str = "threat.indicator.file.pe.import_hash";
+
+    /// List of imported element names and types.
+    pub const THREAT_INDICATOR_FILE_PE_IMPORTS: &str = "threat.indicator.file.pe.imports";
+
+    /// Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_INDICATOR_FILE_PE_IMPORTS_NAMES_ENTROPY: &str =
+        "threat.indicator.file.pe.imports_names_entropy";
+
+    /// Variance for Shannon entropy calculation from the list of imported element names and types.
+    pub const THREAT_INDICATOR_FILE_PE_IMPORTS_NAMES_VAR_ENTROPY: &str =
+        "threat.indicator.file.pe.imports_names_var_entropy";
+
+    /// Internal name of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `MSPAINT.EXE`
+    pub const THREAT_INDICATOR_FILE_PE_ORIGINAL_FILE_NAME: &str =
+        "threat.indicator.file.pe.original_file_name";
+
+    /// A hash of the PE header and data from one or more PE sections. An pehash can be used to cluster files by transforming structural information about a file into a hash value.
+    /// Learn more at https://www.usenix.org/legacy/events/leet09/tech/full_papers/wicherski/wicherski_html/index.html.
+    ///
+    /// # Examples
+    ///
+    /// - `73ff189b63cd6be375a7ff25179a38d347651975`
+    pub const THREAT_INDICATOR_FILE_PE_PEHASH: &str = "threat.indicator.file.pe.pehash";
+
+    /// Internal product name of the file, provided at compile-time.
+    ///
+    /// # Examples
+    ///
+    /// - `Microsoft® Windows® Operating System`
+    pub const THREAT_INDICATOR_FILE_PE_PRODUCT: &str = "threat.indicator.file.pe.product";
+
+    /// An array containing an object for each section of the PE file.
+    /// The keys that should be present in these objects are defined by sub-fields underneath `pe.sections.*`.
+    pub const THREAT_INDICATOR_FILE_PE_SECTIONS: &str = "threat.indicator.file.pe.sections";
+
+    /// Shannon entropy calculation from the section.
+    pub const THREAT_INDICATOR_FILE_PE_SECTIONS_ENTROPY: &str =
+        "threat.indicator.file.pe.sections.entropy";
+
+    /// PE Section List name.
+    pub const THREAT_INDICATOR_FILE_PE_SECTIONS_NAME: &str =
+        "threat.indicator.file.pe.sections.name";
+
+    /// PE Section List physical size.
+    pub const THREAT_INDICATOR_FILE_PE_SECTIONS_PHYSICAL_SIZE: &str =
+        "threat.indicator.file.pe.sections.physical_size";
+
+    /// Variance for Shannon entropy calculation from the section.
+    pub const THREAT_INDICATOR_FILE_PE_SECTIONS_VAR_ENTROPY: &str =
+        "threat.indicator.file.pe.sections.var_entropy";
+
+    /// PE Section List virtual size. This is always the same as `physical_size`.
+    pub const THREAT_INDICATOR_FILE_PE_SECTIONS_VIRTUAL_SIZE: &str =
+        "threat.indicator.file.pe.sections.virtual_size";
+
+    /// File size in bytes.
+    /// Only relevant when `file.type` is "file".
+    ///
+    /// # Examples
+    ///
+    /// - `16384`
+    pub const THREAT_INDICATOR_FILE_SIZE: &str = "threat.indicator.file.size";
+
+    /// Target path for symlinks.
+    pub const THREAT_INDICATOR_FILE_TARGET_PATH: &str = "threat.indicator.file.target_path";
+
+    /// File type (file, dir, or symlink).
+    ///
+    /// # Examples
+    ///
+    /// - `file`
+    pub const THREAT_INDICATOR_FILE_TYPE: &str = "threat.indicator.file.type";
+
+    /// The user ID (UID) or security identifier (SID) of the file owner.
+    ///
+    /// # Examples
+    ///
+    /// - `1001`
+    pub const THREAT_INDICATOR_FILE_UID: &str = "threat.indicator.file.uid";
+
+    /// List of subject alternative names (SAN). Name types vary by certificate authority and certificate type but commonly contain IP addresses, DNS names (and wildcards), and email addresses.
+    ///
+    /// # Examples
+    ///
+    /// - `*.elastic.co`
+    pub const THREAT_INDICATOR_FILE_X509_ALTERNATIVE_NAMES: &str =
+        "threat.indicator.file.x509.alternative_names";
+
+    /// List of common name (CN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example SHA2 High Assurance Server CA`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_COMMON_NAME: &str =
+        "threat.indicator.file.x509.issuer.common_name";
+
+    /// List of country \(C) codes
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_COUNTRY: &str =
+        "threat.indicator.file.x509.issuer.country";
+
+    /// Distinguished name (DN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, O=Example Inc, OU=www.example.com, CN=Example SHA2 High Assurance Server CA`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_DISTINGUISHED_NAME: &str =
+        "threat.indicator.file.x509.issuer.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `Mountain View`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_LOCALITY: &str =
+        "threat.indicator.file.x509.issuer.locality";
+
+    /// List of organizations (O) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example Inc`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_ORGANIZATION: &str =
+        "threat.indicator.file.x509.issuer.organization";
+
+    /// List of organizational units (OU) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `www.example.com`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_ORGANIZATIONAL_UNIT: &str =
+        "threat.indicator.file.x509.issuer.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_INDICATOR_FILE_X509_ISSUER_STATE_OR_PROVINCE: &str =
+        "threat.indicator.file.x509.issuer.state_or_province";
+
+    /// Time at which the certificate is no longer considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-07-16T03:15:39Z`
+    pub const THREAT_INDICATOR_FILE_X509_NOT_AFTER: &str = "threat.indicator.file.x509.not_after";
+
+    /// Time at which the certificate is first considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2019-08-16T01:40:25Z`
+    pub const THREAT_INDICATOR_FILE_X509_NOT_BEFORE: &str = "threat.indicator.file.x509.not_before";
+
+    /// Algorithm used to generate the public key.
+    ///
+    /// # Examples
+    ///
+    /// - `RSA`
+    pub const THREAT_INDICATOR_FILE_X509_PUBLIC_KEY_ALGORITHM: &str =
+        "threat.indicator.file.x509.public_key_algorithm";
+
+    /// The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `nistp521`
+    pub const THREAT_INDICATOR_FILE_X509_PUBLIC_KEY_CURVE: &str =
+        "threat.indicator.file.x509.public_key_curve";
+
+    /// Exponent used to derive the public key. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `65537`
+    pub const THREAT_INDICATOR_FILE_X509_PUBLIC_KEY_EXPONENT: &str =
+        "threat.indicator.file.x509.public_key_exponent";
+
+    /// The size of the public key space in bits.
+    ///
+    /// # Examples
+    ///
+    /// - `2048`
+    pub const THREAT_INDICATOR_FILE_X509_PUBLIC_KEY_SIZE: &str =
+        "threat.indicator.file.x509.public_key_size";
+
+    /// Unique serial number issued by the certificate authority. For consistency, if this value is alphanumeric, it should be formatted without colons and uppercase characters.
+    ///
+    /// # Examples
+    ///
+    /// - `55FBB9C7DEBF09809D12CCAA`
+    pub const THREAT_INDICATOR_FILE_X509_SERIAL_NUMBER: &str =
+        "threat.indicator.file.x509.serial_number";
+
+    /// Identifier for certificate signature algorithm. We recommend using names found in Go Lang Crypto library. See https://github.com/golang/go/blob/go1.14/src/crypto/x509/x509.go#L337-L353.
+    ///
+    /// # Examples
+    ///
+    /// - `SHA256-RSA`
+    pub const THREAT_INDICATOR_FILE_X509_SIGNATURE_ALGORITHM: &str =
+        "threat.indicator.file.x509.signature_algorithm";
+
+    /// List of common names (CN) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `shared.global.example.net`
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_COMMON_NAME: &str =
+        "threat.indicator.file.x509.subject.common_name";
+
+    /// List of country \(C) code
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_COUNTRY: &str =
+        "threat.indicator.file.x509.subject.country";
+
+    /// Distinguished name (DN) of the certificate subject entity.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, ST=California, L=San Francisco, O=Example, Inc., CN=shared.global.example.net`
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_DISTINGUISHED_NAME: &str =
+        "threat.indicator.file.x509.subject.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `San Francisco`
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_LOCALITY: &str =
+        "threat.indicator.file.x509.subject.locality";
+
+    /// List of organizations (O) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `Example, Inc.`
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_ORGANIZATION: &str =
+        "threat.indicator.file.x509.subject.organization";
+
+    /// List of organizational units (OU) of subject.
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_ORGANIZATIONAL_UNIT: &str =
+        "threat.indicator.file.x509.subject.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_INDICATOR_FILE_X509_SUBJECT_STATE_OR_PROVINCE: &str =
+        "threat.indicator.file.x509.subject.state_or_province";
+
+    /// Version of x509 format.
+    ///
+    /// # Examples
+    ///
+    /// - `3`
+    pub const THREAT_INDICATOR_FILE_X509_VERSION_NUMBER: &str =
+        "threat.indicator.file.x509.version_number";
+
+    /// The date and time when intelligence source first reported sighting this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-05T17:25:47.000Z`
+    pub const THREAT_INDICATOR_FIRST_SEEN: &str = "threat.indicator.first_seen";
+
+    /// City name.
+    ///
+    /// # Examples
+    ///
+    /// - `Montreal`
+    pub const THREAT_INDICATOR_GEO_CITY_NAME: &str = "threat.indicator.geo.city_name";
+
+    /// Two-letter code representing continent's name.
+    ///
+    /// # Examples
+    ///
+    /// - `NA`
+    pub const THREAT_INDICATOR_GEO_CONTINENT_CODE: &str = "threat.indicator.geo.continent_code";
+
+    /// Name of the continent.
+    ///
+    /// # Examples
+    ///
+    /// - `North America`
+    pub const THREAT_INDICATOR_GEO_CONTINENT_NAME: &str = "threat.indicator.geo.continent_name";
+
+    /// Country ISO code.
+    ///
+    /// # Examples
+    ///
+    /// - `CA`
+    pub const THREAT_INDICATOR_GEO_COUNTRY_ISO_CODE: &str = "threat.indicator.geo.country_iso_code";
+
+    /// Country name.
+    ///
+    /// # Examples
+    ///
+    /// - `Canada`
+    pub const THREAT_INDICATOR_GEO_COUNTRY_NAME: &str = "threat.indicator.geo.country_name";
+
+    /// Longitude and latitude.
+    ///
+    /// # Examples
+    ///
+    /// - `{ "lon": -73.614830, "lat": 45.505918 }`
+    pub const THREAT_INDICATOR_GEO_LOCATION: &str = "threat.indicator.geo.location";
+
+    /// User-defined description of a location, at the level of granularity they care about.
+    /// Could be the name of their data centers, the floor number, if this describes a local physical entity, city names.
+    /// Not typically used in automated geolocation.
+    ///
+    /// # Examples
+    ///
+    /// - `boston-dc`
+    pub const THREAT_INDICATOR_GEO_NAME: &str = "threat.indicator.geo.name";
+
+    /// Postal code associated with the location.
+    /// Values appropriate for this field may also be known as a postcode or ZIP code and will vary widely from country to country.
+    ///
+    /// # Examples
+    ///
+    /// - `94040`
+    pub const THREAT_INDICATOR_GEO_POSTAL_CODE: &str = "threat.indicator.geo.postal_code";
+
+    /// Region ISO code.
+    ///
+    /// # Examples
+    ///
+    /// - `CA-QC`
+    pub const THREAT_INDICATOR_GEO_REGION_ISO_CODE: &str = "threat.indicator.geo.region_iso_code";
+
+    /// Region name.
+    ///
+    /// # Examples
+    ///
+    /// - `Quebec`
+    pub const THREAT_INDICATOR_GEO_REGION_NAME: &str = "threat.indicator.geo.region_name";
+
+    /// The time zone of the location, such as IANA time zone name.
+    ///
+    /// # Examples
+    ///
+    /// - `America/Argentina/Buenos_Aires`
+    pub const THREAT_INDICATOR_GEO_TIMEZONE: &str = "threat.indicator.geo.timezone";
+
+    /// Identifies a threat indicator as an IP address (irrespective of direction).
+    ///
+    /// # Examples
+    ///
+    /// - `1.2.3.4`
+    pub const THREAT_INDICATOR_IP: &str = "threat.indicator.ip";
+
+    /// The date and time when intelligence source last reported sighting this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-05T17:25:47.000Z`
+    pub const THREAT_INDICATOR_LAST_SEEN: &str = "threat.indicator.last_seen";
+
+    /// Traffic Light Protocol sharing markings.
+    ///
+    /// # Examples
+    ///
+    /// - `CLEAR`
+    pub const THREAT_INDICATOR_MARKING_TLP: &str = "threat.indicator.marking.tlp";
+
+    /// Traffic Light Protocol version.
+    ///
+    /// # Examples
+    ///
+    /// - `2.0`
+    pub const THREAT_INDICATOR_MARKING_TLP_VERSION: &str = "threat.indicator.marking.tlp_version";
+
+    /// The date and time when intelligence source last modified information for this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-11-05T17:25:47.000Z`
+    pub const THREAT_INDICATOR_MODIFIED_AT: &str = "threat.indicator.modified_at";
+
+    /// The display name indicator in an UI friendly format
+    /// URL, IP address, email address, registry key, port number, hash value, or other relevant name can serve as the display name.
+    ///
+    /// # Examples
+    ///
+    /// - `5.2.75.227`
+    pub const THREAT_INDICATOR_NAME: &str = "threat.indicator.name";
+
+    /// Identifies a threat indicator as a port number (irrespective of direction).
+    ///
+    /// # Examples
+    ///
+    /// - `443`
+    pub const THREAT_INDICATOR_PORT: &str = "threat.indicator.port";
+
+    /// The name of the indicator's provider.
+    ///
+    /// # Examples
+    ///
+    /// - `lrz_urlhaus`
+    pub const THREAT_INDICATOR_PROVIDER: &str = "threat.indicator.provider";
+
+    /// Reference URL linking to additional information about this indicator.
+    ///
+    /// # Examples
+    ///
+    /// - `https://system.example.com/indicator/0001234`
+    pub const THREAT_INDICATOR_REFERENCE: &str = "threat.indicator.reference";
+
+    /// Original bytes written with base64 encoding.
+    /// For Windows registry operations, such as SetValueEx and RegQueryValueEx, this corresponds to the data pointed by `lp_data`. This is optional but provides better recoverability and should be populated for REG_BINARY encoded values.
+    ///
+    /// # Examples
+    ///
+    /// - `ZQBuAC0AVQBTAAAAZQBuAAAAAAA=`
+    pub const THREAT_INDICATOR_REGISTRY_DATA_BYTES: &str = "threat.indicator.registry.data.bytes";
+
+    /// Content when writing string types.
+    /// Populated as an array when writing string data to the registry. For single string registry types (REG_SZ, REG_EXPAND_SZ), this should be an array with one string. For sequences of string with REG_MULTI_SZ, this array will be variable length. For numeric data, such as REG_DWORD and REG_QWORD, this should be populated with the decimal representation (e.g `"1"`).
+    ///
+    /// # Examples
+    ///
+    /// - `["C:\rta\red_ttp\bin\myapp.exe"]`
+    pub const THREAT_INDICATOR_REGISTRY_DATA_STRINGS: &str =
+        "threat.indicator.registry.data.strings";
+
+    /// Standard registry type for encoding contents
+    ///
+    /// # Examples
+    ///
+    /// - `REG_SZ`
+    pub const THREAT_INDICATOR_REGISTRY_DATA_TYPE: &str = "threat.indicator.registry.data.type";
+
+    /// Abbreviated name for the hive.
+    ///
+    /// # Examples
+    ///
+    /// - `HKLM`
+    pub const THREAT_INDICATOR_REGISTRY_HIVE: &str = "threat.indicator.registry.hive";
+
+    /// Hive-relative path of keys.
+    ///
+    /// # Examples
+    ///
+    /// - `SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winword.exe`
+    pub const THREAT_INDICATOR_REGISTRY_KEY: &str = "threat.indicator.registry.key";
+
+    /// Full path, including hive, key and value
+    ///
+    /// # Examples
+    ///
+    /// - `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\winword.exe\Debugger`
+    pub const THREAT_INDICATOR_REGISTRY_PATH: &str = "threat.indicator.registry.path";
+
+    /// Name of the value written.
+    ///
+    /// # Examples
+    ///
+    /// - `Debugger`
+    pub const THREAT_INDICATOR_REGISTRY_VALUE: &str = "threat.indicator.registry.value";
+
+    /// Count of AV/EDR vendors that successfully detected malicious file or URL.
+    ///
+    /// # Examples
+    ///
+    /// - `4`
+    pub const THREAT_INDICATOR_SCANNER_STATS: &str = "threat.indicator.scanner_stats";
+
+    /// Number of times this indicator was observed conducting threat activity.
+    ///
+    /// # Examples
+    ///
+    /// - `20`
+    pub const THREAT_INDICATOR_SIGHTINGS: &str = "threat.indicator.sightings";
+
+    /// Type of indicator as represented by Cyber Observable in STIX 2.0.
+    ///
+    /// # Examples
+    ///
+    /// - `ipv4-addr`
+    pub const THREAT_INDICATOR_TYPE: &str = "threat.indicator.type";
+
+    /// Domain of the url, such as "www.elastic.co".
+    /// In some cases a URL may refer to an IP and/or port directly, without a domain name. In this case, the IP address would go to the `domain` field.
+    /// If the URL contains a literal IPv6 address enclosed by `[` and `]` (IETF RFC 2732), the `[` and `]` characters should also be captured in the `domain` field.
+    ///
+    /// # Examples
+    ///
+    /// - `www.elastic.co`
+    pub const THREAT_INDICATOR_URL_DOMAIN: &str = "threat.indicator.url.domain";
+
+    /// The field contains the file extension from the original request url, excluding the leading dot.
+    /// The file extension is only set if it exists, as not every url has a file extension.
+    /// The leading period must not be included. For example, the value must be "png", not ".png".
+    /// Note that when the file name has multiple extensions (example.tar.gz), only the last one should be captured ("gz", not "tar.gz").
+    ///
+    /// # Examples
+    ///
+    /// - `png`
+    pub const THREAT_INDICATOR_URL_EXTENSION: &str = "threat.indicator.url.extension";
+
+    /// Portion of the url after the `#`, such as "top".
+    /// The `#` is not part of the fragment.
+    pub const THREAT_INDICATOR_URL_FRAGMENT: &str = "threat.indicator.url.fragment";
+
+    /// If full URLs are important to your use case, they should be stored in `url.full`, whether this field is reconstructed or present in the event source.
+    ///
+    /// # Examples
+    ///
+    /// - `https://www.elastic.co:443/search?q=elasticsearch#top`
+    pub const THREAT_INDICATOR_URL_FULL: &str = "threat.indicator.url.full";
+
+    /// Unmodified original url as seen in the event source.
+    /// Note that in network monitoring, the observed URL may be a full URL, whereas in access logs, the URL is often just represented as a path.
+    /// This field is meant to represent the URL as it was observed, complete or not.
+    ///
+    /// # Examples
+    ///
+    /// - `https://www.elastic.co:443/search?q=elasticsearch#top or /search?q=elasticsearch`
+    pub const THREAT_INDICATOR_URL_ORIGINAL: &str = "threat.indicator.url.original";
+
+    /// Password of the request.
+    pub const THREAT_INDICATOR_URL_PASSWORD: &str = "threat.indicator.url.password";
+
+    /// Path of the request, such as "/search".
+    pub const THREAT_INDICATOR_URL_PATH: &str = "threat.indicator.url.path";
+
+    /// Port of the request, such as 443.
+    ///
+    /// # Examples
+    ///
+    /// - `443`
+    pub const THREAT_INDICATOR_URL_PORT: &str = "threat.indicator.url.port";
+
+    /// The query field describes the query string of the request, such as "q=elasticsearch".
+    /// The `?` is excluded from the query string. If a URL contains no `?`, there is no query field. If there is a `?` but no query, the query field exists with an empty string. The `exists` query can be used to differentiate between the two cases.
+    pub const THREAT_INDICATOR_URL_QUERY: &str = "threat.indicator.url.query";
+
+    /// The highest registered url domain, stripped of the subdomain.
+    /// For example, the registered domain for "foo.example.com" is "example.com".
+    /// This value can be determined precisely with a list like the public suffix list (http://publicsuffix.org). Trying to approximate this by simply taking the last two labels will not work well for TLDs such as "co.uk".
+    ///
+    /// # Examples
+    ///
+    /// - `example.com`
+    pub const THREAT_INDICATOR_URL_REGISTERED_DOMAIN: &str =
+        "threat.indicator.url.registered_domain";
+
+    /// Scheme of the request, such as "https".
+    /// Note: The `:` is not part of the scheme.
+    ///
+    /// # Examples
+    ///
+    /// - `https`
+    pub const THREAT_INDICATOR_URL_SCHEME: &str = "threat.indicator.url.scheme";
+
+    /// The subdomain portion of a fully qualified domain name includes all of the names except the host name under the registered_domain.  In a partially qualified domain, or if the the qualification level of the full name cannot be determined, subdomain contains all of the names below the registered domain.
+    /// For example the subdomain portion of "www.east.mydomain.co.uk" is "east". If the domain has multiple levels of subdomain, such as "sub2.sub1.example.com", the subdomain field should contain "sub2.sub1", with no trailing period.
+    ///
+    /// # Examples
+    ///
+    /// - `east`
+    pub const THREAT_INDICATOR_URL_SUBDOMAIN: &str = "threat.indicator.url.subdomain";
+
+    /// The effective top level domain (eTLD), also known as the domain suffix, is the last part of the domain name. For example, the top level domain for example.com is "com".
+    /// This value can be determined precisely with a list like the public suffix list (http://publicsuffix.org). Trying to approximate this by simply taking the last label will not work well for effective TLDs such as "co.uk".
+    ///
+    /// # Examples
+    ///
+    /// - `co.uk`
+    pub const THREAT_INDICATOR_URL_TOP_LEVEL_DOMAIN: &str = "threat.indicator.url.top_level_domain";
+
+    /// Username of the request.
+    pub const THREAT_INDICATOR_URL_USERNAME: &str = "threat.indicator.url.username";
+
+    /// List of subject alternative names (SAN). Name types vary by certificate authority and certificate type but commonly contain IP addresses, DNS names (and wildcards), and email addresses.
+    ///
+    /// # Examples
+    ///
+    /// - `*.elastic.co`
+    pub const THREAT_INDICATOR_X509_ALTERNATIVE_NAMES: &str =
+        "threat.indicator.x509.alternative_names";
+
+    /// List of common name (CN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example SHA2 High Assurance Server CA`
+    pub const THREAT_INDICATOR_X509_ISSUER_COMMON_NAME: &str =
+        "threat.indicator.x509.issuer.common_name";
+
+    /// List of country \(C) codes
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_INDICATOR_X509_ISSUER_COUNTRY: &str = "threat.indicator.x509.issuer.country";
+
+    /// Distinguished name (DN) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, O=Example Inc, OU=www.example.com, CN=Example SHA2 High Assurance Server CA`
+    pub const THREAT_INDICATOR_X509_ISSUER_DISTINGUISHED_NAME: &str =
+        "threat.indicator.x509.issuer.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `Mountain View`
+    pub const THREAT_INDICATOR_X509_ISSUER_LOCALITY: &str = "threat.indicator.x509.issuer.locality";
+
+    /// List of organizations (O) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `Example Inc`
+    pub const THREAT_INDICATOR_X509_ISSUER_ORGANIZATION: &str =
+        "threat.indicator.x509.issuer.organization";
+
+    /// List of organizational units (OU) of issuing certificate authority.
+    ///
+    /// # Examples
+    ///
+    /// - `www.example.com`
+    pub const THREAT_INDICATOR_X509_ISSUER_ORGANIZATIONAL_UNIT: &str =
+        "threat.indicator.x509.issuer.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_INDICATOR_X509_ISSUER_STATE_OR_PROVINCE: &str =
+        "threat.indicator.x509.issuer.state_or_province";
+
+    /// Time at which the certificate is no longer considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2020-07-16T03:15:39Z`
+    pub const THREAT_INDICATOR_X509_NOT_AFTER: &str = "threat.indicator.x509.not_after";
+
+    /// Time at which the certificate is first considered valid.
+    ///
+    /// # Examples
+    ///
+    /// - `2019-08-16T01:40:25Z`
+    pub const THREAT_INDICATOR_X509_NOT_BEFORE: &str = "threat.indicator.x509.not_before";
+
+    /// Algorithm used to generate the public key.
+    ///
+    /// # Examples
+    ///
+    /// - `RSA`
+    pub const THREAT_INDICATOR_X509_PUBLIC_KEY_ALGORITHM: &str =
+        "threat.indicator.x509.public_key_algorithm";
+
+    /// The curve used by the elliptic curve public key algorithm. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `nistp521`
+    pub const THREAT_INDICATOR_X509_PUBLIC_KEY_CURVE: &str =
+        "threat.indicator.x509.public_key_curve";
+
+    /// Exponent used to derive the public key. This is algorithm specific.
+    ///
+    /// # Examples
+    ///
+    /// - `65537`
+    pub const THREAT_INDICATOR_X509_PUBLIC_KEY_EXPONENT: &str =
+        "threat.indicator.x509.public_key_exponent";
+
+    /// The size of the public key space in bits.
+    ///
+    /// # Examples
+    ///
+    /// - `2048`
+    pub const THREAT_INDICATOR_X509_PUBLIC_KEY_SIZE: &str = "threat.indicator.x509.public_key_size";
+
+    /// Unique serial number issued by the certificate authority. For consistency, if this value is alphanumeric, it should be formatted without colons and uppercase characters.
+    ///
+    /// # Examples
+    ///
+    /// - `55FBB9C7DEBF09809D12CCAA`
+    pub const THREAT_INDICATOR_X509_SERIAL_NUMBER: &str = "threat.indicator.x509.serial_number";
+
+    /// Identifier for certificate signature algorithm. We recommend using names found in Go Lang Crypto library. See https://github.com/golang/go/blob/go1.14/src/crypto/x509/x509.go#L337-L353.
+    ///
+    /// # Examples
+    ///
+    /// - `SHA256-RSA`
+    pub const THREAT_INDICATOR_X509_SIGNATURE_ALGORITHM: &str =
+        "threat.indicator.x509.signature_algorithm";
+
+    /// List of common names (CN) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `shared.global.example.net`
+    pub const THREAT_INDICATOR_X509_SUBJECT_COMMON_NAME: &str =
+        "threat.indicator.x509.subject.common_name";
+
+    /// List of country \(C) code
+    ///
+    /// # Examples
+    ///
+    /// - `US`
+    pub const THREAT_INDICATOR_X509_SUBJECT_COUNTRY: &str = "threat.indicator.x509.subject.country";
+
+    /// Distinguished name (DN) of the certificate subject entity.
+    ///
+    /// # Examples
+    ///
+    /// - `C=US, ST=California, L=San Francisco, O=Example, Inc., CN=shared.global.example.net`
+    pub const THREAT_INDICATOR_X509_SUBJECT_DISTINGUISHED_NAME: &str =
+        "threat.indicator.x509.subject.distinguished_name";
+
+    /// List of locality names (L)
+    ///
+    /// # Examples
+    ///
+    /// - `San Francisco`
+    pub const THREAT_INDICATOR_X509_SUBJECT_LOCALITY: &str =
+        "threat.indicator.x509.subject.locality";
+
+    /// List of organizations (O) of subject.
+    ///
+    /// # Examples
+    ///
+    /// - `Example, Inc.`
+    pub const THREAT_INDICATOR_X509_SUBJECT_ORGANIZATION: &str =
+        "threat.indicator.x509.subject.organization";
+
+    /// List of organizational units (OU) of subject.
+    pub const THREAT_INDICATOR_X509_SUBJECT_ORGANIZATIONAL_UNIT: &str =
+        "threat.indicator.x509.subject.organizational_unit";
+
+    /// List of state or province names (ST, S, or P)
+    ///
+    /// # Examples
+    ///
+    /// - `California`
+    pub const THREAT_INDICATOR_X509_SUBJECT_STATE_OR_PROVINCE: &str =
+        "threat.indicator.x509.subject.state_or_province";
+
+    /// Version of x509 format.
+    ///
+    /// # Examples
+    ///
+    /// - `3`
+    pub const THREAT_INDICATOR_X509_VERSION_NUMBER: &str = "threat.indicator.x509.version_number";
+
+    /// The alias(es) of the software for a set of related intrusion activity that are tracked by a common name in the security community.
+    /// While not required, you can use a MITRE ATT&CK® associated software description.
+    ///
+    /// # Examples
+    ///
+    /// - `[ "X-Agent" ]`
+    pub const THREAT_SOFTWARE_ALIAS: &str = "threat.software.alias";
+
+    /// The id of the software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+    /// While not required, you can use a MITRE ATT&CK® software id.
+    ///
+    /// # Examples
+    ///
+    /// - `S0552`
+    pub const THREAT_SOFTWARE_ID: &str = "threat.software.id";
+
+    /// The name of the software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+    /// While not required, you can use a MITRE ATT&CK® software name.
+    ///
+    /// # Examples
+    ///
+    /// - `AdFind`
+    pub const THREAT_SOFTWARE_NAME: &str = "threat.software.name";
+
+    /// The platforms of the software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+    /// While not required, you can use MITRE ATT&CK® software platform values.
+    ///
+    /// # Examples
+    ///
+    /// - `[ "Windows" ]`
+    pub const THREAT_SOFTWARE_PLATFORMS: &str = "threat.software.platforms";
+
+    /// The reference URL of the software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+    /// While not required, you can use a MITRE ATT&CK® software reference URL.
+    ///
+    /// # Examples
+    ///
+    /// - `https://attack.mitre.org/software/S0552/`
+    pub const THREAT_SOFTWARE_REFERENCE: &str = "threat.software.reference";
+
+    /// The type of software used by this threat to conduct behavior commonly modeled using MITRE ATT&CK®.
+    /// While not required, you can use a MITRE ATT&CK® software type.
+    ///
+    /// # Examples
+    ///
+    /// - `Tool`
+    pub const THREAT_SOFTWARE_TYPE: &str = "threat.software.type";
 
     /// The id of tactic used by this threat. You can use a MITRE ATT&CK® tactic, for example. (ex. https://attack.mitre.org/tactics/TA0002/ )
     ///
@@ -4256,7 +10143,7 @@ pub mod tls {
     /// - `Example SHA2 High Assurance Server CA`
     pub const TLS_CLIENT_X509_ISSUER_COMMON_NAME: &str = "tls.client.x509.issuer.common_name";
 
-    /// List of country (C) codes
+    /// List of country \(C) codes
     ///
     /// # Examples
     ///
@@ -4305,14 +10192,14 @@ pub mod tls {
     ///
     /// # Examples
     ///
-    /// - `2020-07-16 03:15:39+00:00`
+    /// - `2020-07-16T03:15:39Z`
     pub const TLS_CLIENT_X509_NOT_AFTER: &str = "tls.client.x509.not_after";
 
     /// Time at which the certificate is first considered valid.
     ///
     /// # Examples
     ///
-    /// - `2019-08-16 01:40:25+00:00`
+    /// - `2019-08-16T01:40:25Z`
     pub const TLS_CLIENT_X509_NOT_BEFORE: &str = "tls.client.x509.not_before";
 
     /// Algorithm used to generate the public key.
@@ -4364,7 +10251,7 @@ pub mod tls {
     /// - `shared.global.example.net`
     pub const TLS_CLIENT_X509_SUBJECT_COMMON_NAME: &str = "tls.client.x509.subject.common_name";
 
-    /// List of country (C) code
+    /// List of country \(C) code
     ///
     /// # Examples
     ///
@@ -4516,7 +10403,7 @@ pub mod tls {
     /// - `Example SHA2 High Assurance Server CA`
     pub const TLS_SERVER_X509_ISSUER_COMMON_NAME: &str = "tls.server.x509.issuer.common_name";
 
-    /// List of country (C) codes
+    /// List of country \(C) codes
     ///
     /// # Examples
     ///
@@ -4565,14 +10452,14 @@ pub mod tls {
     ///
     /// # Examples
     ///
-    /// - `2020-07-16 03:15:39+00:00`
+    /// - `2020-07-16T03:15:39Z`
     pub const TLS_SERVER_X509_NOT_AFTER: &str = "tls.server.x509.not_after";
 
     /// Time at which the certificate is first considered valid.
     ///
     /// # Examples
     ///
-    /// - `2019-08-16 01:40:25+00:00`
+    /// - `2019-08-16T01:40:25Z`
     pub const TLS_SERVER_X509_NOT_BEFORE: &str = "tls.server.x509.not_before";
 
     /// Algorithm used to generate the public key.
@@ -4624,7 +10511,7 @@ pub mod tls {
     /// - `shared.global.example.net`
     pub const TLS_SERVER_X509_SUBJECT_COMMON_NAME: &str = "tls.server.x509.subject.common_name";
 
-    /// List of country (C) code
+    /// List of country \(C) code
     ///
     /// # Examples
     ///
@@ -4847,13 +10734,17 @@ pub mod user {
     pub const USER_CHANGES_HASH: &str = "user.changes.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const USER_CHANGES_ID: &str = "user.changes.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const USER_CHANGES_NAME: &str = "user.changes.name";
 
     /// Array of user roles at the time of the event.
@@ -4896,13 +10787,17 @@ pub mod user {
     pub const USER_EFFECTIVE_HASH: &str = "user.effective.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const USER_EFFECTIVE_ID: &str = "user.effective.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const USER_EFFECTIVE_NAME: &str = "user.effective.name";
 
     /// Array of user roles at the time of the event.
@@ -4937,14 +10832,60 @@ pub mod user {
     pub const USER_HASH: &str = "user.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const USER_ID: &str = "user.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const USER_NAME: &str = "user.name";
+
+    /// A risk classification level calculated by an internal system as part of entity analytics and entity risk scoring.
+    ///
+    /// # Examples
+    ///
+    /// - `High`
+    pub const USER_RISK_CALCULATED_LEVEL: &str = "user.risk.calculated_level";
+
+    /// A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring.
+    ///
+    /// # Examples
+    ///
+    /// - `880.73`
+    pub const USER_RISK_CALCULATED_SCORE: &str = "user.risk.calculated_score";
+
+    /// A risk classification score calculated by an internal system as part of entity analytics and entity risk scoring, and normalized to a range of 0 to 100.
+    ///
+    /// # Examples
+    ///
+    /// - `88.73`
+    pub const USER_RISK_CALCULATED_SCORE_NORM: &str = "user.risk.calculated_score_norm";
+
+    /// A risk classification level obtained from outside the system, such as from some external Threat Intelligence Platform.
+    ///
+    /// # Examples
+    ///
+    /// - `High`
+    pub const USER_RISK_STATIC_LEVEL: &str = "user.risk.static_level";
+
+    /// A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform.
+    ///
+    /// # Examples
+    ///
+    /// - `830.0`
+    pub const USER_RISK_STATIC_SCORE: &str = "user.risk.static_score";
+
+    /// A risk classification score obtained from outside the system, such as from some external Threat Intelligence Platform, and normalized to a range of 0 to 100.
+    ///
+    /// # Examples
+    ///
+    /// - `83.0`
+    pub const USER_RISK_STATIC_SCORE_NORM: &str = "user.risk.static_score_norm";
 
     /// Array of user roles at the time of the event.
     ///
@@ -4982,13 +10923,17 @@ pub mod user {
     pub const USER_TARGET_HASH: &str = "user.target.hash";
 
     /// Unique identifier of the user.
+    ///
+    /// # Examples
+    ///
+    /// - `S-1-5-21-202424912787-2692429404-2351956786-1000`
     pub const USER_TARGET_ID: &str = "user.target.id";
 
     /// Short name or login of the user.
     ///
     /// # Examples
     ///
-    /// - `albert`
+    /// - `a.einstein`
     pub const USER_TARGET_NAME: &str = "user.target.name";
 
     /// Array of user roles at the time of the event.
@@ -5061,8 +11006,7 @@ pub mod user_agent {
     pub const USER_AGENT_OS_PLATFORM: &str = "user_agent.os.platform";
 
     /// Use the `os.type` field to categorize the operating system into one of the broad commercial families.
-    /// One of these following values should be used (lowercase): linux, macos, unix, windows.
-    /// If the OS you're dealing with is not in the list, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
+    /// If the OS you're dealing with is not listed as an expected value, the field should not be populated. Please let us know by opening an issue with ECS, to propose its addition.
     ///
     /// # Examples
     ///
@@ -5225,7 +11169,7 @@ pub mod x509 {
     /// - `Example SHA2 High Assurance Server CA`
     pub const X509_ISSUER_COMMON_NAME: &str = "x509.issuer.common_name";
 
-    /// List of country (C) codes
+    /// List of country \(C) codes
     ///
     /// # Examples
     ///
@@ -5271,14 +11215,14 @@ pub mod x509 {
     ///
     /// # Examples
     ///
-    /// - `2020-07-16 03:15:39+00:00`
+    /// - `2020-07-16T03:15:39Z`
     pub const X509_NOT_AFTER: &str = "x509.not_after";
 
     /// Time at which the certificate is first considered valid.
     ///
     /// # Examples
     ///
-    /// - `2019-08-16 01:40:25+00:00`
+    /// - `2019-08-16T01:40:25Z`
     pub const X509_NOT_BEFORE: &str = "x509.not_before";
 
     /// Algorithm used to generate the public key.
@@ -5330,7 +11274,7 @@ pub mod x509 {
     /// - `shared.global.example.net`
     pub const X509_SUBJECT_COMMON_NAME: &str = "x509.subject.common_name";
 
-    /// List of country (C) code
+    /// List of country \(C) code
     ///
     /// # Examples
     ///
